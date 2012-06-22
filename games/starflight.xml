@@ -1,0 +1,1423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<adventure>
+
+	<info>
+		<title>Starflight: A Cosmic Adventure</title>
+		<author>Chris Lampton</author>
+	</info>
+
+	<rooms>
+		<room id="pilot" start="1">
+			<name>Pilot's Cabin</name>
+			<desc>You are in the pilot's cabin of the Starflyer Ganymede. In front of you is a console covered with instruments, gauges and controls. To aft is the cold sleep chamber.</desc>
+			<note id='lightflashing' />
+			<exit dir="south" room="sleep" />
+		</room>
+		<room id="sleep">
+			<name>Cold Sleep Chamber</name>
+			<desc>You are in the cold sleep chamber. In front of you is the coffin-like suspended animation booth in which you recently awoke from your decade-long nap. To starboard is an open door. Forward is the door to the main cabin.</desc>
+			<exit dir="north" room="pilot" />
+			<exit dir="east" room="storage" />
+		</room>
+		<room id="storage">
+			<name>Storage Cabin</name>
+			<desc>You are in the storage cabin of the Ganymede. The wall is lined with metal hooks on which have been anchored small objects so that they will not float about in the absence of gravity. There is an entrance to the airlock set in the ceiling and a door to port leading back to the cold sleep chamber.</desc>
+			<exit dir="west" room="sleep" />
+			<exit dir="up" room="g_airlock" />
+		</room>
+		<room id="g_airlock">
+			<name>Ganymede's Airlock</name>
+			<desc>You are in the Ganymede's airlock, with the inner door below you and the outer door above you.</desc>
+			<note id='inneropenouterclosed' />
+			<exit dir="down" room="storage" />
+			<exit dir="up" room="a_airlock" />
+		</room>
+		<room id="a_airlock">
+			<name>Armstrong's Airlock</name>
+			<desc>You are in the Armstrong's airlock, with the inner door above you and the outer door below you.</desc>
+			<exit dir="down" room="g_airlock" />
+			<exit dir="up" room="trans" />
+		</room>
+		<room id="trans">
+			<name>Transporter Room</name>
+			<desc>You are in the transportation room of the Armstrong. To your horror, you see a human skeleton dressed in a petty officer's uniform seated to one side of the entranceway, its head hunched over a computer terminal. Forward is a doorway, below is the airlock.</desc>
+			<exit dir="down" room="a_airlock" />
+			<exit dir="north" room="out_trans" />
+		</room>
+		<room id="out_trans">
+			<name>Outside Transporter Room</name>
+			<desc>You are in a long hallway running from port to starboard. To aft is a door labelled TRANSPORTATION ROOM.</desc>
+			<exit dir="south" room="trans" />
+			<exit dir="west" room="out_stair" />
+			<exit dir="east" room="out_vault" />
+		</room>
+		<room id="out_vault">
+			<name>Outside Passenger Vault</name>
+			<desc>You are in a long hallway running from port to starboard. Forward is a door labelled PASSENGER VAULT.</desc>
+			<exit dir="north" room="vault" />
+			<exit dir="west" room="out_trans" />
+			<exit dir="east" room="out_storage" />
+		</room>
+		<room id="vault">
+			<name>Passenger Vault</name>
+			<desc>You are in the passenger vault, a chamber so immense that the forward side of it is lost in dark mists. Lined up to port and starboard are tier after tier of cold sleep booths, containing the hibernating bodies of the Armstrong's passengers. To aft is a door.</desc>
+			<exit dir="south" room="out_vault" />
+		</room>
+		<room id="out_storage">
+			<name>Outside Storage Room</name>
+			<desc>You are at the starboard end of a long hallway. To aft is a door labelled STORAGE.</desc>
+			<exit dir="south" room="main_storage" />
+			<exit dir="west" room="out_vault" />
+		</room>
+		<room id="main_storage">
+			<name>Main Storage Room</name>
+			<desc>You are in the Armstrong's main storage room. The exit is forward.</desc>
+			<note id='closeddooraft' />
+			<exit dir="north" room="out_storage" />
+			<exit dir="south" room="aux_storage" />
+		</room>
+		<room id="aux_storage">
+			<name>Auxiliary Storage Room</name>
+			<desc>You are in the Armstrong's auxiliary storage room. Unopened boxes are anchored to the walls with baling wire.</desc>
+			<exit dir="north" room="main_storage" />
+		</room>
+		<room id="out_stair">
+			<name>Outside Stairshaft</name>
+			<desc>You are in a long hallway running from port to starboard. Aft is a door labelled STAIRSHAFT.</desc>
+			<exit dir="south" room="stair" />
+			<exit dir="west" room="corner" />
+			<exit dir="east" room="out_trans" />
+		</room>
+		<room id="stair">
+			<name>Winding Stairshaft</name>
+			<desc>You are in a winding stairshaft leading downward to a lower level of the ship. There is a door to forward.</desc>
+			<exit dir="down" room="maintenance" />
+			<exit dir="north" room="out_stair" />
+		</room>
+		<room id="maintenance">
+			<name>Maintenance Room</name>
+			<desc>You are in the Armstrong's maintenance room. Another uniformed skeleton is sprawled over a console covered with gauges and instruments. There is a stairshaft leading up.</desc>
+			<exit dir="up" room="stair" />
+		</room>
+		<room id="corner">
+			<name>Corner of Two Hallways</name>
+			<desc>You are at the corner of two hallways, one heading forward, the other to starboard.</desc>
+			<exit dir="east" room="out_stair" />
+			<exit dir="north" room="hallway" />
+		</room>
+		<room id="hallway">
+			<name>Long Hallway</name>
+			<desc>You are in a long hallway running from fore to aft.</desc>
+			<exit dir="north" room="out_bridge" />
+			<exit dir="south" room="corner" />
+		</room>
+		<room id="out_bridge">
+			<name>Outside Bridge</name>
+			<desc>You are in a long hallway running from fore to aft. To starboard is a door labelled BRIDGE.</desc>
+			<exit dir="north" room="debris" />
+			<exit dir="south" room="hallway" />
+			<exit dir="east" room="w_bridge" />
+		</room>
+		<room id="w_bridge">
+			<name>Port Side of Bridge</name>
+			<desc>You are on the port side of the Armstrong's bridge. In front of you is a scene of unparalleled carnage. Long decayed skeletons in varicoloured uniforms are sprawled to all sides, some seated in contoured plastic chairs, some collapsed on the floor in grotesque attitudes. There is a door to port. The bridge continues to starboard.</desc>
+			<exit dir="west" room="out_bridge" />
+			<exit dir="east" room="c_bridge" />
+		</room>
+		<room id="c_bridge">
+			<name>Centre of Bridge</name>
+			<desc>You are in the centre of the Armstrong's bridge. You see a skeleton dressed in a captain's uniform, seated in a large chair, its hand perched over the navigational override controls.</desc>
+			<exit dir="west" room="w_bridge" />
+			<exit dir="east" room="e_bridge" />
+		</room>
+		<room id="e_bridge">
+			<name>Starboard Side of Bridge</name>
+			<desc>You are on the starboard side of the Armstrong's bridge. A skeleton in a science officer's uniform is sprawled next to a plastic panel set into the wall.</desc>
+			<exit dir="west" room="c_bridge" />
+		</room>
+		<room id="debris">
+			<name>In the Middle of Debris</name>
+			<desc>You are in the middle of a vast assortment of debris. You can go no farther forward.</desc>
+			<exit dir="south" room="out_bridge" />
+		</room>
+	</rooms>
+
+
+	<nouns>
+		<noun id="spacesuit" visible="1" movable="1" wearable="1">
+			<words>spacesuit,suit</words>
+			<shortname>spacesuit</shortname>
+			<name>a bulky spacesuit</name>
+			<shortdesc>There is a bulky spacesuit here.</shortdesc>
+			<desc>Almost the entire suit, including the flexible portions, is made of heavily metallized fabric, apparently incorporating some sort of iron mesh.</desc>
+			<loc id='storage' />
+		</noun>
+		<noun id="pouch" visible="1" movable="1">
+			<words>pouch,bag,plastic</words>
+			<shortname>plastic pouch</shortname>
+			<name>a plastic pouch</name>
+			<shortdesc>There is a plastic pouch here.</shortdesc>
+			<desc>It's heavy.</desc>
+			<loc id='storage' />
+		</noun>
+		<noun id="crowbar" visible="1" movable="1">
+			<words>crowbar,bar</words>
+			<shortname>crowbar</shortname>
+			<name>a crowbar</name>
+			<shortdesc>There is a crowbar here.</shortdesc>
+		</noun>
+		<noun id="knife" visible="1" movable="1">
+			<words>knife</words>
+			<shortname>knife</shortname>
+			<name>a small knife</name>
+			<shortdesc>There is a small knife here.</shortdesc>
+		</noun>
+		<noun id="keys" visible="1" movable="1">
+			<words>keys,key,set</words>
+			<shortname>set of keys</shortname>
+			<name>a set of keys</name>
+			<shortdesc>There is a set of keys here.</shortdesc>
+		</noun>
+		<noun id="sonic" visible="1" movable="1">
+			<words>sonic,disruptor,cylinder,cylinders</words>
+			<shortname>sonic disruptor</shortname>
+			<name>a sonic disruptor</name>
+			<shortdesc>There is a sonic disruptor here.</shortdesc>
+			<desc>The sonic disruptor is made of two independently rotatable metal cylinders, mounted end to end.</desc>
+		</noun>
+		<noun id="molten" visible="1">
+			<words>molten,sonic,disruptor,cylinder,cylinders</words>
+			<name>a molten sonic disruptor</name>
+			<shortdesc>There is a molten sonic disruptor here.</shortdesc>
+		</noun>
+		<noun id="box" visible="1" movable="1">
+			<words>box,wooden,wood,crate</words>
+			<shortname>wooden box</shortname>
+			<name>a wooden box</name>
+			<shortdesc>There is a wooden box here.</shortdesc>
+			<desc>There seems to be something inside.</desc>
+			<loc id='main_storage' />
+		</noun>
+		<noun id="magnet" visible="1" movable="1">
+			<words>magnet</words>
+			<shortname>magnet</shortname>
+			<name>a powerful bar magnet</name>
+			<shortdesc>There is a powerful bar magnet here.</shortdesc>
+			<loc id='debris' />
+		</noun>
+		<noun id="radio" visible="1" movable="1">
+			<words>radio,twoway</words>
+			<shortname>two-way radio</shortname>
+			<name>a two-way radio</name>
+			<shortdesc>There is a two-way radio here.</shortdesc>
+			<desc>It appears to need batteries.</desc>
+			<loc id='storage' />
+		</noun>
+		<noun id="inner">
+			<words>inner,innerdoor</words>
+			<desc>An iris-shaped airlock door, allowing passage between the airlock and the ship.</desc>
+			<loc id='storage' />
+			<loc id='g_airlock' />
+			<loc id='a_airlock' />
+			<loc id='trans' />
+		</noun>
+		<noun id="outer">
+			<words>outer,outerdoor</words>
+			<desc>An iris-shaped airlock door. This one exits the ship.</desc>
+			<loc id='g_airlock' />
+			<loc id='a_airlock' />
+		</noun>
+		<noun id="light">
+			<words>light</words>
+			<desc>It is blinking rapidly. Below the light is a small blue button.</desc>
+			<loc id='pilot' />
+		</noun>
+		<noun id="blue">
+			<words>blue,bluebutton</words>
+			<loc id='pilot' />
+		</noun>
+		<noun id="console">
+			<words>console,instrument,instruments,gauge,gauges,buttons</words>
+			<desc>The console is covered mostly with digital gauges that allow you to monitor the functioning of the ship's computer. In the centre of the console, however, are four buttons, one green, one yellow, one orange, and one red.</desc>
+			<note id='consolelightflashing' />
+			<loc id='pilot' />
+		</noun>
+		<noun id="green">
+			<words>green,greenbutton,acknowledge</words>
+			<desc>Beneath the green button is the word ACKNOWLEDGE.</desc>
+			<loc id='pilot' />
+		</noun>
+		<noun id="yellow">
+			<words>yellow,yellowbutton,tachyon,tachyonbeam</words>
+			<desc>Beneath the yellow button are the words TACHYON BEAM.</desc>
+			<loc id='pilot' />
+		</noun>
+		<noun id="orange">
+			<words>orange,orangebutton,docking,dockingcontrol</words>
+			<desc>Beneath the orange button are the words DOCKING CONTROL.</desc>
+			<loc id='pilot' />
+		</noun>
+		<noun id="red">
+			<words>red,redbutton,status,report,statusreport</words>
+			<desc>Beneath the red button are the words STATUS REPORT.</desc>
+			<loc id='pilot' />
+		</noun>
+		<noun id="booth">
+			<words>booth,cold,sleep,coffin</words>
+			<loc id='sleep' />
+		</noun>
+		<noun id="petty">
+			<words>skeleton,body,pettyofficer,petty,officer,crewmember,crew</words>
+			<desc>It appears to have been typing at the computer terminal.</desc>
+			<loc id='trans' />
+		</noun>
+		<noun id="terminal">
+			<words>computer,terminal,screen</words>
+			<desc>On the video display you see the words:&#10;&#10;"SHIP'S LOG, ENTRY 2,349.6.&#10;&#10;"Whatever it is, we can't seem to stop it. The carnage is horrible. Most of the crew has succumbed, and I don't know how much longer I can hold out. Even now, the screams in the distance are hideous. Is there any way to"&#10;&#10;At that point, the message ends.</desc>
+			<loc id='trans' />
+		</noun>
+		<noun id="booths">
+			<words>booths,booth,tier,cold,sleep</words>
+			<desc>Through the frosty window of the nearest booth you see the face of a young girl, apparently well and unharmed by whatever has struck the ship's crew.</desc>
+			<loc id='vault' />
+		</noun>
+		<noun id="captain">
+			<words>skeleton,body,captain,capn,skipper,jtk,officer,crewmember,crew</words>
+			<desc>Just beneath the collar of the captain's uniform is the monogram JTK.</desc>
+			<loc id='c_bridge' />
+		</noun>
+		<noun id="navcontrols">
+			<words>nav,navigation,navigational,controls,navigationalcontrols,navcontrols</words>
+			<desc>Considering your rudimentary knowledge of megaship navigation, you shouldn't even be *thinking* of touching the navigational controls.</desc>
+			<loc id='c_bridge' />
+		</noun>
+		<noun id="science">
+			<words>skeleton,body,scienceofficer,science,officer,skull,spock</words>
+			<desc>The skull is cracked where it fell against the panel.</desc>
+			<loc id='e_bridge' />
+		</noun>
+		<noun id="m_officer">
+			<words>skeleton,body,officer,crewmember,crew</words>
+			<desc>The skeleton is sprawled across the instrument console.</desc>
+			<loc id='maintenance' />
+		</noun>
+		<noun id="m_console">
+			<words>console,instrument,instruments,gauge,gauges</words>
+			<desc>Although the skeleton is covering most of the console, you can see a flashing sign at one end. Below the sign is a yellow button.</desc>
+			<loc id='maintenance' />
+		</noun>
+		<noun id="sign">
+			<words>sign,words</words>
+			<desc>The flashing sign reads:&#10;&#10;AIR LEVEL TOXIC!&#10;PRESS PURIFICATION CONTROL THREE TIMES!</desc>
+			<loc id='maintenance' />
+		</noun>
+		<noun id="m_yellow">
+			<words>yellow,yellowbutton,purification</words>
+			<desc>Beneath the yellow button are the words PURIFICATION CONTROL.</desc>
+			<loc id='maintenance' />
+		</noun>
+		<noun id="screen">
+			<words>video,screen,computer,monitor</words>
+			<desc>The video screen is blank.</desc>
+		</noun>
+		<noun id="black">
+			<words>black,blackbutton,emergency,monitoring,system</words>
+			<desc>Beneath the black button are the words EMERGENCY MONITORING SYSTEM.</desc>
+		</noun>
+		<noun id="white">
+			<words>white,whitebutton,acknowledge</words>
+			<desc>Beneath the white button is the word ACKNOWLEDGE.</desc>
+		</noun>
+		<noun id="force">
+			<loc id='aux_storage' />
+		</noun>
+	</nouns>
+
+
+	<words>
+		<word>load,restore</word>
+		<word>save</word>
+		<word>quit,q,exit</word>
+		<word>score</word>
+
+		<word>north,n,fore,forward</word>
+		<word>south,s,aft</word>
+		<word>east,e,starboard,right</word>
+		<word>west,w,port,left</word>
+		<word>up,u</word>
+		<word>down,d</word>
+
+		<word>inventory,inv,i</word>
+		<word>go,walk,run</word>
+		<word>look,l</word>
+		<word>examine,x</word>
+		<word>take,get,grab</word>
+		<word>drop,put,throw</word>
+		<word>wear,equip</word>
+		<word>remove</word>
+		<word>read</word>
+		<word>wait</word>
+		<word>open</word>
+		<word>close,shut</word>
+		<word>push,press</word>
+		<word>unlock</word>
+		<word>touch</word>
+		<word>turn,twist,rotate</word>
+		<word>pry,prise,jimmy</word>
+		<word>cut,slash,slice,puncture</word>
+		<word>enter</word>
+		<word>search</word>
+		<word>health,diagnose,diagnosis</word>
+
+		<word>with</word>
+		<word>at</word>
+		<word>on</word>
+		<word>off</word>
+		<word>in</word>
+
+		<word>door,airlock</word>
+		<word>button</word>
+		<word>panel</word>
+		<word>uniform,clothing,clothes,pocket,pockets</word>
+
+		<word>hit,kick,punch,kill,smash,smack</word>
+		<word>fuck,shit</word>
+	</words>
+
+
+	<vars>
+		<var id="blue" value="0" />
+		<var id="tachyon" value="0" />
+		<var id="ack" value="0" />
+		<var id="rendez" value="0" />
+		<var id="dock" value="0" />
+
+		<var id="a_inner" value="0" />
+		<var id="outer" value="0" />
+		<var id="g_inner" value="1" />
+
+		<var id="box" value="0" />
+		<var id="pouch" value="0" />
+		<var id="panel" value="0" />
+		<var id="storage" value="0" />
+
+		<var id="sonic" value="-1" />
+		<var id="furniture" value="0" />
+		<var id="purify" value="0" />
+
+		<var id="magnet" value="0" />
+
+		<var id="force" value="0" />
+		<var id="hp" value="3" />
+	</vars>
+
+
+	<messages>
+		<message id="intro1">They told you that star flight would be difficult. They told you and you believed them... sort of.&#10;&#10;What they hadn't told you was how grueling cold sleep could be, how the months and years of your flight would be filled with endless nightmares, countless replays of every terrible thing that had happened to you in a lifetime of terrible things. When the instructions finally arrived from the ship's computer telling the cold sleep machinery to revive you for the final phase of your flight, you were grateful.&#10;&#10;What you didn't realize, even as you stumbled groggily from the narrow sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the most nightmarish part of your mission was yet to come... and that you would face it fully awake.</message>
+		<message id="intro2">STARFLIGHT: A Cosmic Adventure&#10;Written &amp; Programmed for the C64 by Chris Lampton&#10;Adapted by Marcus Kamps&#10;&#10;</message>
+
+		<!-- pilot's cabin -->
+
+		<message id="lightflashing">&#10;&#10;A light is flashing on the console.</message>
+		<message id="consolelightflashing"> There is a light flashing near the top of the console.</message>
+		<message id="lightnotflashing">The light is no longer blinking.</message>
+		<message id="whichcolour">Please specify a colour.</message>
+		<message id="bluebutton">A prerecorded voice booms down from an overhead speaker:&#10;&#10;"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?&#10;&#10;"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.&#10;&#10;"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!"</message>
+		<message id="distress">The hauntingly human voice of the ship's computer booms down from the overhead speakers:&#10;&#10;"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!"</message>
+		<message id="cancelled">&#10;&#10;The ship's computer announces:&#10;&#10;"Acknowledgement not received. Request cancelled!"</message>
+		<message id="rendezvous">The ship's computer announces:&#10;&#10;"Rendezvous procedures have been initiated."&#10;&#10;As you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.</message>
+		<message id="functional">The ship's computer announces:&#10;&#10;"All systems are functional."</message>
+		<message id="cantdock">The docking machinery whines uselessly, since there is nothing within the vicinity with which it can dock.</message>
+		<message id="dock">The Ganymede rises until it is touching the Armstrong. A loud grinding noise informs you that the airlocks are now connected and the ships are docked.</message>
+		<message id="undock">The Ganymede and Armstrong disconnect airlocks and undock. The Ganymede floats downward until about fifty metres of space separate it from the Armstrong.</message>
+		<message id="tachyon">There is a crackle from the overhead speaker, then you hear the voice of the communications officer back at base headquarters, transmitted to you via tachyon beam. You tell her what has happened. She replies:</message>
+		<message id="noprogress">&#10;&#10;"Please get back in contact after you've made some progress in your mission."</message>
+		<message id="horrible">&#10;&#10;"My God, that's horrible! Find out what happened and report back immediately!"</message>
+		<message id="astonishing">&#10;&#10;"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!"</message>
+		<message id="congratulations">&#10;&#10;"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!"&#10;&#10;Smiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...</message>
+
+		<!-- airlocks -->
+
+		<message id="airclosed">The airlock door is closed. You can't go that way.</message>
+		<message id="whichdoor">Please specify which door.</message>
+		<message id="openinnerdoor">The inner door is now open.</message>
+		<message id="closeinnerdoor">The inner door is now closed.</message>
+		<message id="openouterdoor">The outer door is now open.</message>
+		<message id="closeouterdoor">The outer door is now closed.</message>
+		<message id="alreadyopen">It's already open.</message>
+		<message id="alreadyclosed">It's already closed.</message>
+		<message id="dooropen">The door is currently open.</message>
+		<message id="doorclosed">The door is currently closed.</message>
+		<message id="closeotherdoor">The other door must be closed first.</message>
+		<message id="inneropenouterclosed"> The inner door is open and the outer door is closed.</message>
+		<message id="innerclosedouteropen"> The inner door is closed and the outer door is open.</message>
+		<message id="innerclosedouterclosed"> The inner door is closed and the outer door is closed.</message>
+		<message id="spacednosuit">A violent gust of air pulls you from the airlock into the void of space. You are briefly aware of the Starflyer Ganymede receding into the distance, then you lose consciousness... forever.</message>
+		<message id="spacedwithsuit">A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.&#10;&#10;Your spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.</message>
+		<message id="finishdocking">&#10;&#10;Perhaps you should have finished docking with the Armstrong...</message>
+		<message id="pullforcewithyou">&#10;&#10;For what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...</message>
+		<message id="airlockfumes">Dim light floods in from the airlock of the Armstrong &#x2013; and a cloud of noxious fumes floods in as well. You begin to choke and try to close the doors, but it's too late. You are losing consciousness. Your final thought is that you should have worn the spacesuit. It might have saved your life...</message>
+		<message id="suitfumes">&#10;&#10;...but you should have left it on! Noxious fumes inside the Armstrong asphyxiate you within seconds!</message>
+		<message id="openairlockmagnet">As the outer door opens, air bursts explosively into the vacuum of space, but you are held fast within the airlock by the strong grip of the bar magnet against the metallized glove of your spacesuit.</message>
+		<message id="openairlockforce"> A screaming sound inside your head tells you that the malevolent force has been yanked back into the vacuum of space from which it came, and can no longer menace the crew members of the Armstrong. You rejoice inwardly! You have accomplished your assigned mission and now have only to report back to headquarters!</message>
+		<message id="outerdoorstillopen">You don't really want to do that. The outer door is still open, leaving you exposed to the void of space.</message>
+
+		<!-- opening, closing, unlocking, etc -->
+
+		<message id="somethinginpocket">You find something in the pocket.</message>
+		<message id="withwhat">With what?</message>
+		<message id="locked">You can't. It's locked.</message>
+		<message id="nokeys">You don't have any keys.</message>
+		<message id="unlocked">Okay. It's unlocked.</message>
+		<message id="alreadyunlocked">It's already unlocked.</message>
+		<message id="jammed">You can't. The panel's unlocked, but it's jammed shut, probably from the force of the science officer's body falling against it.</message>
+		<message id="strongerthanknife">You'll need something stronger than a knife.</message>
+		<message id="cantprypanel">You attempt to pry the locked panel with the crowbar, but are unsuccessful.</message>
+		<message id="prypanel">You pry open the panel with the crowbar.</message>
+		<message id="panelopen"> The panel is open, revealing a computer video screen, a black button and a white button.</message>
+		<message id="emergencysystem">There is a rumble from a speaker set into the science officer's console, then a voice speaks:&#10;&#10;"This is the Armstrong's computerized emergency system. Since the crew of the Armstrong is now dead and all of the passengers remain in cold sleep, it is assumed that you are an outsider responding to the distress signal. Here are the details of the current emergency situation:&#10;&#10;"An invisible, malevolent force has entered the Armstrong during a routine EVA. All crew members are deceased. Over the course of ten years, I have maneuvered the invading entity into the auxiliary storage area, behind the main storage room, where it is now imprisoned, though perhaps not for long. If you wish me to unlock the door to this room, please acknowledge immediately!"</message>
+		<message id="storageunlocked">The emergency computer announces:&#10;&#10;"Door to the auxiliary storage room is now unlocked."</message>
+		<message id="opendooraft"> An open door is aft.</message>
+		<message id="closeddooraft"> A closed door is aft.</message>
+		<message id="itsopen">Okay. It's open.</message>
+		<message id="openfellout">Okay. It's open... and something fell out.</message>
+		<message id="alreadyopen">It's already open.</message>
+		<message id="itsempty">It's empty.</message>
+		<message id="zipperstuck">You can't. The zipper's stuck.</message>
+		<message id="cutpouch">You cut open the pouch with the knife.</message>
+		<message id="alreadycut">It's already been cut, thank you.</message>
+
+		<!-- sonic disruptor -->
+
+		<message id="twistdisruptor">You twist the disruptor until it clicks.</message>
+		<message id="alreadyprimed">You've already primed the disruptor.</message>
+		<message id="notbloodylikely">Not bloody likely.</message>
+		<message id="glowingnumeral">&#10;&#10;A glowing numeral %VAR(sonic) appears on one side of the sonic disruptor.</message>
+		<message id="disruptorbursts">&#10;&#10;The sonic disruptor bursts forth with a spray of high-frequency sound that atomizes everything in its immediate vicinity... yourself included.</message>
+		<message id="destroyedfurniture"> For what it's worth, you did succeed in destroying the piece of furniture that had been blocking the stairshaft.</message>
+		<message id="heardisruptor">&#10;&#10;In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity.</message>
+		<message id="heardisruptorshatter">&#10;&#10;In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity, accompanied by the sound of shattering plastic.</message>
+
+		<!-- malevolent force -->
+
+		<message id="forceinroom">&#10;&#10;You are aware of a powerful, invisible force in the room with you.</message>
+		<message id="jolt1">&#10;&#10;Your entire nervous system is jolted by a mental force the likes of which you have never experienced. Your head jerks back and your mouth opens in an involuntary scream. From the neck down your body is completely paralyzed, immobile; then the force relents and you go limp.</message>
+		<message id="jolt2">&#10;&#10;A second jolt, more powerful than the first and infinitely more painful, surges through your nervous system. For a moment you do not even recognize the sound of your own scream. After what seems like several eternities, the pain goes away.</message>
+		<message id="jolt3">&#10;&#10;The third jolt strikes you like a crackling bolt of lightning. The duration is shorter this time, because your weakened heart is incapable of sustaining further pain of this intensity. Within seconds you slump dead against the nearest wall, wondering in your last instant of consciousness just who will discover *your* decaying skeleton...</message>
+		<message id="healthhp3">You're in fine health... for the time being, anyway.</message>
+		<message id="healthhp2">The shock to your nervous system has left you in ragged shape. You are wobbly, disoriented, and slightly nauseous. You should avoid additional shocks of this nature.</message>
+		<message id="healthhp1">You are in critical condition. One more shock like that last one and your star-flying days will come to an abrupt halt.</message>
+
+		<!-- various -->
+
+		<message id="nosleep">You don't really want to do that. If you re-enter the suspended animation booth and revert to cold sleep, the ship will automatically return to its home port. Your mission will be a failure.</message>
+		<message id="skeletons">You step cautiously over a pair of skeletons that have fallen together in the middle of the hallway.&#10;&#10;</message>
+		<message id="vaultlarge">You don't really want to go that way. The passenger vault is so large that you could wander in it for days, to no particular avail.</message>
+		<message id="electroniclock">The door is locked electronically and can only be unlocked by order of the ship's computer system.</message>
+		<message id="debris">The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members.</message>
+		<message id="dropsuit"> Unfortunately, you will need to drop your bulky space suit before you can squeeze through the debris.</message>
+		<message id="squeeze"> You are barely able to squeeze through the debris.&#10;&#10;</message>
+		<message id="blockedfurniture">There is a large item of plastic furniture blocking your descent. Below the plastic, you can just make out the skeletal remains of one of the crew members, who had apparently placed the furniture here in an unsuccessful attempt to ward off an attacker.</message>
+		<message id="descend">You descend into the shaft, picking your way past the shattered remains of the piece of plastic furniture and the skeleton that was holding it in place.&#10;&#10;</message>
+		<message id="airispure">You hear a hissing sound from the ventilation system. After a few moments the sign on the control panel indicates that the air is pure enough to breathe.</message>
+		<message id="signnotflashing">The sign is no longer flashing.</message>
+		<message id="takemagnet">With a bone-wrenching tug, you pull the magnet loose from the metal bulkhead where it had attached itself.</message>
+		<message id="dropmagnet">You drop the magnet. With a powerful leap and a loud clang, it attaches itself to the nearest metal bulkhead.</message>
+		<message id="feelslikemagnet">It feels like a magnet.</message>
+		<message id="clingstofingers">It clings to the metallic fingers of your spacesuit glove.</message>
+		<message id="immobilized">The fingers of your spacesuit attach themselves tightly to the magnet. Since you are *in* the spacesuit, you are temporarily immobilized.</message>
+		<message id="pullfreeofmagnet">First, you tug yourself free of the bar magnet...&#10;&#10;</message>
+
+		<!-- game-specific defaults -->
+
+		<message id="timepasses">One minute passes...</message>
+		<message id="touched">Okay. You've touched it.</message>
+		<message id="violent">Feeling violent today, are we?</message>
+		<message id="nothere">Please! Not here!</message>
+		<message id="cantgothere">You can't go there!</message>
+		<message id="okay">Okay.</message>
+		<message id="fromwhat">From what?</message>
+		<message id="dontknowhow">I don't know how to %1.</message>
+		<message id="dontknowhowsomething">I don't know how to %1 something.</message>
+		<message id="turns">You have taken %TURNS turns.</message>
+
+		<!-- engine defaults -->
+
+		<message id="saved">Saved game.</message>
+		<message id="loadedsave">Loaded save game.&#10;&#10;</message>
+		<message id="nosave">No save game to load.</message>
+		<message id="cantverb">You can't %1 that.</message>
+		<message id="nothinghappens">Nothing happens.</message>
+		<message id="carrying">You are carrying:</message>
+		<message id="invitem">&#10;%NOUN.</message>
+		<message id="invitemworn">&#10;%NOUN (being worn).</message>
+		<message id="invitemcontains">&#10;&#09;The %NOUN contains:</message>
+		<message id="invitemcontained">&#10;&#09;&#09;%NOUN.</message>
+		<message id="taken">Taken.</message>
+		<message id="dropped">Dropped.</message>
+		<message id="donthave">You don't have it.</message>
+		<message id="alreadycarrying">You've already got it.</message>
+		<message id="carryingnothing">You're not carrying anything.</message>
+		<message id="wearing">You are now wearing the %2.</message>
+		<message id="nolongerwearing">You are no longer wearing the %2.</message>
+		<message id="notwearing">You're not wearing it.</message>
+		<message id="alreadywearing">You're already wearing it.</message>
+		<message id="dontsee">That's not here.</message>
+		<message id="nothingunusual">You see nothing unusual.</message>
+		<message id="cantgo">You can't go that way.</message>
+		<message id="gameover">&#10;&#10;Would you like to play again?</message>
+	</messages>
+
+
+	<conds>
+		<condset>
+
+			<cond>
+				<if>start</if>
+				<action>message intro1</action>
+				<action>pause</action>
+				<action>message intro2</action>
+				<action>look</action>
+				<done />
+			</cond>
+
+		<!-- start of turn -->
+
+			<cond>
+				<if>var storage 2,somewhere force</if>
+				<action>sendtoroom force</action>
+			</cond>
+
+		<!-- pushing buttons -->
+
+			<cond>
+				<if>input * button</if>
+				<action>message whichcolour</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input push blue,room pilot,var blue 0</if>
+				<action>setvar blue 1</action>
+				<action>removeroomnote pilot lightflashing</action>
+				<action>resendnote console consolelightflashing</action>
+				<action>setnoundesc light lightnotflashing</action>
+				<action>message bluebutton</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input push blue,room pilot,var blue 1</if>
+				<if>input push green,room pilot,var ack 0</if>
+				<if>input push black,room e_bridge,!var storage 0</if>
+				<if>input push white,room e_bridge,var ack 0</if>
+				<action>message nothinghappens</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input push red,room pilot</if>
+				<cond>
+					<if>var blue 1,var rendez 0</if>
+					<action>setvar ack 2</action>
+					<action>message distress</action>
+					<done />
+				</cond>
+				<action>message functional</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input push green,room pilot,var ack 1</if>
+				<action>setvar ack 0</action>
+				<action>setvar rendez 1</action>
+				<action>message rendezvous</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input push orange,room pilot</if>
+				<cond>
+					<if>var rendez 0</if>
+					<action>message cantdock</action>
+					<done />
+				</cond>
+				<cond>
+					<if>var rendez 1,var dock 0</if>
+					<action>setvar dock 1</action>
+					<action>message dock</action>
+					<done />
+				</cond>
+				<cond>
+					<if>var dock 1</if>
+					<action>setvar dock 0</action>
+					<action>message undock</action>
+					<done />
+				</cond>
+			</cond>
+			<cond>
+				<if>input push yellow,room pilot</if>
+				<action>message tachyon</action>
+				<cond>
+					<if>var tachyon 0</if>
+					<action>message noprogress</action>
+				</cond>
+				<cond>
+					<if>var tachyon 1</if>
+					<action>message horrible</action>
+				</cond>
+				<cond>
+					<if>var tachyon 2</if>
+					<action>message astonishing</action>
+				</cond>
+				<cond>
+					<if>var tachyon 3</if>
+					<action>message congratulations</action>
+					<gameover />
+				</cond>
+				<done />
+			</cond>
+			<cond>
+				<if>input push yellow,room maintenance</if>
+				<cond>
+					<if>var purify 3</if>
+					<action>message nothinghappens</action>
+				</cond>
+				<cond>
+					<if>var purify &lt;3</if>
+					<action>adjustvar purify +1</action>
+					<cond>
+						<if>var purify &lt;3</if>
+						<action>message nothinghappens</action>
+					</cond>
+					<cond>
+						<if>var purify 3</if>
+						<action>setnoundesc sign signnotflashing</action>
+						<action>message airispure</action>
+					</cond>
+				</cond>
+				<done />
+			</cond>
+			<cond>
+				<if>input push black,room e_bridge,var storage 0</if>
+				<action>setvar ack 2</action>
+				<action>setvar tachyon 2</action>
+				<action>message emergencysystem</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input push white,room e_bridge,var ack 1</if>
+				<action>setvar ack 0</action>
+				<action>setvar storage 1</action>
+				<action>message storageunlocked</action>
+				<done />
+			</cond>
+
+		<!-- airlocks -->
+
+			<cond>
+				<if>input up,room storage,var g_inner 0</if>
+				<if>input up,room g_airlock,var outer 0</if>
+				<if>input up,room a_airlock,var a_inner 0</if>
+				<if>input down,room trans,var a_inner 0</if>
+				<if>input down,room a_airlock,var outer 0</if>
+				<if>input down,room g_airlock,var g_inner 0</if>
+				<action>message airclosed</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input * door</if>
+				<cond>
+					<if>room a_airlock|g_airlock</if>
+					<action>message whichdoor</action>
+					<done />
+				</cond>
+				<cond>
+					<if>room storage|trans</if>
+					<replace>%1 inner</replace>
+				</cond>
+			</cond>
+
+			<cond>
+				<if>input examine inner,room storage|g_airlock,var g_inner 0</if>
+				<if>input examine inner,room trans|a_airlock,var a_inner 0</if>
+				<if>input examine outer,room a_airlock|g_airlock,var outer 0</if>
+				<action>examine</action>
+				<action>message doorclosed</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input examine inner,room storage|g_airlock,var g_inner 1</if>
+				<if>input examine inner,room trans|a_airlock,var a_inner 1</if>
+				<if>input examine outer,room a_airlock|g_airlock,var outer 1</if>
+				<action>examine</action>
+				<action>message dooropen</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open inner,room g_airlock|a_airlock,var outer 1</if>
+				<if>input open outer,room g_airlock,var g_inner 1</if>
+				<if>input open outer,room a_airlock,var a_inner 1</if>
+				<action>message closeotherdoor</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open inner,room storage|g_airlock,var g_inner 1</if>
+				<if>input open inner,room trans|a_airlock,var a_inner 1</if>
+				<if>input open outer,room g_airlock|a_airlock,var outer 1</if>
+				<action>message alreadyopen</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input close inner,room storage|g_airlock,var g_inner 0</if>
+				<if>input close inner,room trans|a_airlock,var a_inner 0</if>
+				<if>input close outer,room g_airlock|a_airlock,var outer 0</if>
+				<action>message alreadyclosed</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open inner|close inner,!room storage|g_airlock|a_airlock|trans</if>
+				<if>input open outer|close outer,!room g_airlock|a_airlock</if>
+				<action>message dontsee</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open outer,room g_airlock</if>
+				<cond>
+					<if>var dock 0</if>
+					<cond>
+						<if>var magnet 0</if>
+						<cond>
+							<if>!worn spacesuit</if>
+							<action>message spacednosuit</action>
+						</cond>
+						<cond>
+							<if>worn spacesuit</if>
+							<action>message spacedwithsuit</action>
+						</cond>
+						<cond>
+							<if>nounloc force g_airlock</if>
+							<action>message pullforcewithyou</action>
+						</cond>
+						<cond>
+							<if>!nounloc force g_airlock,var rendez 1</if>
+							<action>message finishdocking</action>
+						</cond>
+						<gameover />
+					</cond>
+					<action>setvar outer 1</action>
+					<action>message openairlockmagnet</action>
+					<cond>
+						<if>nounloc force g_airlock</if>
+						<action>setvar tachyon 3</action>
+						<action>destroy force</action>
+						<action>message openairlockforce</action>
+					</cond>
+					<done />
+				</cond>
+				<cond>
+					<if>var dock 1,!var purify 3,!worn spacesuit</if>
+					<action>message airlockfumes</action>
+					<gameover />
+				</cond>
+			</cond>
+			<cond>
+				<if>input open inner,room storage|g_airlock,var g_inner 0</if>
+				<action>setvar g_inner 1</action>
+				<action>clearroomnotes g_airlock</action>
+				<action>addroomnote g_airlock inneropenouterclosed</action>
+				<action>message openinnerdoor</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open inner,room trans|a_airlock,var a_inner 0</if>
+				<action>setvar a_inner 1</action>
+				<action>clearroomnotes a_airlock</action>
+				<action>addroomnote a_airlock inneropenouterclosed</action>
+				<action>message openinnerdoor</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open outer,room g_airlock|a_airlock,var outer 0</if>
+				<action>setvar outer 1</action>
+				<action>clearroomnotes g_airlock,a_airlock</action>
+				<action>addroomnote g_airlock,a_airlock innerclosedouteropen</action>
+				<action>message openouterdoor</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input close inner,room storage|g_airlock,var g_inner 1</if>
+				<action>setvar g_inner 0</action>
+				<action>clearroomnotes g_airlock</action>
+				<action>addroomnote g_airlock innerclosedouterclosed</action>
+				<action>message closeinnerdoor</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input close inner,room trans|a_airlock,var a_inner 1</if>
+				<action>setvar a_inner 0</action>
+				<action>clearroomnotes a_airlock</action>
+				<action>addroomnote a_airlock innerclosedouterclosed</action>
+				<action>message closeinnerdoor</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input close outer,room g_airlock|a_airlock,var outer 1</if>
+				<action>setvar outer 0</action>
+				<action>clearroomnotes g_airlock,a_airlock</action>
+				<action>addroomnote g_airlock,a_airlock innerclosedouterclosed</action>
+				<action>message closeouterdoor</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input go up,room g_airlock,var dock 0,var outer 1</if>
+				<action>message cantgo</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input remove suit,room g_airlock,var dock 0,var outer 1</if>
+				<action>message outerdoorstillopen</action>
+				<done />
+			</cond>
+
+		<!-- unlocking and opening -->
+
+			<cond>
+				<if>input open box,present box,var box 0</if>
+				<if>input open panel,room e_bridge,var panel 0</if>
+				<if>input open door,room main_storage,var storage 0</if>
+				<action>message locked</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input unlock panel,room e_bridge,!ininv keys,var panel 0</if>
+				<if>input unlock box,present box,!ininv keys,var box 0</if>
+				<action>message nokeys</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input unlock door,room main_storage,var storage 0</if>
+				<action>message electroniclock</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input unlock box,present box,var box 1</if>
+				<if>input unlock panel,room e_bridge,var panel 1</if>
+				<if>input unlock door,room main_storage,var storage 1</if>
+				<action>message alreadyunlocked</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open box,present box,var box 2</if>
+				<if>input open|pry panel,room e_bridge,var panel 2</if>
+				<if>input open door,room main_storage,var storage 2</if>
+				<action>message alreadyopen</action>
+				<done />
+			</cond>
+
+			<cond>
+				<if>input examine|search uniform</if>
+				<if>input search skeleton</if>
+				<cond>
+					<if>room e_bridge,!somewhere keys</if>
+					<action>sendnoun keys e_bridge</action>
+					<action>message somethinginpocket</action>
+					<done />
+				</cond>
+				<cond>
+					<if>room maintenance,!somewhere knife</if>
+					<action>sendnoun knife maintenance</action>
+					<action>message somethinginpocket</action>
+					<done />
+				</cond>
+			</cond>
+
+			<cond>
+				<if>input open pouch,present pouch</if>
+				<action>message zipperstuck</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input cut pouch,var pouch 1</if>
+				<action>message alreadycut</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input cut pouch with knife,!ininv knife</if>
+				<action>message donthave</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input cut pouch,!ininv knife</if>
+				<action>message withwhat</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input cut pouch,ininv knife,present pouch</if>
+				<action>setvar pouch 1</action>
+				<action>setnoundesc pouch nothingunusual</action>
+				<action>sendtonoun crowbar pouch</action>
+				<action>message cutpouch</action>
+				<done />
+			</cond>
+
+			<cond>
+				<if>input unlock panel,room e_bridge,ininv keys,var panel 0</if>
+				<action>setvar panel 1</action>
+				<action>message unlocked</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open panel,room e_bridge,var panel 1</if>
+				<action>message jammed</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input pry panel with crowbar,room e_bridge,!ininv crowbar</if>
+				<if>input pry panel with crowbar,room e_bridge,contained crowbar</if>
+				<action>message donthave</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input pry panel,room e_bridge</if>
+				<cond>
+					<if>!ininv crowbar</if>
+					<if>contained crowbar</if>
+					<cond>
+						<if>ininv knife</if>
+						<action>message strongerthanknife</action>
+						<done />
+					</cond>
+					<action>message withwhat</action>
+					<done />
+				</cond>
+				<cond>
+					<if>var panel 0</if>
+					<action>message cantprypanel</action>
+					<done />
+				</cond>
+				<action>setvar panel 2</action>
+				<action>sendnoun screen,black,white e_bridge</action>
+				<action>addroomnote e_bridge panelopen</action>
+				<action>message prypanel</action>
+				<done />
+			</cond>
+
+			<cond>
+				<if>input unlock box,present box,ininv keys,var box 0</if>
+				<action>setvar box 1</action>
+				<action>message unlocked</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open box,present box,var box 1</if>
+				<action>setvar box 2</action>
+				<action>setnoundesc box itsempty</action>
+				<action>sendtoroom sonic</action>
+				<action>message openfellout</action>
+				<done />
+			</cond>
+
+			<cond>
+				<if>input go south,room main_storage,!var storage 2</if>
+				<action>message cantgo</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input open door,room main_storage,var storage 1</if>
+				<action>removeroomnote main_storage closeddooraft</action>
+				<action>addroomnote main_storage opendooraft</action>
+				<action>setvar storage 2</action>
+				<action>sendnoun force aux_storage</action>
+				<action>message itsopen</action>
+				<done />
+			</cond>
+
+		<!-- blocking and unblocking -->
+
+			<cond>
+				<if>input go north,room out_bridge</if>
+				<action>message debris</action>
+				<cond>
+					<if>ininv spacesuit</if>
+					<action>message dropsuit</action>
+					<done />
+				</cond>
+				<action>message squeeze</action>
+			</cond>
+
+			<cond>
+				<if>input go down,room stair</if>
+				<cond>
+					<if>var furniture 0</if>
+					<action>message blockedfurniture</action>
+					<done />
+				</cond>
+				<action>message descend</action>
+			</cond>
+			<cond>
+				<if>input turn sonic,present sonic</if>
+				<cond>
+					<if>var sonic -1</if>
+					<action>setvar sonic 4</action>
+					<action>message twistdisruptor</action>
+					<done />
+				</cond>
+				<action>message alreadyprimed</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input turn molten,inroom molten</if>
+				<action>message notbloodylikely</action>
+				<done />
+			</cond>
+
+		<!-- magnet -->
+
+			<cond>
+				<if>input take magnet,inroom magnet</if>
+				<action>sendnoun magnet INVENTORY</action>
+				<action>message takemagnet</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input drop magnet,ininv magnet</if>
+				<action>sendtoroom magnet</action>
+				<action>message dropmagnet</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input touch magnet</if>
+				<cond>
+					<if>!worn spacesuit,inroom magnet</if>
+					<action>message feelslikemagnet</action>
+					<done />
+				</cond>
+				<cond>
+					<if>worn spacesuit</if>
+					<cond>
+						<if>ininv magnet</if>
+						<action>message clingstofingers</action>
+					</cond>
+					<cond>
+						<if>inroom magnet</if>
+						<action>setvar magnet 1</action>
+						<action>message immobilized</action>
+					</cond>
+					<done />
+				</cond>
+			</cond>
+			<cond>
+				<if>input go *,exitexists %2,var magnet 1</if>
+				<if>input remove suit,var magnet 1</if>
+				<action>setvar magnet 0</action>
+				<action>message pullfreeofmagnet</action>
+			</cond>
+
+		<!-- various custom messages and can't-do-thats -->
+
+			<cond>
+				<if>input remove suit,!var purify 3,room a_airlock|trans|out_trans|vault|out_vault|out_storage|main_storage|aux_storage|out_stair|stair|maintenance|corner|hallway|out_bridge|w_bridge|c_bridge|e_bridge</if>
+				<action>message nolongerwearing</action>
+				<action>message suitfumes</action>
+				<gameover />
+			</cond>
+
+			<cond>
+				<if>input examine uniform,room c_bridge</if>
+				<replace>examine captain</replace>
+				<done />
+			</cond>
+			<cond>
+				<if>input read terminal|sign</if>
+				<action>examine %2</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input touch controls,room c_bridge</if>
+				<action>examine %2</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input go|enter booth,room sleep</if>
+				<action>message nosleep</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input go east,room out_trans</if>
+				<if>input go west,room out_vault</if>
+				<action>message skeletons</action>
+			</cond>
+			<cond>
+				<if>input go north,room vault</if>
+				<action>message vaultlarge</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input hit</if>
+				<action>message violent</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input fuck</if>
+				<action>message nothere</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input health</if>
+				<cond>
+					<if>var hp 3</if>
+					<action>message healthhp3</action>
+				</cond>
+				<cond>
+					<if>var hp 2</if>
+					<action>message healthhp2</action>
+				</cond>
+				<cond>
+					<if>var hp 1</if>
+					<action>message healthhp1</action>
+				</cond>
+				<done />
+			</cond>
+
+		<!-- generic redirects -->
+
+			<cond>
+				<if>input take inventory</if>
+				<replace>inventory</replace>
+			</cond>
+			<cond>
+				<if>input put on *</if>
+				<replace>wear %3</replace>
+			</cond>
+			<cond>
+				<if>input take off *</if>
+				<replace>remove %3</replace>
+			</cond>
+			<cond>
+				<if>input go in *</if>
+				<replace>enter %3</replace>
+			</cond>
+			<cond>
+				<if>input look at *</if>
+				<replace>examine %3</replace>
+			</cond>
+			<cond>
+				<if>input north|south|east|west|up|down</if>
+				<replace>go %1</replace>
+			</cond>
+			<cond>
+				<if>input pry open *</if>
+				<replace>pry %3</replace>
+			</cond>
+
+		<!-- default responses -->
+
+			<cond>
+				<if>input wear *</if>
+				<action>wear %2</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input remove *,wearable %2</if>
+				<cond>
+					<if>worn %2</if>
+					<action>sendnoun %2 INVENTORY</action>
+					<action>message nolongerwearing</action>
+					<done />
+				</cond>
+				<action>message notwearing</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input take|remove *,contained %2,present %2</if>
+				<action>sendnoun %2 INVENTORY</action>
+				<action>message okay</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input remove *,present %2,!contained %2,!worn %2</if>
+				<action>message fromwhat</action>
+				<done />
+			</cond>
+
+			<cond>
+				<if>input push|open|close|unlock|cut|pry|remove *,!present %2</if>
+				<action>message dontsee</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input push|open|close|unlock|cut|pry|enter *</if>
+				<action>message cantverb</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input search</if>
+				<action>message nothingunusual</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input touch *</if>
+				<action>message touched</action>
+				<done />
+			</cond>
+
+		<!-- basic actions -->
+
+			<cond>
+				<if>input wait</if>
+				<action>message timepasses</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input take</if>
+				<action>take %2</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input drop</if>
+				<action>drop %2</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input examine</if>
+				<action>examine %2</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input inventory</if>
+				<action>inv</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input look</if>
+				<action>look</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input go north|south|east|west|up|down</if>
+				<action>move %2</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input go</if>
+				<action>message cantgothere</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input score</if>
+				<action>message turns</action>
+				<done />
+			</cond>
+
+			<cond>
+				<if>input load</if>
+				<action>load</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input save</if>
+				<action>save</action>
+				<done />
+			</cond>
+
+			<cond>
+				<if>input * *</if>
+				<action>message dontknowhowsomething</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input *</if>
+				<action>message dontknowhow</action>
+				<done />
+			</cond>
+		</condset>
+
+		<condset>
+
+		<!-- acknowledgement -->
+
+			<cond>
+				<if>var ack 1</if>
+				<action>setvar ack 0</action>
+				<action>message cancelled</action>
+			</cond>
+			<cond>
+				<if>var ack 2</if>
+				<action>setvar ack 1</action>
+			</cond>
+
+        <!-- first milestone -->
+
+			<cond>
+				<if>room trans,var tachyon 0</if>
+				<action>setvar tachyon 1</action>
+			</cond>
+
+		<!-- sonic disruptor -->
+
+			<cond>
+				<if>var sonic &gt;-1</if>
+				<action>adjustvar sonic -1</action>
+				<cond>
+					<if>var sonic &gt;0,present sonic</if>
+					<action>message glowingnumeral</action>
+				</cond>
+				<cond>
+					<if>var sonic 0</if>
+					<cond>
+						<if>present sonic</if>
+						<action>message disruptorbursts</action>
+						<cond>
+							<if>room stair</if>
+							<action>message destroyedfurniture</action>
+						</cond>
+						<gameover />
+					</cond>
+					<cond>
+						<if>nounloc sonic stair</if>
+						<action>setvar furniture 1</action>
+						<action>message heardisruptorshatter</action>
+					</cond>
+					<cond>
+						<if>!nounloc sonic stair</if>
+						<action>message heardisruptor</action>
+					</cond>
+					<action>swapnouns sonic molten</action>
+				</cond>
+			</cond>
+
+		<!-- malevolent force -->
+
+			<cond>
+				<if>var storage 2</if>
+				<cond>
+					<if>!inroom force</if>
+					<action>setvar force 0</action>
+				</cond>
+				<cond>
+					<if>inroom force</if>
+					<action>message forceinroom</action>
+					<cond>
+						<if>var force 1</if>
+						<cond>
+							<if>random 50</if>
+							<action>adjustvar hp -1</action>
+							<cond>
+								<if>var hp 2</if>
+								<action>message jolt1</action>
+							</cond>
+							<cond>
+								<if>var hp 1</if>
+								<action>message jolt2</action>
+							</cond>
+							<cond>
+								<if>var hp 0</if>
+								<action>message jolt3</action>
+								<gameover />
+							</cond>
+						</cond>
+					</cond>
+					<action>setvar force 1</action>
+				</cond>
+			</cond>
+
+		</condset>
+	</conds>
+
+</adventure>
