@@ -1,4 +1,5 @@
 import game
+import state
 
 
 class Engine:
@@ -7,7 +8,7 @@ class Engine:
         
         
     def new_game(self):
-        self.state = game.State(self.game)
+        self.state = state.State(self.game)
         return self.do_turn()
     
     

@@ -5,11 +5,10 @@ from collections import OrderedDict
 import json
 #import pprint
 import re
+import sys
 
-
-title = 'starflight'
-
-game = xml.parse('games/{0}.xml'.format(title))
+title = sys.argv[1]
+game = xml.parse('{0}.xml'.format(title))
 
 # rooms
 
@@ -56,14 +55,18 @@ def get_control(cdata):
     elif len(idata) == 1:
         control['if'] = idata[0].text.split(',')
     
-    # collect actions, and sub condition blocks
-    control['then'] = []
-    for child in cdata:
-        if child.tag == 'action':
-            control['then'].append(child.text)
-        elif child.tag == 'cond':
-            control['then'].append(get_control(child))
-    
+    if cdata.find('replace') is not None:
+        # add command replacements
+        control['replace'] = cdata.find('replace').text
+    else: 
+        # collect actions, and sub condition blocks
+        control['then'] = []
+        for child in cdata:
+            if child.tag == 'action':
+                control['then'].append(child.text)
+            elif child.tag == 'cond':
+                control['then'].append(get_control(child))
+            
     # add other flags
     flags = ('done', 'gameover')
     control.update({cdata.find(flag).tag: True for flag in flags if cdata.find(flag) is not None})
@@ -91,7 +94,7 @@ pattern, repl = r'\[(("[^"]*",\s)*)\s*("[^"]*"(,\s)?)\s+(("[^"]*",?\s*)*)\]', r'
 while re.search(pattern, jsn) is not None:
     jsn = re.sub(pattern, repl, jsn)
     
-with open('games/{0}.json'.format(title), 'wb') as jsonfile:
+with open('{0}.json'.format(title), 'wb') as jsonfile:
     jsonfile.write(jsn)
 
 

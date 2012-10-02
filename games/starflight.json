@@ -722,7 +722,7 @@
                     }, 
                     {
                         "if": ["room storage|trans"], 
-                        "then": []
+                        "replace": "%1 inner"
                     }
                 ]
             }, 
@@ -1102,7 +1102,7 @@
             }, 
             {
                 "if": ["input examine uniform", "room c_bridge"], 
-                "then": [], 
+                "replace": "examine captain", 
                 "done": true
             }, 
             {
@@ -1162,31 +1162,31 @@
             }, 
             {
                 "if": ["input take inventory"], 
-                "then": []
+                "replace": "inventory"
             }, 
             {
                 "if": ["input put on *"], 
-                "then": []
+                "replace": "wear %3"
             }, 
             {
                 "if": ["input take off *"], 
-                "then": []
+                "replace": "remove %3"
             }, 
             {
                 "if": ["input go in *"], 
-                "then": []
+                "replace": "enter %3"
             }, 
             {
                 "if": ["input look at *"], 
-                "then": []
+                "replace": "examine %3"
             }, 
             {
                 "if": ["input north|south|east|west|up|down"], 
-                "then": []
+                "replace": "go %1"
             }, 
             {
                 "if": ["input pry open *"], 
-                "then": []
+                "replace": "pry %3"
             }, 
             {
                 "if": ["input wear *"], 
