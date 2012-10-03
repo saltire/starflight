@@ -1,44 +1,39 @@
-import json
+import gamedata
 
 
 class Game:
-    def __init__(self, file):
-        with open(file, 'rb') as gamefile:
-            data = json.load(gamefile)
+    def __init__(self, gamepath):
+        self.data = gamedata.GameData(gamepath)
+        self.turn = 0
         
-        for var in ('rooms', 'nouns', 'vars', 'messages'):
-            setattr(self, var, data.get(var, {}))
-            
-        self.controls = data.get('controls', [])
-            
-        self.vocab = set()
-        for words in data.get('words', []):
-            self.add_to_vocab(words)
-        for noun in self.nouns:
-            self.add_to_vocab(noun['words'])
-            
+        self.vars = self.data.get_initial_vars()
+        self.room = self.data.get_initial_room()
+        
+        
+    def get_controls(self):
+        return self.data.get_controls()
     
-    def add_to_vocab(self, words):
-        words = set(words)
-        for group in self.vocab:
-            if group & words:
-                words = group | words
-                self.vocab.discard(group)
-        self.vocab.add(words)
+    
+    def get_message(self, mid):
+        return self.data.get_message(mid)
+    
+    
+    def get_turn(self):
+        return self.turn
+    
+    
+    def new_turn(self):
+        self.turn += 1
         
         
+    def get_var(self, vid):
+        return self.vars[vid]
+    
+    
+    def get_current_room(self):
+        return self.room
+        
+    
     def match_word(self, inputword, word):
-        if word == '*':
-            return True
-        
-        words = word.split('|')
-        if inputword in words:
-            return True
-        
-        for w in words:
-            for group in self.vocab:
-                if w in group and inputword in group:
-                    return True
-            
-        return False
+        return self.data.match_word(inputword, word)
     

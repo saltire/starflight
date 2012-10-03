@@ -1,3 +1,4 @@
+import collections
 import re
 
 import game
@@ -6,7 +7,8 @@ import game
 class Adventure:
     def __init__(self, gamefile):
         self.game = game.Game(gamefile)
-        self.turn = 0
+        self.controls = self.game.get_controls()
+        self.messages = collections.deque()
         
         
     def start_game(self):
@@ -15,14 +17,19 @@ class Adventure:
             status = self.do_turn(command)
             if status == 'gameover':
                 break
+            
+            print
+            print '>',
             command = raw_input().strip()
             
             
     def do_turn(self, command):
-        words = [word for word in command.split() if word not in ('the', 'a', 'an')]
+        self.game.new_turn()
+        self.messages.clear()
         
+        words = [word for word in command.split() if word not in ('the', 'a', 'an')]
+
         while True:
-            self.turn += 1
             status, actions = self.do_controls(words)
             if status != 'replace':
                 break
@@ -31,14 +38,25 @@ class Adventure:
             words = re.sub('%(\d+)', lambda m: words[int(m.group(1)) - 1], actions).split()
             
         for action in actions:
-            self.do_action(action)
+            status = self.do_action(action)
+            
+        while self.messages:
+            msg = self.messages.popleft()
+            if msg == 'PAUSE':
+                print
+                raw_input('Press Enter to continue...')
+                print
+            else:
+                print msg
+            
+        return status
     
     
     def do_controls(self, words):
         status = 'ok'
         allactions = []
         
-        for controlset in self.game.controls:
+        for controlset in self.controls:
             for control in controlset:
                 status, actions = self.do_control(control, words)
                 allactions.extend(actions)
@@ -76,22 +94,27 @@ class Adventure:
         return status, allactions
     
     
-    def test_is_true(self, iftest, words):
-        for test in iftest:
-            # test must be all lists, or all strings
-            if all(isinstance(subtest, list) for subtest in test):
-                return any(all(self.cond_is_true(cond, words) for cond in subtest) for subtest in test)
-            else:
-                return all(self.cond_is_true(cond, words) for cond in test)
+    def test_is_true(self, test, words):
+        if all(isinstance(subtest, list) for subtest in test):
+            # test is a list of subtests (i.e. a list of lists)
+            # any of these can be true
+            return any(all(self.cond_is_true(cond, words) for cond in subtest) for subtest in test)
+                  
+        elif all(isinstance(cond, str) or isinstance(cond, unicode) for cond in test):
+            # test is a list of conditions (i.e. a list of strings)
+            # all of these must be true
+            return all(self.cond_is_true(cond, words) for cond in test)
+        
+        else:
+            raise Exception('Invalid test:', test)
     
     
     def cond_is_true(self, cond, words):
+        #print 'test:', cond, ':',
+        
         cond = cond.strip()
         
         if cond == '*':
-            return True
-        
-        if cond == 'start' and self.turn == 1:
             return True
         
         neg = False
@@ -99,16 +122,25 @@ class Adventure:
             neg = True
             cond = cond[1:]
             
-        cwords = cond.split()
-        success = getattr(self, "t_{0}".format(cwords[0]))(cwords[1:], words)
+        cwords = cond.split()            
+        success = getattr(self, 't_{0}'.format(cwords[0]))(words, *cwords[1:])
+        #print not success if neg else success
         return not success if neg else success
     
     
     def do_action(self, action):
-        pass
+        awords = action.split()
+        return getattr(self, 'a_{0}'.format(awords[0]))(*awords[1:])
     
     
-    def t_input(self, cwords, words):
+    def t_start(self, words):
+        return self.game.get_turn() == 1
+    
+    
+    def t_input(self, words, *cwords):
+        if len(words) < len(cwords):
+            return False
+        
         for index, cword in enumerate(cwords):
             if self.game.match_word(words[index], cword):
                 continue
@@ -117,7 +149,39 @@ class Adventure:
         return True
     
     
-    
+    def t_var(self, words, vid, value):
+        var = self.game.get_var(vid)
         
+        if value[0] == '<':
+            return var < int(value[1:])
+        elif value[0] == '>':
+            return var > int(value[1:])
+        elif value[0] in ('>=', '=>'):
+            return var >= int(value[2:])
+        elif value[0] in ('<=', '=<'):
+            return var <= int(value[2:])
+        else:
+            return var == int(value)
+    
+    
+    def t_room(self, words, rid):
+        return self.game.get_current_room() == rid
+    
+    
+    def a_message(self, mid):
+        self.messages.append(self.game.get_message(mid))
+        return 'ok'
+    
+    
+    def a_pause(self):
+        self.messages.append('PAUSE')
+        return 'ok'
+    
+    
+    def a_look(self):
+        self.messages.append(self.game.get_current_room().get_description())
+        return 'ok'
+    
+    
     
         
