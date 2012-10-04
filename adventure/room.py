@@ -10,3 +10,7 @@ class Room:
             
     def get_description(self):
         return self.desc or ''
+    
+    
+    def get_exits(self):
+        return self.exits or {}

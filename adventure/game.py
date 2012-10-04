@@ -1,19 +1,12 @@
-import gamedata
-
-
 class Game:
-    def __init__(self, gamepath):
-        self.data = gamedata.GameData(gamepath)
+    def __init__(self, data):
+        self.data = data
         self.turn = 0
         
         self.vars = self.data.get_initial_vars()
-        self.room = self.data.get_initial_room()
+        self.room = self.data.get_initial_room() # current room id
         
         
-    def get_controls(self):
-        return self.data.get_controls()
-    
-    
     def get_message(self, mid):
         return self.data.get_message(mid)
     
@@ -30,8 +23,16 @@ class Game:
         return self.vars[vid]
     
     
-    def get_current_room(self):
+    def get_current_room_id(self):
         return self.room
+    
+    
+    def go_to_room(self, rid):
+        self.room = rid
+    
+    
+    def get_current_room(self):
+        return self.data.get_room(self.room)
         
     
     def match_word(self, inputword, word):
