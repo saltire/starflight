@@ -1,6 +1,6 @@
 import textwrap
 
-from adventure import adventure
+import adventure
 
 gamefile = 'games/starflight.json'
 adv = adventure.Adventure(gamefile)
