@@ -1,6 +1,4 @@
-import collections
 import re
-import textwrap
 
 import game
 import gamedata
@@ -14,27 +12,11 @@ class Adventure:
         self.messages = data.get_messages()
         self.vocab = data.get_vocab()
         
-        self.words = []
-        self.output = collections.deque()
         
-        
-    def start_game(self):
-        """Start a new game from the beginning."""
-        command = ''
-        while True:
-            status = self.do_turn(command)
-            if status == 'gameover':
-                break
-            
-            print
-            print '>',
-            command = raw_input().strip()
-            
-            
     def do_turn(self, command):
         """Get a command, and execute a single turn of the game."""
-        self.game.new_turn()
-        self.output.clear()
+        self.game.increment_turn()
+        self.output = []
         self.words = [word for word in command.split() if word not in ('the', 'a', 'an')]
 
         while True:
@@ -43,26 +25,18 @@ class Adventure:
                 break
             
             # if status == replace, actions will contain the replacement command
-            self.words = self.substitute_words(actions, self.words).split()
+            self.words = self.substitute_words(actions).split()
             
         for action in actions:
             status = self.do_action(action)
             
-        while self.output:
-            msg = self.substitute_words(self.output.popleft(), self.words)
-            if msg == 'PAUSE':
-                print
-                raw_input('Press Enter to continue...')
-                print
-            else:
-                print '\n'.join(textwrap.fill(para) for para in msg.splitlines())
-            
-        return status
+        return status, self.output
     
     
-    def substitute_words(self, phrase, words):
+    def substitute_words(self, phrase):
         """Substitute %1, %2, etc. in phrase with words from the original command."""
-        return re.sub('%(\d+)', lambda m: words[int(m.group(1)) - 1], phrase)
+        sub_word = lambda m: self.words[int(m.group(1)) - 1] if len(self.words) >= m.group(1) else ''
+        return re.sub('%(\d+)', sub_word, phrase)
     
     
     def do_controls(self):
@@ -128,7 +102,7 @@ class Adventure:
     
     def cond_is_true(self, cond):
         """Decide whether a single condition evaluates to true."""
-        cond = self.substitute_words(cond.strip(), self.words)
+        cond = self.substitute_words(cond.strip())
         #print 'test:', cond, ':',
         
         if cond == '*':
@@ -147,10 +121,15 @@ class Adventure:
     
     def do_action(self, action):
         """Call the method for a single action."""
-        action = self.substitute_words(action.strip(), self.words)
+        action = self.substitute_words(action.strip())
         awords = action.split()
         #print 'action:', action
         return getattr(self, 'a_{0}'.format(awords[0]))(*awords[1:])
+    
+    
+    def queue_output(self, message):
+        """Add a message to the output queue."""
+        self.output.append(self.substitute_words(message))
     
     
     def match_word(self, inputword, word):
@@ -210,17 +189,17 @@ class Adventure:
     
     
     def a_message(self, mid):
-        self.output.append(self.messages[mid])
+        self.queue_output(self.messages[mid])
         return 'ok'
     
     
     def a_pause(self):
-        self.output.append('PAUSE')
+        self.queue_output('PAUSE')
         return 'ok'
     
     
     def a_look(self):
-        self.output.append(self.game.get_current_room().get_description())
+        self.queue_output(self.game.get_current_room().get_description())
         return 'ok'
     
     

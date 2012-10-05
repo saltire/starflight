@@ -15,7 +15,7 @@ class Game:
         return self.turn
     
     
-    def new_turn(self):
+    def increment_turn(self):
         self.turn += 1
         
         
