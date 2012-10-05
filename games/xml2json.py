@@ -30,8 +30,9 @@ for ndata in game.find('nouns'):
     noun.update({item.tag: item.text for item in ndata if item.text})
     if 'words' in noun:
         noun['words'] = ndata.find('words').text.split(',')
-    if ndata.find('loc') is not None:
-        noun['loc'] = [loc.get('id') for loc in ndata.findall('loc')]
+    for opt in ('loc', 'note'):
+        if ndata.find(opt) is not None:
+            noun['{0}s'.format(opt)] = [tag.get('id') for tag in ndata.findall(opt)]
     for k, v in noun.iteritems():
         if v == '1':
             noun[k] = True

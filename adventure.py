@@ -26,6 +26,7 @@ class Adventure:
             
             # if status == replace, actions will contain the replacement command
             self.words = self.substitute_words(actions).split()
+            #print 'replace:', ' '.join(self.words)
             
         for action in actions:
             status = self.do_action(action)
@@ -35,7 +36,8 @@ class Adventure:
     
     def substitute_words(self, phrase):
         """Substitute %1, %2, etc. in phrase with words from the original command."""
-        sub_word = lambda m: self.words[int(m.group(1)) - 1] if len(self.words) >= m.group(1) else ''
+        sub_word = lambda m: self.words[int(m.group(1)) - 1] if len(self.words) >= int(m.group(1)) else ''
+        #print 'substituting from:', phrase, 'to:', re.sub('%(\d+)', sub_word, phrase)
         return re.sub('%(\d+)', sub_word, phrase)
     
     
@@ -128,8 +130,9 @@ class Adventure:
     
     
     def queue_output(self, message):
-        """Add a message to the output queue."""
-        self.output.append(self.substitute_words(message))
+        """Add a message or messages to the output queue."""
+        if len(message):
+            self.output.append(self.substitute_words(message))
     
     
     def match_word(self, inputword, word):
@@ -203,15 +206,26 @@ class Adventure:
         return 'ok'
     
     
-    def a_move(self, direction):
+    def a_move(self, direction=''):
         try:
-            dest = next(dest for rexit, dest in self.game.get_current_room().get_exits().items()
-                        if self.match_word(direction, rexit))
+            dest = next(dest for exit, dest in self.game.get_current_room().get_exits().items()
+                            if self.match_word(direction, exit))
             self.game.go_to_room(dest)
             self.a_look()
             
         except StopIteration:
             self.a_message('cantgo')
+            
+            
+    def a_examine(self, nword=''):
+        try:
+            noun = next(noun for noun in self.game.get_nouns_present() if nword in noun.get_words())
+            self.queue_output(noun.get_description())
+            for note in noun.get_notes():
+                self.a_message(note)
+        
+        except StopIteration:
+            self.a_message('nothingunusual')
             
     
     

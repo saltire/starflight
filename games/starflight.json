@@ -178,26 +178,26 @@
     }, 
     "nouns": {
         "force": {
-            "loc": ["aux_storage"]
+            "locs": ["aux_storage"]
         }, 
         "m_yellow": {
-            "loc": ["maintenance"], 
+            "locs": ["maintenance"], 
             "words": ["yellow", "yellowbutton", "purification"], 
             "desc": "Beneath the yellow button are the words PURIFICATION CONTROL."
         }, 
         "yellow": {
-            "loc": ["pilot"], 
+            "locs": ["pilot"], 
             "words": ["yellow", "yellowbutton", "tachyon", "tachyonbeam"], 
             "desc": "Beneath the yellow button are the words TACHYON BEAM."
         }, 
         "sign": {
-            "loc": ["maintenance"], 
+            "locs": ["maintenance"], 
             "words": ["sign", "words"], 
             "desc": "The flashing sign reads:\n\nAIR LEVEL TOXIC!\nPRESS PURIFICATION CONTROL THREE TIMES!"
         }, 
         "radio": {
-            "loc": ["storage"], 
             "name": "a two-way radio", 
+            "locs": ["storage"], 
             "movable": true, 
             "visible": true, 
             "words": ["radio", "twoway"], 
@@ -206,35 +206,35 @@
             "desc": "It appears to need batteries."
         }, 
         "booth": {
-            "loc": ["sleep"], 
+            "locs": ["sleep"], 
             "words": ["booth", "cold", "sleep", "coffin"]
         }, 
         "captain": {
-            "loc": ["c_bridge"], 
+            "locs": ["c_bridge"], 
             "words": ["skeleton", "body", "captain", "capn", "skipper", "jtk", "officer", "crewmember", "crew"], 
             "desc": "Just beneath the collar of the captain's uniform is the monogram JTK."
         }, 
         "blue": {
-            "loc": ["pilot"], 
+            "locs": ["pilot"], 
             "words": ["blue", "bluebutton"]
         }, 
         "petty": {
-            "loc": ["trans"], 
+            "locs": ["trans"], 
             "words": ["skeleton", "body", "pettyofficer", "petty", "officer", "crewmember", "crew"], 
             "desc": "It appears to have been typing at the computer terminal."
         }, 
         "outer": {
-            "loc": ["g_airlock", "a_airlock"], 
+            "locs": ["g_airlock", "a_airlock"], 
             "words": ["outer", "outerdoor"], 
             "desc": "An iris-shaped airlock door. This one exits the ship."
         }, 
         "terminal": {
-            "loc": ["trans"], 
+            "locs": ["trans"], 
             "words": ["computer", "terminal", "screen"], 
             "desc": "On the video display you see the words:\n\n\"SHIP'S LOG, ENTRY 2,349.6.\n\n\"Whatever it is, we can't seem to stop it. The carnage is horrible. Most of the crew has succumbed, and I don't know how much longer I can hold out. Even now, the screams in the distance are hideous. Is there any way to\"\n\nAt that point, the message ends."
         }, 
         "m_officer": {
-            "loc": ["maintenance"], 
+            "locs": ["maintenance"], 
             "words": ["skeleton", "body", "officer", "crewmember", "crew"], 
             "desc": "The skeleton is sprawled across the instrument console."
         }, 
@@ -243,12 +243,12 @@
             "desc": "Beneath the black button are the words EMERGENCY MONITORING SYSTEM."
         }, 
         "inner": {
-            "loc": ["storage", "g_airlock", "a_airlock", "trans"], 
+            "locs": ["storage", "g_airlock", "a_airlock", "trans"], 
             "words": ["inner", "innerdoor"], 
             "desc": "An iris-shaped airlock door, allowing passage between the airlock and the ship."
         }, 
         "orange": {
-            "loc": ["pilot"], 
+            "locs": ["pilot"], 
             "words": ["orange", "orangebutton", "docking", "dockingcontrol"], 
             "desc": "Beneath the orange button are the words DOCKING CONTROL."
         }, 
@@ -257,7 +257,7 @@
             "desc": "Beneath the white button is the word ACKNOWLEDGE."
         }, 
         "red": {
-            "loc": ["pilot"], 
+            "locs": ["pilot"], 
             "words": ["red", "redbutton", "status", "report", "statusreport"], 
             "desc": "Beneath the red button are the words STATUS REPORT."
         }, 
@@ -271,17 +271,17 @@
             "desc": "The sonic disruptor is made of two independently rotatable metal cylinders, mounted end to end."
         }, 
         "m_console": {
-            "loc": ["maintenance"], 
+            "locs": ["maintenance"], 
             "words": ["console", "instrument", "instruments", "gauge", "gauges"], 
             "desc": "Although the skeleton is covering most of the console, you can see a flashing sign at one end. Below the sign is a yellow button."
         }, 
         "booths": {
-            "loc": ["vault"], 
+            "locs": ["vault"], 
             "words": ["booths", "booth", "tier", "cold", "sleep"], 
             "desc": "Through the frosty window of the nearest booth you see the face of a young girl, apparently well and unharmed by whatever has struck the ship's crew."
         }, 
         "navcontrols": {
-            "loc": ["c_bridge"], 
+            "locs": ["c_bridge"], 
             "words": ["nav", "navigation", "navigational", "controls", "navigationalcontrols", "navcontrols"], 
             "desc": "Considering your rudimentary knowledge of megaship navigation, you shouldn't even be *thinking* of touching the navigational controls."
         }, 
@@ -298,8 +298,8 @@
             "desc": "The video screen is blank."
         }, 
         "spacesuit": {
-            "loc": ["storage"], 
             "name": "a bulky spacesuit", 
+            "locs": ["storage"], 
             "movable": true, 
             "wearable": true, 
             "visible": true, 
@@ -309,13 +309,14 @@
             "desc": "Almost the entire suit, including the flexible portions, is made of heavily metallized fabric, apparently incorporating some sort of iron mesh."
         }, 
         "console": {
-            "loc": ["pilot"], 
+            "locs": ["pilot"], 
+            "notes": ["consolelightflashing"], 
             "words": ["console", "instrument", "instruments", "gauge", "gauges", "buttons"], 
             "desc": "The console is covered mostly with digital gauges that allow you to monitor the functioning of the ship's computer. In the centre of the console, however, are four buttons, one green, one yellow, one orange, and one red."
         }, 
         "pouch": {
-            "loc": ["storage"], 
             "name": "a plastic pouch", 
+            "locs": ["storage"], 
             "movable": true, 
             "visible": true, 
             "words": ["pouch", "bag", "plastic"], 
@@ -330,8 +331,8 @@
             "name": "a molten sonic disruptor"
         }, 
         "box": {
-            "loc": ["main_storage"], 
             "name": "a wooden box", 
+            "locs": ["main_storage"], 
             "movable": true, 
             "visible": true, 
             "words": ["box", "wooden", "wood", "crate"], 
@@ -340,7 +341,7 @@
             "desc": "There seems to be something inside."
         }, 
         "light": {
-            "loc": ["pilot"], 
+            "locs": ["pilot"], 
             "words": ["light"], 
             "desc": "It is blinking rapidly. Below the light is a small blue button."
         }, 
@@ -348,13 +349,13 @@
             "visible": true, 
             "name": "a powerful bar magnet", 
             "words": ["magnet"], 
-            "loc": ["debris"], 
+            "locs": ["debris"], 
             "shortdesc": "There is a powerful bar magnet here.", 
             "shortname": "magnet", 
             "movable": true
         }, 
         "green": {
-            "loc": ["pilot"], 
+            "locs": ["pilot"], 
             "words": ["green", "greenbutton", "acknowledge"], 
             "desc": "Beneath the green button is the word ACKNOWLEDGE."
         }, 
@@ -367,7 +368,7 @@
             "movable": true
         }, 
         "science": {
-            "loc": ["e_bridge"], 
+            "locs": ["e_bridge"], 
             "words": ["skeleton", "body", "scienceofficer", "science", "officer", "skull", "spock"], 
             "desc": "The skull is cracked where it fell against the panel."
         }, 

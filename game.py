@@ -3,8 +3,8 @@ class Game:
         self.data = data
         self.turn = 0
         
-        self.vars = self.data.get_initial_vars()
         self.room = self.data.get_initial_room() # current room id
+        self.vars = self.data.get_initial_vars()
         
         
     def get_message(self, mid):
@@ -35,6 +35,6 @@ class Game:
         return self.data.get_room(self.room)
         
     
-    def match_word(self, inputword, word):
-        return self.data.match_word(inputword, word)
-    
+    def get_nouns_present(self):
+        return [noun for noun in self.data.nouns.values()
+                    if noun.get_locs() & set([self.room, 'INVENTORY', 'WORN'])]

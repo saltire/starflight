@@ -47,6 +47,10 @@ class GameData:
     def get_initial_vars(self):
         return self.data.get('vars', {})
     
+    
+    def get_initial_noun_locs(self):
+        return {nid: noun.get_initial_locs() for nid, noun in self.nouns.items()}
+    
         
     def get_room(self, rid):
         return self.rooms[rid]
