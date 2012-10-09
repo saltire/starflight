@@ -3,20 +3,22 @@ import xml.etree.ElementTree as xml
 
 from collections import OrderedDict
 import json
+import os
 #import pprint
 import re
 import sys
 
-title = sys.argv[1]
-game = xml.parse('{0}.xml'.format(title))
+path = sys.argv[1]
+game = xml.parse(path)
 
 # rooms
 
-rooms = {}
+rooms = OrderedDict()
 for rdata in game.find('rooms'):
     room = dict(rdata.items())
     room.update({item.tag: item.text for item in rdata if item.text})
     room['exits'] = {exit.get('dir'): exit.get('room') for exit in rdata.findall('exit')}
+    room['notes'] = [note.get('id') for note in rdata.findall('note')]
     for k, v in room.iteritems():
         if v == '1':
             room[k] = True
@@ -24,7 +26,7 @@ for rdata in game.find('rooms'):
 
 # nouns
     
-nouns = {}
+nouns = OrderedDict()
 for ndata in game.find('nouns'):
     noun = dict(ndata.items())
     noun.update({item.tag: item.text for item in ndata if item.text})
@@ -41,8 +43,8 @@ for ndata in game.find('nouns'):
 # words, variables, messages
     
 words = [word.text.split(',') for word in game.find('words').findall('word')]
-vars = {var.get('id'): int(var.get('value')) for var in game.find('vars')}
-messages = {msg.get('id'): msg.text for msg in game.find('messages')}
+vars = OrderedDict((var.get('id'), int(var.get('value'))) for var in game.find('vars'))
+messages = OrderedDict((msg.get('id'), msg.text) for msg in game.find('messages'))
 
 # control trees (were called conds)
 
@@ -95,7 +97,12 @@ pattern, repl = r'\[(("[^"]*",\s)*)\s*("[^"]*"(,\s)?)\s+(("[^"]*",?\s*)*)\]', r'
 while re.search(pattern, jsn) is not None:
     jsn = re.sub(pattern, repl, jsn)
     
-with open('{0}.json'.format(title), 'wb') as jsonfile:
+try:
+    outpath = sys.argv[2]
+except:
+    outpath = '{0}.json'.format(os.path.basename(path).rstrip('.xml'))
+    
+with open(outpath, 'wb') as jsonfile:
     jsonfile.write(jsn)
 
 

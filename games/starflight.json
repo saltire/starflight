@@ -1,15 +1,61 @@
 {
     "rooms": {
-        "out_bridge": {
-            "desc": "You are in a long hallway running from fore to aft. To starboard is a door labelled BRIDGE.", 
+        "pilot": {
+            "name": "Pilot's Cabin", 
             "exits": {
-                "east": "w_bridge", 
-                "north": "debris", 
-                "south": "hallway"
+                "south": "sleep"
             }, 
-            "name": "Outside Bridge"
+            "notes": ["lightflashing"], 
+            "start": true, 
+            "desc": "You are in the pilot's cabin of the Starflyer Ganymede. In front of you is a console covered with instruments, gauges and controls. To aft is the cold sleep chamber."
+        }, 
+        "sleep": {
+            "notes": [], 
+            "desc": "You are in the cold sleep chamber. In front of you is the coffin-like suspended animation booth in which you recently awoke from your decade-long nap. To starboard is an open door. Forward is the door to the main cabin.", 
+            "exits": {
+                "east": "storage", 
+                "north": "pilot"
+            }, 
+            "name": "Cold Sleep Chamber"
+        }, 
+        "storage": {
+            "notes": [], 
+            "desc": "You are in the storage cabin of the Ganymede. The wall is lined with metal hooks on which have been anchored small objects so that they will not float about in the absence of gravity. There is an entrance to the airlock set in the ceiling and a door to port leading back to the cold sleep chamber.", 
+            "exits": {
+                "west": "sleep", 
+                "up": "g_airlock"
+            }, 
+            "name": "Storage Cabin"
+        }, 
+        "g_airlock": {
+            "notes": ["inneropenouterclosed"], 
+            "desc": "You are in the Ganymede's airlock, with the inner door below you and the outer door above you.", 
+            "exits": {
+                "down": "storage", 
+                "up": "a_airlock"
+            }, 
+            "name": "Ganymede's Airlock"
+        }, 
+        "a_airlock": {
+            "notes": [], 
+            "desc": "You are in the Armstrong's airlock, with the inner door above you and the outer door below you.", 
+            "exits": {
+                "down": "g_airlock", 
+                "up": "trans"
+            }, 
+            "name": "Armstrong's Airlock"
+        }, 
+        "trans": {
+            "notes": [], 
+            "desc": "You are in the transportation room of the Armstrong. To your horror, you see a human skeleton dressed in a petty officer's uniform seated to one side of the entranceway, its head hunched over a computer terminal. Forward is a doorway, below is the airlock.", 
+            "exits": {
+                "down": "a_airlock", 
+                "north": "out_trans"
+            }, 
+            "name": "Transporter Room"
         }, 
         "out_trans": {
+            "notes": [], 
             "desc": "You are in a long hallway running from port to starboard. To aft is a door labelled TRANSPORTATION ROOM.", 
             "exits": {
                 "west": "out_stair", 
@@ -18,91 +64,8 @@
             }, 
             "name": "Outside Transporter Room"
         }, 
-        "debris": {
-            "desc": "You are in the middle of a vast assortment of debris. You can go no farther forward.", 
-            "exits": {
-                "south": "out_bridge"
-            }, 
-            "name": "In the Middle of Debris"
-        }, 
-        "sleep": {
-            "desc": "You are in the cold sleep chamber. In front of you is the coffin-like suspended animation booth in which you recently awoke from your decade-long nap. To starboard is an open door. Forward is the door to the main cabin.", 
-            "exits": {
-                "east": "storage", 
-                "north": "pilot"
-            }, 
-            "name": "Cold Sleep Chamber"
-        }, 
-        "corner": {
-            "desc": "You are at the corner of two hallways, one heading forward, the other to starboard.", 
-            "exits": {
-                "east": "out_stair", 
-                "north": "hallway"
-            }, 
-            "name": "Corner of Two Hallways"
-        }, 
-        "aux_storage": {
-            "desc": "You are in the Armstrong's auxiliary storage room. Unopened boxes are anchored to the walls with baling wire.", 
-            "exits": {
-                "north": "main_storage"
-            }, 
-            "name": "Auxiliary Storage Room"
-        }, 
-        "e_bridge": {
-            "desc": "You are on the starboard side of the Armstrong's bridge. A skeleton in a science officer's uniform is sprawled next to a plastic panel set into the wall.", 
-            "exits": {
-                "west": "c_bridge"
-            }, 
-            "name": "Starboard Side of Bridge"
-        }, 
-        "stair": {
-            "desc": "You are in a winding stairshaft leading downward to a lower level of the ship. There is a door to forward.", 
-            "exits": {
-                "down": "maintenance", 
-                "north": "out_stair"
-            }, 
-            "name": "Winding Stairshaft"
-        }, 
-        "storage": {
-            "desc": "You are in the storage cabin of the Ganymede. The wall is lined with metal hooks on which have been anchored small objects so that they will not float about in the absence of gravity. There is an entrance to the airlock set in the ceiling and a door to port leading back to the cold sleep chamber.", 
-            "exits": {
-                "west": "sleep", 
-                "up": "g_airlock"
-            }, 
-            "name": "Storage Cabin"
-        }, 
-        "out_storage": {
-            "desc": "You are at the starboard end of a long hallway. To aft is a door labelled STORAGE.", 
-            "exits": {
-                "west": "out_vault", 
-                "south": "main_storage"
-            }, 
-            "name": "Outside Storage Room"
-        }, 
-        "maintenance": {
-            "desc": "You are in the Armstrong's maintenance room. Another uniformed skeleton is sprawled over a console covered with gauges and instruments. There is a stairshaft leading up.", 
-            "exits": {
-                "up": "stair"
-            }, 
-            "name": "Maintenance Room"
-        }, 
-        "main_storage": {
-            "desc": "You are in the Armstrong's main storage room. The exit is forward.", 
-            "exits": {
-                "north": "out_storage", 
-                "south": "aux_storage"
-            }, 
-            "name": "Main Storage Room"
-        }, 
-        "hallway": {
-            "desc": "You are in a long hallway running from fore to aft.", 
-            "exits": {
-                "north": "out_bridge", 
-                "south": "corner"
-            }, 
-            "name": "Long Hallway"
-        }, 
         "out_vault": {
+            "notes": [], 
             "desc": "You are in a long hallway running from port to starboard. Forward is a door labelled PASSENGER VAULT.", 
             "exits": {
                 "west": "out_trans", 
@@ -111,23 +74,42 @@
             }, 
             "name": "Outside Passenger Vault"
         }, 
-        "pilot": {
-            "start": true, 
-            "desc": "You are in the pilot's cabin of the Starflyer Ganymede. In front of you is a console covered with instruments, gauges and controls. To aft is the cold sleep chamber.", 
+        "vault": {
+            "notes": [], 
+            "desc": "You are in the passenger vault, a chamber so immense that the forward side of it is lost in dark mists. Lined up to port and starboard are tier after tier of cold sleep booths, containing the hibernating bodies of the Armstrong's passengers. To aft is a door.", 
             "exits": {
-                "south": "sleep"
+                "south": "out_vault"
             }, 
-            "name": "Pilot's Cabin"
+            "name": "Passenger Vault"
         }, 
-        "c_bridge": {
-            "desc": "You are in the centre of the Armstrong's bridge. You see a skeleton dressed in a captain's uniform, seated in a large chair, its hand perched over the navigational override controls.", 
+        "out_storage": {
+            "notes": [], 
+            "desc": "You are at the starboard end of a long hallway. To aft is a door labelled STORAGE.", 
             "exits": {
-                "west": "w_bridge", 
-                "east": "e_bridge"
+                "west": "out_vault", 
+                "south": "main_storage"
             }, 
-            "name": "Centre of Bridge"
+            "name": "Outside Storage Room"
+        }, 
+        "main_storage": {
+            "notes": ["closeddooraft"], 
+            "desc": "You are in the Armstrong's main storage room. The exit is forward.", 
+            "exits": {
+                "north": "out_storage", 
+                "south": "aux_storage"
+            }, 
+            "name": "Main Storage Room"
+        }, 
+        "aux_storage": {
+            "notes": [], 
+            "desc": "You are in the Armstrong's auxiliary storage room. Unopened boxes are anchored to the walls with baling wire.", 
+            "exits": {
+                "north": "main_storage"
+            }, 
+            "name": "Auxiliary Storage Room"
         }, 
         "out_stair": {
+            "notes": [], 
             "desc": "You are in a long hallway running from port to starboard. Aft is a door labelled STAIRSHAFT.", 
             "exits": {
                 "west": "corner", 
@@ -136,15 +118,53 @@
             }, 
             "name": "Outside Stairshaft"
         }, 
-        "a_airlock": {
-            "desc": "You are in the Armstrong's airlock, with the inner door above you and the outer door below you.", 
+        "stair": {
+            "notes": [], 
+            "desc": "You are in a winding stairshaft leading downward to a lower level of the ship. There is a door to forward.", 
             "exits": {
-                "down": "g_airlock", 
-                "up": "trans"
+                "down": "maintenance", 
+                "north": "out_stair"
             }, 
-            "name": "Armstrong's Airlock"
+            "name": "Winding Stairshaft"
+        }, 
+        "maintenance": {
+            "notes": [], 
+            "desc": "You are in the Armstrong's maintenance room. Another uniformed skeleton is sprawled over a console covered with gauges and instruments. There is a stairshaft leading up.", 
+            "exits": {
+                "up": "stair"
+            }, 
+            "name": "Maintenance Room"
+        }, 
+        "corner": {
+            "notes": [], 
+            "desc": "You are at the corner of two hallways, one heading forward, the other to starboard.", 
+            "exits": {
+                "east": "out_stair", 
+                "north": "hallway"
+            }, 
+            "name": "Corner of Two Hallways"
+        }, 
+        "hallway": {
+            "notes": [], 
+            "desc": "You are in a long hallway running from fore to aft.", 
+            "exits": {
+                "north": "out_bridge", 
+                "south": "corner"
+            }, 
+            "name": "Long Hallway"
+        }, 
+        "out_bridge": {
+            "notes": [], 
+            "desc": "You are in a long hallway running from fore to aft. To starboard is a door labelled BRIDGE.", 
+            "exits": {
+                "east": "w_bridge", 
+                "north": "debris", 
+                "south": "hallway"
+            }, 
+            "name": "Outside Bridge"
         }, 
         "w_bridge": {
+            "notes": [], 
             "desc": "You are on the port side of the Armstrong's bridge. In front of you is a scene of unparalleled carnage. Long decayed skeletons in varicoloured uniforms are sprawled to all sides, some seated in contoured plastic chairs, some collapsed on the floor in grotesque attitudes. There is a door to port. The bridge continues to starboard.", 
             "exits": {
                 "west": "out_bridge", 
@@ -152,151 +172,33 @@
             }, 
             "name": "Port Side of Bridge"
         }, 
-        "vault": {
-            "desc": "You are in the passenger vault, a chamber so immense that the forward side of it is lost in dark mists. Lined up to port and starboard are tier after tier of cold sleep booths, containing the hibernating bodies of the Armstrong's passengers. To aft is a door.", 
+        "c_bridge": {
+            "notes": [], 
+            "desc": "You are in the centre of the Armstrong's bridge. You see a skeleton dressed in a captain's uniform, seated in a large chair, its hand perched over the navigational override controls.", 
             "exits": {
-                "south": "out_vault"
+                "west": "w_bridge", 
+                "east": "e_bridge"
             }, 
-            "name": "Passenger Vault"
+            "name": "Centre of Bridge"
         }, 
-        "trans": {
-            "desc": "You are in the transportation room of the Armstrong. To your horror, you see a human skeleton dressed in a petty officer's uniform seated to one side of the entranceway, its head hunched over a computer terminal. Forward is a doorway, below is the airlock.", 
+        "e_bridge": {
+            "notes": [], 
+            "desc": "You are on the starboard side of the Armstrong's bridge. A skeleton in a science officer's uniform is sprawled next to a plastic panel set into the wall.", 
             "exits": {
-                "down": "a_airlock", 
-                "north": "out_trans"
+                "west": "c_bridge"
             }, 
-            "name": "Transporter Room"
+            "name": "Starboard Side of Bridge"
         }, 
-        "g_airlock": {
-            "desc": "You are in the Ganymede's airlock, with the inner door below you and the outer door above you.", 
+        "debris": {
+            "notes": [], 
+            "desc": "You are in the middle of a vast assortment of debris. You can go no farther forward.", 
             "exits": {
-                "down": "storage", 
-                "up": "a_airlock"
+                "south": "out_bridge"
             }, 
-            "name": "Ganymede's Airlock"
+            "name": "In the Middle of Debris"
         }
     }, 
     "nouns": {
-        "force": {
-            "locs": ["aux_storage"]
-        }, 
-        "m_yellow": {
-            "locs": ["maintenance"], 
-            "words": ["yellow", "yellowbutton", "purification"], 
-            "desc": "Beneath the yellow button are the words PURIFICATION CONTROL."
-        }, 
-        "yellow": {
-            "locs": ["pilot"], 
-            "words": ["yellow", "yellowbutton", "tachyon", "tachyonbeam"], 
-            "desc": "Beneath the yellow button are the words TACHYON BEAM."
-        }, 
-        "sign": {
-            "locs": ["maintenance"], 
-            "words": ["sign", "words"], 
-            "desc": "The flashing sign reads:\n\nAIR LEVEL TOXIC!\nPRESS PURIFICATION CONTROL THREE TIMES!"
-        }, 
-        "radio": {
-            "name": "a two-way radio", 
-            "locs": ["storage"], 
-            "movable": true, 
-            "visible": true, 
-            "words": ["radio", "twoway"], 
-            "shortdesc": "There is a two-way radio here.", 
-            "shortname": "two-way radio", 
-            "desc": "It appears to need batteries."
-        }, 
-        "booth": {
-            "locs": ["sleep"], 
-            "words": ["booth", "cold", "sleep", "coffin"]
-        }, 
-        "captain": {
-            "locs": ["c_bridge"], 
-            "words": ["skeleton", "body", "captain", "capn", "skipper", "jtk", "officer", "crewmember", "crew"], 
-            "desc": "Just beneath the collar of the captain's uniform is the monogram JTK."
-        }, 
-        "blue": {
-            "locs": ["pilot"], 
-            "words": ["blue", "bluebutton"]
-        }, 
-        "petty": {
-            "locs": ["trans"], 
-            "words": ["skeleton", "body", "pettyofficer", "petty", "officer", "crewmember", "crew"], 
-            "desc": "It appears to have been typing at the computer terminal."
-        }, 
-        "outer": {
-            "locs": ["g_airlock", "a_airlock"], 
-            "words": ["outer", "outerdoor"], 
-            "desc": "An iris-shaped airlock door. This one exits the ship."
-        }, 
-        "terminal": {
-            "locs": ["trans"], 
-            "words": ["computer", "terminal", "screen"], 
-            "desc": "On the video display you see the words:\n\n\"SHIP'S LOG, ENTRY 2,349.6.\n\n\"Whatever it is, we can't seem to stop it. The carnage is horrible. Most of the crew has succumbed, and I don't know how much longer I can hold out. Even now, the screams in the distance are hideous. Is there any way to\"\n\nAt that point, the message ends."
-        }, 
-        "m_officer": {
-            "locs": ["maintenance"], 
-            "words": ["skeleton", "body", "officer", "crewmember", "crew"], 
-            "desc": "The skeleton is sprawled across the instrument console."
-        }, 
-        "black": {
-            "words": ["black", "blackbutton", "emergency", "monitoring", "system"], 
-            "desc": "Beneath the black button are the words EMERGENCY MONITORING SYSTEM."
-        }, 
-        "inner": {
-            "locs": ["storage", "g_airlock", "a_airlock", "trans"], 
-            "words": ["inner", "innerdoor"], 
-            "desc": "An iris-shaped airlock door, allowing passage between the airlock and the ship."
-        }, 
-        "orange": {
-            "locs": ["pilot"], 
-            "words": ["orange", "orangebutton", "docking", "dockingcontrol"], 
-            "desc": "Beneath the orange button are the words DOCKING CONTROL."
-        }, 
-        "white": {
-            "words": ["white", "whitebutton", "acknowledge"], 
-            "desc": "Beneath the white button is the word ACKNOWLEDGE."
-        }, 
-        "red": {
-            "locs": ["pilot"], 
-            "words": ["red", "redbutton", "status", "report", "statusreport"], 
-            "desc": "Beneath the red button are the words STATUS REPORT."
-        }, 
-        "sonic": {
-            "name": "a sonic disruptor", 
-            "movable": true, 
-            "visible": true, 
-            "words": ["sonic", "disruptor", "cylinder", "cylinders"], 
-            "shortdesc": "There is a sonic disruptor here.", 
-            "shortname": "sonic disruptor", 
-            "desc": "The sonic disruptor is made of two independently rotatable metal cylinders, mounted end to end."
-        }, 
-        "m_console": {
-            "locs": ["maintenance"], 
-            "words": ["console", "instrument", "instruments", "gauge", "gauges"], 
-            "desc": "Although the skeleton is covering most of the console, you can see a flashing sign at one end. Below the sign is a yellow button."
-        }, 
-        "booths": {
-            "locs": ["vault"], 
-            "words": ["booths", "booth", "tier", "cold", "sleep"], 
-            "desc": "Through the frosty window of the nearest booth you see the face of a young girl, apparently well and unharmed by whatever has struck the ship's crew."
-        }, 
-        "navcontrols": {
-            "locs": ["c_bridge"], 
-            "words": ["nav", "navigation", "navigational", "controls", "navigationalcontrols", "navcontrols"], 
-            "desc": "Considering your rudimentary knowledge of megaship navigation, you shouldn't even be *thinking* of touching the navigational controls."
-        }, 
-        "keys": {
-            "visible": true, 
-            "name": "a set of keys", 
-            "words": ["keys", "key", "set"], 
-            "shortdesc": "There is a set of keys here.", 
-            "shortname": "set of keys", 
-            "movable": true
-        }, 
-        "screen": {
-            "words": ["video", "screen", "computer", "monitor"], 
-            "desc": "The video screen is blank."
-        }, 
         "spacesuit": {
             "name": "a bulky spacesuit", 
             "locs": ["storage"], 
@@ -308,12 +210,6 @@
             "shortname": "spacesuit", 
             "desc": "Almost the entire suit, including the flexible portions, is made of heavily metallized fabric, apparently incorporating some sort of iron mesh."
         }, 
-        "console": {
-            "locs": ["pilot"], 
-            "notes": ["consolelightflashing"], 
-            "words": ["console", "instrument", "instruments", "gauge", "gauges", "buttons"], 
-            "desc": "The console is covered mostly with digital gauges that allow you to monitor the functioning of the ship's computer. In the centre of the console, however, are four buttons, one green, one yellow, one orange, and one red."
-        }, 
         "pouch": {
             "name": "a plastic pouch", 
             "locs": ["storage"], 
@@ -323,6 +219,39 @@
             "shortdesc": "There is a plastic pouch here.", 
             "shortname": "plastic pouch", 
             "desc": "It's heavy."
+        }, 
+        "crowbar": {
+            "visible": true, 
+            "name": "a crowbar", 
+            "words": ["crowbar", "bar"], 
+            "shortdesc": "There is a crowbar here.", 
+            "shortname": "crowbar", 
+            "movable": true
+        }, 
+        "knife": {
+            "visible": true, 
+            "name": "a small knife", 
+            "words": ["knife"], 
+            "shortdesc": "There is a small knife here.", 
+            "shortname": "knife", 
+            "movable": true
+        }, 
+        "keys": {
+            "visible": true, 
+            "name": "a set of keys", 
+            "words": ["keys", "key", "set"], 
+            "shortdesc": "There is a set of keys here.", 
+            "shortname": "set of keys", 
+            "movable": true
+        }, 
+        "sonic": {
+            "name": "a sonic disruptor", 
+            "movable": true, 
+            "visible": true, 
+            "words": ["sonic", "disruptor", "cylinder", "cylinders"], 
+            "shortdesc": "There is a sonic disruptor here.", 
+            "shortname": "sonic disruptor", 
+            "desc": "The sonic disruptor is made of two independently rotatable metal cylinders, mounted end to end."
         }, 
         "molten": {
             "shortdesc": "There is a molten sonic disruptor here.", 
@@ -340,11 +269,6 @@
             "shortname": "wooden box", 
             "desc": "There seems to be something inside."
         }, 
-        "light": {
-            "locs": ["pilot"], 
-            "words": ["light"], 
-            "desc": "It is blinking rapidly. Below the light is a small blue button."
-        }, 
         "magnet": {
             "visible": true, 
             "name": "a powerful bar magnet", 
@@ -354,31 +278,129 @@
             "shortname": "magnet", 
             "movable": true
         }, 
+        "radio": {
+            "name": "a two-way radio", 
+            "locs": ["storage"], 
+            "movable": true, 
+            "visible": true, 
+            "words": ["radio", "twoway"], 
+            "shortdesc": "There is a two-way radio here.", 
+            "shortname": "two-way radio", 
+            "desc": "It appears to need batteries."
+        }, 
+        "inner": {
+            "locs": ["storage", "g_airlock", "a_airlock", "trans"], 
+            "words": ["inner", "innerdoor"], 
+            "desc": "An iris-shaped airlock door, allowing passage between the airlock and the ship."
+        }, 
+        "outer": {
+            "locs": ["g_airlock", "a_airlock"], 
+            "words": ["outer", "outerdoor"], 
+            "desc": "An iris-shaped airlock door. This one exits the ship."
+        }, 
+        "light": {
+            "locs": ["pilot"], 
+            "words": ["light"], 
+            "desc": "It is blinking rapidly. Below the light is a small blue button."
+        }, 
+        "blue": {
+            "locs": ["pilot"], 
+            "words": ["blue", "bluebutton"]
+        }, 
+        "console": {
+            "locs": ["pilot"], 
+            "notes": ["consolelightflashing"], 
+            "words": ["console", "instrument", "instruments", "gauge", "gauges", "buttons"], 
+            "desc": "The console is covered mostly with digital gauges that allow you to monitor the functioning of the ship's computer. In the centre of the console, however, are four buttons, one green, one yellow, one orange, and one red."
+        }, 
         "green": {
             "locs": ["pilot"], 
             "words": ["green", "greenbutton", "acknowledge"], 
             "desc": "Beneath the green button is the word ACKNOWLEDGE."
         }, 
-        "knife": {
-            "visible": true, 
-            "name": "a small knife", 
-            "words": ["knife"], 
-            "shortdesc": "There is a small knife here.", 
-            "shortname": "knife", 
-            "movable": true
+        "yellow": {
+            "locs": ["pilot"], 
+            "words": ["yellow", "yellowbutton", "tachyon", "tachyonbeam"], 
+            "desc": "Beneath the yellow button are the words TACHYON BEAM."
+        }, 
+        "orange": {
+            "locs": ["pilot"], 
+            "words": ["orange", "orangebutton", "docking", "dockingcontrol"], 
+            "desc": "Beneath the orange button are the words DOCKING CONTROL."
+        }, 
+        "red": {
+            "locs": ["pilot"], 
+            "words": ["red", "redbutton", "status", "report", "statusreport"], 
+            "desc": "Beneath the red button are the words STATUS REPORT."
+        }, 
+        "booth": {
+            "locs": ["sleep"], 
+            "words": ["booth", "cold", "sleep", "coffin"]
+        }, 
+        "petty": {
+            "locs": ["trans"], 
+            "words": ["skeleton", "body", "pettyofficer", "petty", "officer", "crewmember", "crew"], 
+            "desc": "It appears to have been typing at the computer terminal."
+        }, 
+        "terminal": {
+            "locs": ["trans"], 
+            "words": ["computer", "terminal", "screen"], 
+            "desc": "On the video display you see the words:\n\n\"SHIP'S LOG, ENTRY 2,349.6.\n\n\"Whatever it is, we can't seem to stop it. The carnage is horrible. Most of the crew has succumbed, and I don't know how much longer I can hold out. Even now, the screams in the distance are hideous. Is there any way to\"\n\nAt that point, the message ends."
+        }, 
+        "booths": {
+            "locs": ["vault"], 
+            "words": ["booths", "booth", "tier", "cold", "sleep"], 
+            "desc": "Through the frosty window of the nearest booth you see the face of a young girl, apparently well and unharmed by whatever has struck the ship's crew."
+        }, 
+        "captain": {
+            "locs": ["c_bridge"], 
+            "words": ["skeleton", "body", "captain", "capn", "skipper", "jtk", "officer", "crewmember", "crew"], 
+            "desc": "Just beneath the collar of the captain's uniform is the monogram JTK."
+        }, 
+        "navcontrols": {
+            "locs": ["c_bridge"], 
+            "words": ["nav", "navigation", "navigational", "controls", "navigationalcontrols", "navcontrols"], 
+            "desc": "Considering your rudimentary knowledge of megaship navigation, you shouldn't even be *thinking* of touching the navigational controls."
         }, 
         "science": {
             "locs": ["e_bridge"], 
             "words": ["skeleton", "body", "scienceofficer", "science", "officer", "skull", "spock"], 
             "desc": "The skull is cracked where it fell against the panel."
         }, 
-        "crowbar": {
-            "visible": true, 
-            "name": "a crowbar", 
-            "words": ["crowbar", "bar"], 
-            "shortdesc": "There is a crowbar here.", 
-            "shortname": "crowbar", 
-            "movable": true
+        "m_officer": {
+            "locs": ["maintenance"], 
+            "words": ["skeleton", "body", "officer", "crewmember", "crew"], 
+            "desc": "The skeleton is sprawled across the instrument console."
+        }, 
+        "m_console": {
+            "locs": ["maintenance"], 
+            "words": ["console", "instrument", "instruments", "gauge", "gauges"], 
+            "desc": "Although the skeleton is covering most of the console, you can see a flashing sign at one end. Below the sign is a yellow button."
+        }, 
+        "sign": {
+            "locs": ["maintenance"], 
+            "words": ["sign", "words"], 
+            "desc": "The flashing sign reads:\n\nAIR LEVEL TOXIC!\nPRESS PURIFICATION CONTROL THREE TIMES!"
+        }, 
+        "m_yellow": {
+            "locs": ["maintenance"], 
+            "words": ["yellow", "yellowbutton", "purification"], 
+            "desc": "Beneath the yellow button are the words PURIFICATION CONTROL."
+        }, 
+        "screen": {
+            "words": ["video", "screen", "computer", "monitor"], 
+            "desc": "The video screen is blank."
+        }, 
+        "black": {
+            "words": ["black", "blackbutton", "emergency", "monitoring", "system"], 
+            "desc": "Beneath the black button are the words EMERGENCY MONITORING SYSTEM."
+        }, 
+        "white": {
+            "words": ["white", "whitebutton", "acknowledge"], 
+            "desc": "Beneath the white button is the word ACKNOWLEDGE."
+        }, 
+        "force": {
+            "locs": ["aux_storage"]
         }
     }, 
     "words": [
@@ -427,153 +449,153 @@
     ], 
     "vars": {
         "blue": 0, 
-        "box": 0, 
-        "purify": 0, 
-        "outer": 0, 
-        "sonic": -1, 
-        "ack": 0, 
         "tachyon": 0, 
-        "hp": 3, 
-        "a_inner": 0, 
-        "storage": 0, 
-        "g_inner": 1, 
+        "ack": 0, 
         "rendez": 0, 
-        "magnet": 0, 
         "dock": 0, 
-        "force": 0, 
-        "furniture": 0, 
+        "a_inner": 0, 
+        "outer": 0, 
+        "g_inner": 1, 
+        "box": 0, 
         "pouch": 0, 
-        "panel": 0
+        "panel": 0, 
+        "storage": 0, 
+        "sonic": -1, 
+        "furniture": 0, 
+        "purify": 0, 
+        "magnet": 0, 
+        "force": 0, 
+        "hp": 3
     }, 
     "messages": {
-        "airclosed": "The airlock door is closed. You can't go that way.", 
-        "itsopen": "Okay. It's open.", 
-        "violent": "Feeling violent today, are we?", 
-        "debris": "The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members.", 
-        "alreadycut": "It's already been cut, thank you.", 
-        "alreadyopen": "It's already open.", 
-        "saved": "Saved game.", 
-        "strongerthanknife": "You'll need something stronger than a knife.", 
-        "openouterdoor": "The outer door is now open.", 
-        "dontknowhow": "I don't know how to %1.", 
-        "innerclosedouterclosed": " The inner door is closed and the outer door is closed.", 
-        "nokeys": "You don't have any keys.", 
-        "donthave": "You don't have it.", 
-        "signnotflashing": "The sign is no longer flashing.", 
-        "takemagnet": "With a bone-wrenching tug, you pull the magnet loose from the metal bulkhead where it had attached itself.", 
-        "cantdock": "The docking machinery whines uselessly, since there is nothing within the vicinity with which it can dock.", 
-        "wearing": "You are now wearing the %2.", 
-        "twistdisruptor": "You twist the disruptor until it clicks.", 
-        "consolelightflashing": " There is a light flashing near the top of the console.", 
-        "lightnotflashing": "The light is no longer blinking.", 
-        "whichdoor": "Please specify which door.", 
-        "dock": "The Ganymede rises until it is touching the Armstrong. A loud grinding noise informs you that the airlocks are now connected and the ships are docked.", 
-        "spacedwithsuit": "A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.\n\nYour spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.", 
-        "pullforcewithyou": "\n\nFor what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...", 
-        "zipperstuck": "You can't. The zipper's stuck.", 
-        "openfellout": "Okay. It's open... and something fell out.", 
-        "turns": "You have taken %TURNS turns.", 
         "intro1": "They told you that star flight would be difficult. They told you and you believed them... sort of.\n\nWhat they hadn't told you was how grueling cold sleep could be, how the months and years of your flight would be filled with endless nightmares, countless replays of every terrible thing that had happened to you in a lifetime of terrible things. When the instructions finally arrived from the ship's computer telling the cold sleep machinery to revive you for the final phase of your flight, you were grateful.\n\nWhat you didn't realize, even as you stumbled groggily from the narrow sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the most nightmarish part of your mission was yet to come... and that you would face it fully awake.", 
         "intro2": "STARFLIGHT: A Cosmic Adventure\nWritten & Programmed for the C64 by Chris Lampton\nAdapted by Marcus Kamps\n\n", 
-        "prypanel": "You pry open the panel with the crowbar.", 
-        "suitfumes": "\n\n...but you should have left it on! Noxious fumes inside the Armstrong asphyxiate you within seconds!", 
-        "alreadyprimed": "You've already primed the disruptor.", 
-        "alreadycarrying": "You've already got it.", 
-        "airlockfumes": "Dim light floods in from the airlock of the Armstrong \u2013 and a cloud of noxious fumes floods in as well. You begin to choke and try to close the doors, but it's too late. You are losing consciousness. Your final thought is that you should have worn the spacesuit. It might have saved your life...", 
-        "finishdocking": "\n\nPerhaps you should have finished docking with the Armstrong...", 
-        "closeddooraft": " A closed door is aft.", 
+        "lightflashing": "\n\nA light is flashing on the console.", 
+        "consolelightflashing": " There is a light flashing near the top of the console.", 
+        "lightnotflashing": "The light is no longer blinking.", 
+        "whichcolour": "Please specify a colour.", 
+        "bluebutton": "A prerecorded voice booms down from an overhead speaker:\n\n\"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?\n\n\"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.\n\n\"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!\"", 
+        "distress": "The hauntingly human voice of the ship's computer booms down from the overhead speakers:\n\n\"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!\"", 
+        "cancelled": "\n\nThe ship's computer announces:\n\n\"Acknowledgement not received. Request cancelled!\"", 
+        "rendezvous": "The ship's computer announces:\n\n\"Rendezvous procedures have been initiated.\"\n\nAs you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.", 
+        "functional": "The ship's computer announces:\n\n\"All systems are functional.\"", 
+        "cantdock": "The docking machinery whines uselessly, since there is nothing within the vicinity with which it can dock.", 
+        "dock": "The Ganymede rises until it is touching the Armstrong. A loud grinding noise informs you that the airlocks are now connected and the ships are docked.", 
+        "undock": "The Ganymede and Armstrong disconnect airlocks and undock. The Ganymede floats downward until about fifty metres of space separate it from the Armstrong.", 
+        "tachyon": "There is a crackle from the overhead speaker, then you hear the voice of the communications officer back at base headquarters, transmitted to you via tachyon beam. You tell her what has happened. She replies:", 
+        "noprogress": "\n\n\"Please get back in contact after you've made some progress in your mission.\"", 
+        "horrible": "\n\n\"My God, that's horrible! Find out what happened and report back immediately!\"", 
+        "astonishing": "\n\n\"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!\"", 
+        "congratulations": "\n\n\"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!\"\n\nSmiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...", 
+        "airclosed": "The airlock door is closed. You can't go that way.", 
+        "whichdoor": "Please specify which door.", 
+        "openinnerdoor": "The inner door is now open.", 
+        "closeinnerdoor": "The inner door is now closed.", 
+        "openouterdoor": "The outer door is now open.", 
+        "closeouterdoor": "The outer door is now closed.", 
+        "alreadyopen": "It's already open.", 
         "alreadyclosed": "It's already closed.", 
-        "loadedsave": "Loaded save game.\n\n", 
+        "dooropen": "The door is currently open.", 
+        "doorclosed": "The door is currently closed.", 
+        "closeotherdoor": "The other door must be closed first.", 
+        "inneropenouterclosed": " The inner door is open and the outer door is closed.", 
+        "innerclosedouteropen": " The inner door is closed and the outer door is open.", 
+        "innerclosedouterclosed": " The inner door is closed and the outer door is closed.", 
+        "spacednosuit": "A violent gust of air pulls you from the airlock into the void of space. You are briefly aware of the Starflyer Ganymede receding into the distance, then you lose consciousness... forever.", 
+        "spacedwithsuit": "A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.\n\nYour spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.", 
+        "finishdocking": "\n\nPerhaps you should have finished docking with the Armstrong...", 
+        "pullforcewithyou": "\n\nFor what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...", 
+        "airlockfumes": "Dim light floods in from the airlock of the Armstrong \u2013 and a cloud of noxious fumes floods in as well. You begin to choke and try to close the doors, but it's too late. You are losing consciousness. Your final thought is that you should have worn the spacesuit. It might have saved your life...", 
+        "suitfumes": "\n\n...but you should have left it on! Noxious fumes inside the Armstrong asphyxiate you within seconds!", 
+        "openairlockmagnet": "As the outer door opens, air bursts explosively into the vacuum of space, but you are held fast within the airlock by the strong grip of the bar magnet against the metallized glove of your spacesuit.", 
+        "openairlockforce": " A screaming sound inside your head tells you that the malevolent force has been yanked back into the vacuum of space from which it came, and can no longer menace the crew members of the Armstrong. You rejoice inwardly! You have accomplished your assigned mission and now have only to report back to headquarters!", 
+        "outerdoorstillopen": "You don't really want to do that. The outer door is still open, leaving you exposed to the void of space.", 
+        "somethinginpocket": "You find something in the pocket.", 
+        "withwhat": "With what?", 
+        "locked": "You can't. It's locked.", 
+        "nokeys": "You don't have any keys.", 
+        "unlocked": "Okay. It's unlocked.", 
+        "alreadyunlocked": "It's already unlocked.", 
+        "jammed": "You can't. The panel's unlocked, but it's jammed shut, probably from the force of the science officer's body falling against it.", 
+        "strongerthanknife": "You'll need something stronger than a knife.", 
+        "cantprypanel": "You attempt to pry the locked panel with the crowbar, but are unsuccessful.", 
+        "prypanel": "You pry open the panel with the crowbar.", 
+        "panelopen": " The panel is open, revealing a computer video screen, a black button and a white button.", 
+        "emergencysystem": "There is a rumble from a speaker set into the science officer's console, then a voice speaks:\n\n\"This is the Armstrong's computerized emergency system. Since the crew of the Armstrong is now dead and all of the passengers remain in cold sleep, it is assumed that you are an outsider responding to the distress signal. Here are the details of the current emergency situation:\n\n\"An invisible, malevolent force has entered the Armstrong during a routine EVA. All crew members are deceased. Over the course of ten years, I have maneuvered the invading entity into the auxiliary storage area, behind the main storage room, where it is now imprisoned, though perhaps not for long. If you wish me to unlock the door to this room, please acknowledge immediately!\"", 
+        "storageunlocked": "The emergency computer announces:\n\n\"Door to the auxiliary storage room is now unlocked.\"", 
+        "opendooraft": " An open door is aft.", 
+        "closeddooraft": " A closed door is aft.", 
+        "itsopen": "Okay. It's open.", 
+        "openfellout": "Okay. It's open... and something fell out.", 
+        "itsempty": "It's empty.", 
+        "zipperstuck": "You can't. The zipper's stuck.", 
+        "cutpouch": "You cut open the pouch with the knife.", 
+        "alreadycut": "It's already been cut, thank you.", 
+        "twistdisruptor": "You twist the disruptor until it clicks.", 
+        "alreadyprimed": "You've already primed the disruptor.", 
+        "notbloodylikely": "Not bloody likely.", 
+        "glowingnumeral": "\n\nA glowing numeral %VAR(sonic) appears on one side of the sonic disruptor.", 
+        "disruptorbursts": "\n\nThe sonic disruptor bursts forth with a spray of high-frequency sound that atomizes everything in its immediate vicinity... yourself included.", 
+        "destroyedfurniture": " For what it's worth, you did succeed in destroying the piece of furniture that had been blocking the stairshaft.", 
+        "heardisruptor": "\n\nIn the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity.", 
+        "heardisruptorshatter": "\n\nIn the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity, accompanied by the sound of shattering plastic.", 
+        "forceinroom": "\n\nYou are aware of a powerful, invisible force in the room with you.", 
+        "jolt1": "\n\nYour entire nervous system is jolted by a mental force the likes of which you have never experienced. Your head jerks back and your mouth opens in an involuntary scream. From the neck down your body is completely paralyzed, immobile; then the force relents and you go limp.", 
         "jolt2": "\n\nA second jolt, more powerful than the first and infinitely more painful, surges through your nervous system. For a moment you do not even recognize the sound of your own scream. After what seems like several eternities, the pain goes away.", 
         "jolt3": "\n\nThe third jolt strikes you like a crackling bolt of lightning. The duration is shorter this time, because your weakened heart is incapable of sustaining further pain of this intensity. Within seconds you slump dead against the nearest wall, wondering in your last instant of consciousness just who will discover *your* decaying skeleton...", 
-        "jolt1": "\n\nYour entire nervous system is jolted by a mental force the likes of which you have never experienced. Your head jerks back and your mouth opens in an involuntary scream. From the neck down your body is completely paralyzed, immobile; then the force relents and you go limp.", 
-        "inneropenouterclosed": " The inner door is open and the outer door is closed.", 
-        "feelslikemagnet": "It feels like a magnet.", 
-        "nosave": "No save game to load.", 
-        "forceinroom": "\n\nYou are aware of a powerful, invisible force in the room with you.", 
         "healthhp3": "You're in fine health... for the time being, anyway.", 
         "healthhp2": "The shock to your nervous system has left you in ragged shape. You are wobbly, disoriented, and slightly nauseous. You should avoid additional shocks of this nature.", 
         "healthhp1": "You are in critical condition. One more shock like that last one and your star-flying days will come to an abrupt halt.", 
-        "unlocked": "Okay. It's unlocked.", 
-        "panelopen": " The panel is open, revealing a computer video screen, a black button and a white button.", 
-        "horrible": "\n\n\"My God, that's horrible! Find out what happened and report back immediately!\"", 
-        "invitemworn": "\n%NOUN (being worn).", 
-        "electroniclock": "The door is locked electronically and can only be unlocked by order of the ship's computer system.", 
-        "dontknowhowsomething": "I don't know how to %1 something.", 
-        "noprogress": "\n\n\"Please get back in contact after you've made some progress in your mission.\"", 
-        "heardisruptor": "\n\nIn the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity.", 
-        "closeinnerdoor": "The inner door is now closed.", 
-        "clingstofingers": "It clings to the metallic fingers of your spacesuit glove.", 
-        "invitem": "\n%NOUN.", 
-        "invitemcontains": "\n\tThe %NOUN contains:", 
-        "nothere": "Please! Not here!", 
-        "itsempty": "It's empty.", 
         "nosleep": "You don't really want to do that. If you re-enter the suspended animation booth and revert to cold sleep, the ship will automatically return to its home port. Your mission will be a failure.", 
-        "closeouterdoor": "The outer door is now closed.", 
-        "distress": "The hauntingly human voice of the ship's computer booms down from the overhead speakers:\n\n\"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!\"", 
-        "tachyon": "There is a crackle from the overhead speaker, then you hear the voice of the communications officer back at base headquarters, transmitted to you via tachyon beam. You tell her what has happened. She replies:", 
-        "alreadyunlocked": "It's already unlocked.", 
-        "functional": "The ship's computer announces:\n\n\"All systems are functional.\"", 
-        "outerdoorstillopen": "You don't really want to do that. The outer door is still open, leaving you exposed to the void of space.", 
-        "jammed": "You can't. The panel's unlocked, but it's jammed shut, probably from the force of the science officer's body falling against it.", 
-        "gameover": "\n\nWould you like to play again?", 
-        "undock": "The Ganymede and Armstrong disconnect airlocks and undock. The Ganymede floats downward until about fifty metres of space separate it from the Armstrong.", 
-        "vaultlarge": "You don't really want to go that way. The passenger vault is so large that you could wander in it for days, to no particular avail.", 
         "skeletons": "You step cautiously over a pair of skeletons that have fallen together in the middle of the hallway.\n\n", 
-        "closeotherdoor": "The other door must be closed first.", 
+        "vaultlarge": "You don't really want to go that way. The passenger vault is so large that you could wander in it for days, to no particular avail.", 
+        "electroniclock": "The door is locked electronically and can only be unlocked by order of the ship's computer system.", 
+        "debris": "The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members.", 
+        "dropsuit": " Unfortunately, you will need to drop your bulky space suit before you can squeeze through the debris.", 
+        "squeeze": " You are barely able to squeeze through the debris.\n\n", 
+        "blockedfurniture": "There is a large item of plastic furniture blocking your descent. Below the plastic, you can just make out the skeletal remains of one of the crew members, who had apparently placed the furniture here in an unsuccessful attempt to ward off an attacker.", 
+        "descend": "You descend into the shaft, picking your way past the shattered remains of the piece of plastic furniture and the skeleton that was holding it in place.\n\n", 
+        "airispure": "You hear a hissing sound from the ventilation system. After a few moments the sign on the control panel indicates that the air is pure enough to breathe.", 
+        "signnotflashing": "The sign is no longer flashing.", 
+        "takemagnet": "With a bone-wrenching tug, you pull the magnet loose from the metal bulkhead where it had attached itself.", 
+        "dropmagnet": "You drop the magnet. With a powerful leap and a loud clang, it attaches itself to the nearest metal bulkhead.", 
+        "feelslikemagnet": "It feels like a magnet.", 
+        "clingstofingers": "It clings to the metallic fingers of your spacesuit glove.", 
+        "immobilized": "The fingers of your spacesuit attach themselves tightly to the magnet. Since you are *in* the spacesuit, you are temporarily immobilized.", 
+        "pullfreeofmagnet": "First, you tug yourself free of the bar magnet...\n\n", 
+        "timepasses": "One minute passes...", 
+        "touched": "Okay. You've touched it.", 
+        "violent": "Feeling violent today, are we?", 
+        "nothere": "Please! Not here!", 
+        "cantgothere": "You can't go there!", 
+        "okay": "Okay.", 
+        "fromwhat": "From what?", 
+        "dontknowhow": "I don't know how to %1.", 
+        "dontknowhowsomething": "I don't know how to %1 something.", 
+        "turns": "You have taken %TURNS turns.", 
+        "saved": "Saved game.", 
+        "loadedsave": "Loaded save game.\n\n", 
+        "nosave": "No save game to load.", 
         "cantverb": "You can't %1 that.", 
         "nothinghappens": "Nothing happens.", 
-        "innerclosedouteropen": " The inner door is closed and the outer door is open.", 
-        "taken": "Taken.", 
-        "touched": "Okay. You've touched it.", 
-        "opendooraft": " An open door is aft.", 
-        "blockedfurniture": "There is a large item of plastic furniture blocking your descent. Below the plastic, you can just make out the skeletal remains of one of the crew members, who had apparently placed the furniture here in an unsuccessful attempt to ward off an attacker.", 
-        "airispure": "You hear a hissing sound from the ventilation system. After a few moments the sign on the control panel indicates that the air is pure enough to breathe.", 
         "carrying": "You are carrying:", 
-        "dropmagnet": "You drop the magnet. With a powerful leap and a loud clang, it attaches itself to the nearest metal bulkhead.", 
-        "squeeze": " You are barely able to squeeze through the debris.\n\n", 
-        "congratulations": "\n\n\"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!\"\n\nSmiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...", 
-        "locked": "You can't. It's locked.", 
+        "invitem": "\n%NOUN.", 
+        "invitemworn": "\n%NOUN (being worn).", 
+        "invitemcontains": "\n\tThe %NOUN contains:", 
         "invitemcontained": "\n\t\t%NOUN.", 
-        "nothingunusual": "You see nothing unusual.", 
-        "carryingnothing": "You're not carrying anything.", 
-        "dropsuit": " Unfortunately, you will need to drop your bulky space suit before you can squeeze through the debris.", 
-        "disruptorbursts": "\n\nThe sonic disruptor bursts forth with a spray of high-frequency sound that atomizes everything in its immediate vicinity... yourself included.", 
-        "openairlockmagnet": "As the outer door opens, air bursts explosively into the vacuum of space, but you are held fast within the airlock by the strong grip of the bar magnet against the metallized glove of your spacesuit.", 
-        "cancelled": "\n\nThe ship's computer announces:\n\n\"Acknowledgement not received. Request cancelled!\"", 
-        "doorclosed": "The door is currently closed.", 
-        "spacednosuit": "A violent gust of air pulls you from the airlock into the void of space. You are briefly aware of the Starflyer Ganymede receding into the distance, then you lose consciousness... forever.", 
-        "dontsee": "That's not here.", 
-        "timepasses": "One minute passes...", 
-        "lightflashing": "\n\nA light is flashing on the console.", 
-        "openinnerdoor": "The inner door is now open.", 
-        "nolongerwearing": "You are no longer wearing the %2.", 
+        "taken": "Taken.", 
         "dropped": "Dropped.", 
-        "alreadywearing": "You're already wearing it.", 
-        "bluebutton": "A prerecorded voice booms down from an overhead speaker:\n\n\"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?\n\n\"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.\n\n\"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!\"", 
-        "notbloodylikely": "Not bloody likely.", 
-        "storageunlocked": "The emergency computer announces:\n\n\"Door to the auxiliary storage room is now unlocked.\"", 
-        "immobilized": "The fingers of your spacesuit attach themselves tightly to the magnet. Since you are *in* the spacesuit, you are temporarily immobilized.", 
-        "glowingnumeral": "\n\nA glowing numeral %VAR(sonic) appears on one side of the sonic disruptor.", 
-        "descend": "You descend into the shaft, picking your way past the shattered remains of the piece of plastic furniture and the skeleton that was holding it in place.\n\n", 
-        "heardisruptorshatter": "\n\nIn the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity, accompanied by the sound of shattering plastic.", 
-        "whichcolour": "Please specify a colour.", 
-        "emergencysystem": "There is a rumble from a speaker set into the science officer's console, then a voice speaks:\n\n\"This is the Armstrong's computerized emergency system. Since the crew of the Armstrong is now dead and all of the passengers remain in cold sleep, it is assumed that you are an outsider responding to the distress signal. Here are the details of the current emergency situation:\n\n\"An invisible, malevolent force has entered the Armstrong during a routine EVA. All crew members are deceased. Over the course of ten years, I have maneuvered the invading entity into the auxiliary storage area, behind the main storage room, where it is now imprisoned, though perhaps not for long. If you wish me to unlock the door to this room, please acknowledge immediately!\"", 
-        "okay": "Okay.", 
-        "cantgo": "You can't go that way.", 
+        "donthave": "You don't have it.", 
+        "alreadycarrying": "You've already got it.", 
+        "carryingnothing": "You're not carrying anything.", 
+        "wearing": "You are now wearing the %2.", 
+        "nolongerwearing": "You are no longer wearing the %2.", 
         "notwearing": "You're not wearing it.", 
-        "somethinginpocket": "You find something in the pocket.", 
-        "dooropen": "The door is currently open.", 
-        "cantprypanel": "You attempt to pry the locked panel with the crowbar, but are unsuccessful.", 
-        "fromwhat": "From what?", 
-        "cantgothere": "You can't go there!", 
-        "withwhat": "With what?", 
-        "openairlockforce": " A screaming sound inside your head tells you that the malevolent force has been yanked back into the vacuum of space from which it came, and can no longer menace the crew members of the Armstrong. You rejoice inwardly! You have accomplished your assigned mission and now have only to report back to headquarters!", 
-        "destroyedfurniture": " For what it's worth, you did succeed in destroying the piece of furniture that had been blocking the stairshaft.", 
-        "astonishing": "\n\n\"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!\"", 
-        "cutpouch": "You cut open the pouch with the knife.", 
-        "pullfreeofmagnet": "First, you tug yourself free of the bar magnet...\n\n", 
-        "rendezvous": "The ship's computer announces:\n\n\"Rendezvous procedures have been initiated.\"\n\nAs you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly."
+        "alreadywearing": "You're already wearing it.", 
+        "dontsee": "That's not here.", 
+        "nothingunusual": "You see nothing unusual.", 
+        "cantgo": "You can't go that way.", 
+        "gameover": "\n\nWould you like to play again?"
     }, 
     "controls": [
         [
