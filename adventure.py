@@ -1,17 +1,34 @@
+import json
+import logging
 import re
 
 import game
-import gamedata
 
 
 class Adventure:
-    def __init__(self, gamefile):
-        data = gamedata.GameData(gamefile)
-        self.game = game.Game(data)
-        self.controls = data.get_controls()
-        self.messages = data.get_messages()
-        self.vocab = data.get_vocab()
+    def __init__(self, gamepath):
+        with open(gamepath, 'rb') as gamefile:
+            data = json.load(gamefile)
         
+        self.controls = data.get('controls', [])
+        self.messages = data.get('messages', {})
+        self.game = game.Game(data)
+        
+        def add_to_vocab(vocab, words):
+            words = set(words)
+            for group in [group for group in vocab if group & words]:
+                words = group | words
+                vocab.remove(group)
+            if words:
+                vocab.append(words)
+            return vocab
+
+        self.vocab = []
+        for words in data.get('words', []):
+            add_to_vocab(self.vocab, words)
+        for noun in data.get('nouns', {}).values():
+            add_to_vocab(self.vocab, noun.get('words', []))
+
         
     def do_turn(self, command):
         """Get a command, and execute a single turn of the game."""
@@ -26,7 +43,7 @@ class Adventure:
             
             # if status == replace, actions will contain the replacement command
             self.words = self.substitute_words(actions).split()
-            #print 'replace:', ' '.join(self.words)
+            logging.debug('replace: %s', ' '.join(self.words))
             
         for action in actions:
             status = self.do_action(action)
@@ -37,7 +54,7 @@ class Adventure:
     def substitute_words(self, phrase):
         """Substitute %1, %2, etc. in phrase with words from the original command."""
         sub_word = lambda m: self.words[int(m.group(1)) - 1] if len(self.words) >= int(m.group(1)) else ''
-        #print 'substituting from:', phrase, 'to:', re.sub('%(\d+)', sub_word, phrase)
+        #logging.debug('substituting from: %s to: %s', phrase, re.sub('%(\d+)', sub_word, phrase))
         return re.sub('%(\d+)', sub_word, phrase)
     
     
@@ -105,7 +122,7 @@ class Adventure:
     def cond_is_true(self, cond):
         """Decide whether a single condition evaluates to true."""
         cond = self.substitute_words(cond.strip())
-        #print 'test:', cond, ':',
+        #logging.debug('test: %s:', cond)
         
         if cond == '*':
             return True
@@ -117,7 +134,7 @@ class Adventure:
             
         cwords = cond.split()
         success = getattr(self, 't_{0}'.format(cwords[0]))(*cwords[1:])
-        #print cwords, (not success if neg else success)
+        logging.debug('test: %s: %s', cond, not success if neg else success)
         return not success if neg else success
     
     
@@ -125,7 +142,7 @@ class Adventure:
         """Call the method for a single action."""
         action = self.substitute_words(action.strip())
         awords = action.split()
-        #print 'action:', action
+        logging.debug('action: %s', action)
         return getattr(self, 'a_{0}'.format(awords[0]))(*awords[1:])
     
     
@@ -193,17 +210,17 @@ class Adventure:
     
     def a_message(self, mid):
         self.queue_output(self.messages[mid])
-        return 'ok'
     
     
     def a_pause(self):
         self.queue_output('PAUSE')
-        return 'ok'
     
     
     def a_look(self):
-        self.queue_output(self.game.get_current_room().get_description())
-        return 'ok'
+        room = self.game.get_current_room()
+        self.queue_output(room.get_description())
+        for mid in room.get_notes():
+            self.a_message(mid)
     
     
     def a_move(self, direction=''):
@@ -220,14 +237,28 @@ class Adventure:
     def a_examine(self, nword=''):
         try:
             noun = next(noun for noun in self.game.get_nouns_present() if nword in noun.get_words())
-            self.queue_output(noun.get_description())
-            for note in noun.get_notes():
-                self.a_message(note)
+            desc = noun.get_description()
+            notes = noun.get_notes()
+            if not desc and not notes:
+                raise StopIteration
+            
+            self.queue_output(desc)
+            for mid in notes:
+                self.a_message(mid)
         
         except StopIteration:
             self.a_message('nothingunusual')
             
     
+    def a_setvar(self, vid, value):
+        self.game.set_var(vid, value)
+        
     
+    def a_adjustvar(self, vid, value):
+        self.game.adjust_var(vid, value)
+        
+        
+    def a_removeroomnote(self, rid, mid):
+        self.game.get_room(rid).remove_note(mid)
     
         

@@ -1,9 +1,12 @@
+import logging
 import textwrap
 
 import adventure
 
 gamefile = 'games/starflight.json'
 adv = adventure.Adventure(gamefile)
+
+#logging.basicConfig(level=logging.DEBUG)
 
 command = ''
 while True:
