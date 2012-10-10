@@ -14,21 +14,27 @@ class Adventure:
         self.messages = data.get('messages', {})
         self.game = game.Game(data)
         
-        def add_to_vocab(vocab, words):
-            words = set(words)
-            for group in [group for group in vocab if group & words]:
-                words = group | words
-                vocab.remove(group)
-            if words:
-                vocab.append(words)
-            return vocab
+        def add_to_vocab(wordslist):
+            for words in wordslist:
+                words = set(words)
+                for group in [group for group in self.vocab if group & words]:
+                    words = group | words
+                    self.vocab.remove(group)
+                if words:
+                    self.vocab.append(words)
 
         self.vocab = []
-        for words in data.get('words', []):
-            add_to_vocab(self.vocab, words)
-        for noun in data.get('nouns', {}).values():
-            add_to_vocab(self.vocab, noun.get('words', []))
-
+        add_to_vocab(data.get('words', []))
+        add_to_vocab([noun.get('words', []) for noun in data.get('nouns', {}).values()])
+            
+        def add_to_synonyms(wordslist):
+            for words in wordslist:
+                self.synonyms.update({word: self.synonyms.setdefault(word, set()) | set(words) for word in words})
+            
+        self.synonyms = {}
+        add_to_synonyms(data.get('words', []))
+        add_to_synonyms([noun.get('words', []) for noun in data.get('nouns', {}).values()])
+                
         
     def do_turn(self, command):
         """Get a command, and execute a single turn of the game."""
@@ -154,19 +160,7 @@ class Adventure:
     
     def match_word(self, inputword, word):
         """Check if an input word is a synonym of another word."""
-        if word == '*':
-            return True
-        
-        words = word.split('|')
-        if inputword in words:
-            return True
-        
-        for w in words:
-            for group in self.vocab:
-                if w in group and inputword in group:
-                    return True
-            
-        return False
+        return word == '*' or any(inputword in self.synonyms.get(word, []) for word in word.split('|'))
     
     
     def t_start(self):
