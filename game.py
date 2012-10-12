@@ -49,8 +49,16 @@ class Game:
     
     def get_room(self, rid):
         return self.rooms[rid]
+    
+    
+    def get_noun(self, nid):
+        return self.nouns[nid]
+    
+    
+    def get_nouns_by_name(self, word):
+        return set([noun for noun in self.nouns.values() if word in noun.get_words()])
         
     
     def get_nouns_present(self):
-        return [noun for noun in self.nouns.values()
-                    if noun.get_locs() & set([self.current_room, 'INVENTORY', 'WORN'])]
+        return set([noun for noun in self.nouns.values()
+                    if noun.get_locs() & set([self.current_room, 'INVENTORY', 'WORN'])])

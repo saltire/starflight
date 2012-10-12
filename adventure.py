@@ -14,19 +14,6 @@ class Adventure:
         self.messages = data.get('messages', {})
         self.game = game.Game(data)
         
-        def add_to_vocab(wordslist):
-            for words in wordslist:
-                words = set(words)
-                for group in [group for group in self.vocab if group & words]:
-                    words = group | words
-                    self.vocab.remove(group)
-                if words:
-                    self.vocab.append(words)
-
-        self.vocab = []
-        add_to_vocab(data.get('words', []))
-        add_to_vocab([noun.get('words', []) for noun in data.get('nouns', {}).values()])
-            
         def add_to_synonyms(wordslist):
             for words in wordslist:
                 self.synonyms.update({word: self.synonyms.setdefault(word, set()) | set(words) for word in words})
@@ -127,9 +114,8 @@ class Adventure:
     
     def cond_is_true(self, cond):
         """Decide whether a single condition evaluates to true."""
-        cond = self.substitute_words(cond.strip())
+        #cond = self.substitute_words(cond.strip())
         #logging.debug('test: %s:', cond)
-        
         if cond == '*':
             return True
         
@@ -138,7 +124,7 @@ class Adventure:
             neg = True
             cond = cond[1:]
             
-        cwords = cond.split()
+        cwords = cond.strip().split()
         success = getattr(self, 't_{0}'.format(cwords[0]))(*cwords[1:])
         logging.debug('test: %s: %s', cond, not success if neg else success)
         return not success if neg else success
@@ -146,21 +132,34 @@ class Adventure:
     
     def do_action(self, action):
         """Call the method for a single action."""
-        action = self.substitute_words(action.strip())
-        awords = action.split()
+        #action = self.substitute_words(action.strip())
+        awords = action.strip().split()
         logging.debug('action: %s', action)
         return getattr(self, 'a_{0}'.format(awords[0]))(*awords[1:])
     
     
     def queue_output(self, message):
         """Add a message or messages to the output queue."""
-        if len(message):
+        if isinstance(message, list):
+            for msg in message:
+                self.queue_output(msg)
+        elif len(message):
             self.output.append(self.substitute_words(message))
     
     
     def match_word(self, inputword, word):
         """Check if an input word is a synonym of another word."""
         return word == '*' or any(inputword in self.synonyms.get(word, []) for word in word.split('|'))
+    
+    
+    def match_nouns(self, inputword):
+        """Return a set of nouns matching an input. If the noun is passed by ID,
+        the set will contain that one noun. If user input is passed, it will
+        contain all nouns matching the input word."""
+        if inputword[0] == '%':
+            return self.game.get_nouns_by_name(self.substitute_words(inputword))
+        else:
+            return set([self.game.get_noun(inputword)])
     
     
     def t_start(self):
@@ -217,10 +216,11 @@ class Adventure:
             self.a_message(mid)
     
     
-    def a_move(self, direction=''):
+    def a_move(self, dir):
+        dir = self.substitute_words(dir)
         try:
             dest = next(dest for exit, dest in self.game.get_current_room().get_exits().items()
-                            if self.match_word(direction, exit))
+                            if self.match_word(dir, exit))
             self.game.go_to_room(dest)
             self.a_look()
             
@@ -228,19 +228,16 @@ class Adventure:
             self.a_message('cantgo')
             
             
-    def a_examine(self, nword=''):
-        try:
-            noun = next(noun for noun in self.game.get_nouns_present() if nword in noun.get_words())
-            desc = noun.get_description()
-            notes = noun.get_notes()
-            if not desc and not notes:
-                raise StopIteration
-            
-            self.queue_output(desc)
-            for mid in notes:
-                self.a_message(mid)
+    def a_examine(self, nword):
+        msgs = []
+        for noun in self.match_nouns(nword) & self.game.get_nouns_present():
+            if noun.get_description():
+                msgs.append(noun.get_description())
+            msgs.extend(self.messages[mid] for mid in noun.get_notes())
         
-        except StopIteration:
+        if msgs:
+            self.queue_output(msgs)
+        else:
             self.a_message('nothingunusual')
             
     
