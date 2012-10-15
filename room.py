@@ -27,3 +27,7 @@ class Room:
     def remove_note(self, mid):
         while mid in self.notes:
             self.notes.remove(mid)
+            
+            
+    def clear_notes(self, mid):
+        self.notes = []

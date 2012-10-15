@@ -1,5 +1,6 @@
 import json
 import logging
+import random
 import re
 
 import game
@@ -23,11 +24,13 @@ class Adventure:
         add_to_synonyms([noun.get('words', []) for noun in data.get('nouns', {}).values()])
                 
         
-    def do_turn(self, command):
+    def do_command(self, command):
         """Get a command, and execute a single turn of the game."""
+        status = 'ok'
+        
         self.game.increment_turn()
         self.output = []
-        self.words = [word for word in command.split() if word not in ('the', 'a', 'an')]
+        self.words = [word for word in command.strip().split() if word not in ('the', 'a', 'an')]
 
         while True:
             status, actions = self.do_controls()
@@ -84,7 +87,14 @@ class Adventure:
                 if isinstance(action, dict):
                     # action is a subcontrol
                     status, actions = self.do_control(action)
+                    
+                    if status == 'replace':
+                        return 'replace', actions
+                    
                     allactions.extend(actions)
+                    if status in ('done', 'gameover'):
+                        break
+                    
                 else:
                     allactions.append(action)
                     
@@ -154,7 +164,7 @@ class Adventure:
     
     def match_nouns(self, inputword):
         """Return a set of nouns matching an input. If the noun is passed by ID,
-        the set will contain that one noun. If user input is passed, it will
+        the set will contain that one noun. If an input wildcard is passed, it will
         contain all nouns matching the input word."""
         if inputword[0] == '%':
             return self.game.get_nouns_by_name(self.substitute_words(inputword))
@@ -167,15 +177,8 @@ class Adventure:
     
     
     def t_input(self, *cwords):
-        if len(self.words) < len(cwords):
-            return False
-        
-        for index, cword in enumerate(cwords):
-            if self.match_word(self.words[index], cword):
-                continue
-            else:
-                return False
-        return True
+        return (len(self.words) >= len(cwords) and
+                all(self.match_word(self.words[i], cword) for i, cword in enumerate(cwords)))
     
     
     def t_var(self, vid, value):
@@ -201,6 +204,43 @@ class Adventure:
         return any(self.match_word(direction, rexit) for rexit in self.game.get_current_room().get_exits())
     
     
+    def t_nounloc(self, nword, rid):
+        return any(noun for noun in self.match_nouns(nword) if rid in noun.get_locs())
+    
+    
+    def t_ininv(self, nword):
+        return self.t_nounloc(nword, 'INVENTORY')
+    
+    
+    def t_worn(self, nword):
+        return self.t_nounloc(nword, 'WORN')
+        
+        
+    def t_inroom(self, nword):
+        return self.t_nounloc(nword, self.game.get_current_room_id())
+    
+    
+    def t_present(self, nword):
+        return bool(self.match_nouns(nword) & self.game.get_nouns_present())
+    
+    
+    def t_contained(self, nword):
+        return any(noun for noun in self.match_nouns(nword) for loc in noun.get_locs()
+                   if loc in self.game.get_noun_list())
+        
+        
+    def t_somewhere(self, nword):
+        return any(noun.get_locs() for noun in self.match_nouns(nword))
+    
+    
+    def t_wearable(self, nword):
+        return any(noun.is_wearable() for noun in self.match_nouns(nword))
+    
+    
+    def t_random(self, percent):
+        return random.random() * 100 < percent
+    
+    
     def a_message(self, mid):
         self.queue_output(self.messages[mid])
     
@@ -220,7 +260,7 @@ class Adventure:
         dir = self.substitute_words(dir)
         try:
             dest = next(dest for exit, dest in self.game.get_current_room().get_exits().items()
-                            if self.match_word(dir, exit))
+                        if self.match_word(dir, exit))
             self.game.go_to_room(dest)
             self.a_look()
             
@@ -240,6 +280,115 @@ class Adventure:
         else:
             self.a_message('nothingunusual')
             
+            
+    def a_take(self, nword):
+        presentnouns = self.match_nouns(nword) & self.game.get_nouns_present()
+        if not presentnouns:
+            self.a_message('dontsee')
+        else:
+            movables = set(noun for noun in presentnouns if noun.is_movable())
+            if not movables:
+                self.a_message('cantverb')
+            else:
+                notcarried = set(noun for noun in movables if 'INVENTORY' not in noun.get_locs())
+                if not notcarried:
+                    self.a_message('alreadycarrying')
+                else:
+                    for noun in notcarried:
+                        noun.set_locs('INVENTORY')
+                    self.a_message('taken')
+                    
+                    
+    def a_wear(self, nword):
+        presentnouns = self.match_nouns(nword) & self.game.get_nouns_present()
+        if not presentnouns:
+            self.a_message('dontsee')
+        else:
+            wearables = set(noun for noun in presentnouns if noun.is_wearable())
+            if not wearables:
+                self.a_message('cantverb')
+            else:
+                notworn = set(noun for noun in wearables if 'WORN' not in noun.get_locs())
+                if not notworn:
+                    self.a_message('alreadywearing')
+                else:
+                    for noun in notworn:
+                        noun.set_locs('WORN')
+                    self.a_message('wearing')
+                
+            
+    def a_drop(self, nword):
+        carried = self.match_nouns(nword) & self.game.get_nouns_by_loc('INVENTORY')
+        if carried:
+            for noun in carried:
+                noun.set_locs(self.game.get_current_room_id())
+            self.a_message('dropped')
+        else:
+            self.a_message('donthave')        
+            
+            
+    def a_destroy(self, nword):
+        for noun in self.match_nouns(nword):
+            noun.clear_locs()
+            
+            
+    def a_sendnoun(self, nword, rid):
+        for noun in self.match_nouns(nword):
+            noun.set_locs(rid)
+            
+            
+    def a_sendtoroom(self, nword):
+        self.a_sendnoun(nword, self.game.get_current_room_id())
+        
+        
+    def a_sendtonoun(self, nword1, nword2):
+        locs = set.union(noun.get_locs() for noun in self.match_nouns(nword2))
+        for noun in self.match_nouns(nword1):
+            noun.set_locs(locs)
+            
+            
+    def a_swapnouns(self, nword1, nword2):
+        nouns1 = self.match_nouns(nword1)
+        nouns2 = self.match_nouns(nword2)
+        locs1 = set.union(noun.get_locs() for noun in nouns1)
+        locs2 = set.union(noun.get_locs() for noun in nouns2)
+        for noun in nouns1:
+            noun.set_locs(locs2)
+        for noun in nouns2:
+            noun.set_locs(locs1)
+            
+            
+    def a_setnoundesc(self, nword, mid):
+        for noun in self.match_nouns(nword):
+            noun.set_description(self.messages[mid])
+            
+            
+    def a_addnounnote(self, nword, mid):
+        for noun in self.match_nouns(nword):
+            noun.add_note(mid)
+        
+        
+    def a_removenounnote(self, nword, mid):
+        for noun in self.match_nouns(nword):
+            noun.remove_note(mid)
+        
+        
+    def a_clearnounnotes(self, nword):
+        for noun in self.match_nouns(nword):
+            noun.clear_notes()
+        
+        
+    def a_addroomnote(self, rid, mid):
+        self.game.get_room(rid).add_note(mid)
+        
+        
+    def a_removeroomnote(self, rid, mid):
+        self.game.get_room(rid).remove_note(mid)
+        
+        
+    def a_clearroomnotes(self, rid):
+        self.game.get_room(rid).clear_notes()
+            
     
     def a_setvar(self, vid, value):
         self.game.set_var(vid, value)
@@ -247,9 +396,5 @@ class Adventure:
     
     def a_adjustvar(self, vid, value):
         self.game.adjust_var(vid, value)
-        
-        
-    def a_removeroomnote(self, rid, mid):
-        self.game.get_room(rid).remove_note(mid)
     
         

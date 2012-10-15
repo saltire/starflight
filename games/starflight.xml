@@ -599,7 +599,7 @@
 				<if>input push blue,room pilot,var blue 0</if>
 				<action>setvar blue 1</action>
 				<action>removeroomnote pilot lightflashing</action>
-				<action>resendnote console consolelightflashing</action>
+				<action>removenounnote console consolelightflashing</action>
 				<action>setnoundesc light lightnotflashing</action>
 				<action>message bluebutton</action>
 				<done />

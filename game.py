@@ -55,6 +55,10 @@ class Game:
         return self.nouns[nid]
     
     
+    def get_noun_list(self):
+        return self.nouns.keys()
+    
+    
     def get_nouns_by_name(self, word):
         return set([noun for noun in self.nouns.values() if word in noun.get_words()])
         

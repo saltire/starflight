@@ -615,7 +615,7 @@
             }, 
             {
                 "if": ["input push blue", "room pilot", "var blue 0"], 
-                "then": ["setvar blue 1", "removeroomnote pilot lightflashing", "resendnote console consolelightflashing", "setnoundesc light lightnotflashing", "message bluebutton"], 
+                "then": ["setvar blue 1", "removeroomnote pilot lightflashing", "removenounnote console consolelightflashing", "setnoundesc light lightnotflashing", "message bluebutton"], 
                 "done": true
             }, 
             {

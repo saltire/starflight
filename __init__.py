@@ -10,7 +10,7 @@ adv = adventure.Adventure(gamefile)
 
 command = ''
 while True:
-    status, output = adv.do_turn(command)
+    status, output = adv.do_command(command)
     
     for msg in output:
         if msg == 'PAUSE':
