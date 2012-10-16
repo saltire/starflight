@@ -33,16 +33,9 @@ class Adventure:
         self.words = [word for word in command.strip().split() if word not in ('the', 'a', 'an')]
 
         while True:
-            status, actions = self.do_controls()
+            status = self.do_controls()
             if status != 'replace':
                 break
-            
-            # if status == replace, actions will contain the replacement command
-            self.words = self.substitute_words(actions).split()
-            logging.debug('replace: %s', ' '.join(self.words))
-            
-        for action in actions:
-            status = self.do_action(action)
             
         return status, self.output
     
@@ -57,21 +50,26 @@ class Adventure:
     def do_controls(self):
         """Step through all the tests and actions for this turn."""
         status = 'ok'
-        allactions = []
         
         for controlset in self.controls:
+            allactions = []
             for control in controlset:
                 status, actions = self.do_control(control)
                 allactions.extend(actions)
                 
-                if status == 'done':
+                if status == 'replace':
+                    self.words = self.substitute_words(actions).split()
+                    logging.debug('replace: %s', ' '.join(self.words))
+                    return 'replace'
+                elif status == 'done':
                     break
-                elif status == 'replace':
-                    return 'replace', actions
                 elif status == 'gameover':
-                    return 'gameover', allactions
+                    return 'gameover'
         
-        return status, allactions
+            for action in allactions:
+                self.do_action(action)
+            
+        return 'ok'
     
     
     def do_control(self, control):
