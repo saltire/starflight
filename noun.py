@@ -1,9 +1,14 @@
 class Noun:
-    def __init__(self, ndata):
+    def __init__(self, nid, ndata):
+        self.id = nid
         self.data = ndata
         self.locs = set(self.data.get('locs', []))
         self.notes = self.data.get('notes', [])
         self.desc = self.data.get('desc',  '')
+        
+        
+    def get_id(self):
+        return self.id
             
             
     def get_locs(self):
@@ -11,7 +16,7 @@ class Noun:
     
     
     def set_locs(self, rid):
-        self.locs = set(rid)
+        self.locs = set(rid if isinstance(rid, list) else [rid])
     
     
     def add_loc(self, rid):
@@ -47,6 +52,18 @@ class Noun:
         return self.data.get('words', [])
     
     
+    def get_name(self):
+        return self.data.get('name', '')
+
+    
+    def get_short_name(self):
+        return self.data.get('shortname', '')
+    
+    
+    def get_short_desc(self):
+        return self.data.get('shortdesc', '')
+    
+    
     def get_description(self):
         return self.desc
     
@@ -57,6 +74,10 @@ class Noun:
         
     def is_movable(self):
         return bool(self.data.get('movable'))
+    
+    
+    def is_visible(self):
+        return bool(self.data.get('visible'))
 
     
     def is_wearable(self):

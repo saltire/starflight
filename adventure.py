@@ -61,13 +61,18 @@ class Adventure:
                     self.words = self.substitute_words(actions).split()
                     logging.debug('replace: %s', ' '.join(self.words))
                     return 'replace'
-                elif status == 'done':
-                    break
                 elif status == 'gameover':
-                    return 'gameover'
+                    logging.debug('gameover')
+                    break
+                elif status == 'done':
+                    logging.debug('done')
+                    break
         
             for action in allactions:
                 self.do_action(action)
+                
+            if status == 'gameover':
+                return 'gameover'
             
         return 'ok'
     
@@ -90,7 +95,9 @@ class Adventure:
                         return 'replace', actions
                     
                     allactions.extend(actions)
-                    if status in ('done', 'gameover'):
+                    if status == 'gameover':
+                        return 'gameover', allactions
+                    if status == 'done':
                         break
                     
                 else:
@@ -134,7 +141,7 @@ class Adventure:
             
         cwords = cond.strip().split()
         success = getattr(self, 't_{0}'.format(cwords[0]))(*cwords[1:])
-        logging.debug('test: %s: %s', cond, not success if neg else success)
+        logging.debug('test: %s%s: %s', '!' if neg else '', cond, not success if neg else success)
         return not success if neg else success
     
     
@@ -167,9 +174,19 @@ class Adventure:
         if inputword[0] == '%':
             return self.game.get_nouns_by_name(self.substitute_words(inputword))
         else:
-            return set([self.game.get_noun(inputword)])
+            return set(self.game.get_noun(nid) for nid in inputword.split(','))
     
     
+    def show_noun_contents(self, container):
+        """Queue for output a list of nouns contained within a noun."""
+        contents = self.game.get_nouns_by_loc(container.get_id())
+        if contents:
+            self.queue_message(self.messages['invitemcontains'].replace('%NOUN', container.get_short_name()))
+            for noun in contents:
+                self.queue_message(self.messages['invitemcontained'].replace('%NOUN', noun.get_short_name()))
+                self.show_noun_contents(noun)
+                
+        
     def t_start(self):
         return self.game.get_turn() == 1
     
@@ -194,16 +211,17 @@ class Adventure:
             return var == int(value)
     
     
-    def t_room(self, rid):
-        return self.game.get_current_room_id() == rid
+    def t_room(self, rword):
+        return any(self.game.get_current_room_id() == rid for rid in rword.split('|'))
     
     
     def t_exitexists(self, direction):
         return any(self.match_word(direction, rexit) for rexit in self.game.get_current_room().get_exits())
     
     
-    def t_nounloc(self, nword, rid):
-        return any(noun for noun in self.match_nouns(nword) if rid in noun.get_locs())
+    def t_nounloc(self, nword, rword):
+        return any(noun for noun in self.match_nouns(nword)
+                   for rid in rword.split('|') if rid in noun.get_locs())
     
     
     def t_ininv(self, nword):
@@ -252,6 +270,23 @@ class Adventure:
         self.queue_output(room.get_description())
         for mid in room.get_notes():
             self.a_message(mid)
+            
+        for noun in self.game.get_nouns_by_loc(self.game.get_current_room_id()):
+            if noun.is_visible():
+                self.queue_output(noun.get_short_desc())
+                self.show_noun_contents(noun)
+                
+                
+    def a_inv(self):
+        inv = self.game.get_nouns_by_loc('INVENTORY') | self.game.get_nouns_by_loc('WORN')
+        if inv:
+            self.a_message('carrying')
+            for noun in inv:
+                self.queue_output((self.messages['invitemworn'] if 'WORN' in noun.get_locs() else 
+                                   self.messages['invitem']).replace('%NOUN', noun.get_name()))
+                self.show_noun_contents(noun)
+        else:
+            self.a_message('carryingnothing')
     
     
     def a_move(self, dir):
@@ -376,16 +411,19 @@ class Adventure:
             noun.clear_notes()
         
         
-    def a_addroomnote(self, rid, mid):
-        self.game.get_room(rid).add_note(mid)
+    def a_addroomnote(self, rword, mid):
+        for rid in rword.split(','):
+            self.game.get_room(rid).add_note(mid)
         
         
-    def a_removeroomnote(self, rid, mid):
-        self.game.get_room(rid).remove_note(mid)
+    def a_removeroomnote(self, rword, mid):
+        for rid in rword.split(','):
+            self.game.get_room(rid).remove_note(mid)
         
         
-    def a_clearroomnotes(self, rid):
-        self.game.get_room(rid).clear_notes()
+    def a_clearroomnotes(self, rword):
+        for rid in rword.split(','):
+            self.game.get_room(rid).clear_notes()
             
     
     def a_setvar(self, vid, value):

@@ -5,8 +5,8 @@ import room
 class Game:
     def __init__(self, data):
         self.vars = {vid: int(value) for vid, value in data.get('vars', {}).items()}
-        self.rooms = {rid: room.Room(rdata) for rid, rdata in data.get('rooms', {}).items()}
-        self.nouns = {nid: noun.Noun(ndata) for nid, ndata in data.get('nouns', {}).items()}
+        self.rooms = {rid: room.Room(rid, rdata) for rid, rdata in data.get('rooms', {}).items()}
+        self.nouns = {nid: noun.Noun(nid, ndata) for nid, ndata in data.get('nouns', {}).items()}
 
         self.turn = 0
         self.current_room = next(rid for rid, room in self.rooms.items() if room.is_start())
@@ -60,9 +60,13 @@ class Game:
     
     
     def get_nouns_by_name(self, word):
-        return set([noun for noun in self.nouns.values() if word in noun.get_words()])
+        return set(noun for noun in self.nouns.values() if word in noun.get_words())
+    
+    
+    def get_nouns_by_loc(self, rid):
+        return set(noun for noun in self.nouns.values() if rid in noun.get_locs())
         
     
     def get_nouns_present(self):
-        return set([noun for noun in self.nouns.values()
-                    if noun.get_locs() & set([self.current_room, 'INVENTORY', 'WORN'])])
+        return set(noun for noun in self.nouns.values()
+                    if noun.get_locs() & set([self.current_room, 'INVENTORY', 'WORN']))

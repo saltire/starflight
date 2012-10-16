@@ -1,7 +1,12 @@
 class Room:
-    def __init__(self, rdata):
+    def __init__(self, rid, rdata):
+        self.id = rid
         self.data = rdata
         self.notes = self.data.get('notes', [])
+        
+    
+    def get_id(self):
+        return self.id
             
             
     def is_start(self):
@@ -29,5 +34,5 @@ class Room:
             self.notes.remove(mid)
             
             
-    def clear_notes(self, mid):
+    def clear_notes(self):
         self.notes = []
