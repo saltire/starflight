@@ -1,12 +1,11 @@
-import xml.etree.ElementTree as xml
-#import yaml
-
 from collections import OrderedDict
 import json
 import os
-#import pprint
 import re
 import sys
+import xml.etree.ElementTree as xml
+#import yaml
+
 
 path = sys.argv[1]
 game = xml.parse(path)
@@ -79,8 +78,6 @@ def get_control(cdata):
 controls = [[get_control(cdata) for cdata in controlset] for controlset in game.find('conds')]
 
 
-# generate json file
-
 gamedata = OrderedDict([
         ('rooms', rooms),
         ('nouns', nouns),
@@ -89,6 +86,9 @@ gamedata = OrderedDict([
         ('messages', messages),
         ('controls', controls)
         ])
+
+
+# generate json file
 
 jsn = json.dumps(gamedata, indent=4)
 
@@ -108,8 +108,18 @@ with open(outpath, 'wb') as jsonfile:
 
 # generate yaml file
 
-#with open('starflight.yml', 'wb') as yml:
-#    yml.write(yaml.dump(starflight, indent=4))
+#def _represent_dictorder(self, data):
+#    return self.represent_mapping('tag:yaml.org,2002:map', data.items())
+
+#yaml.add_representer(OrderedDict, _represent_dictorder)
+ 
+#try:
+#    outpath = sys.argv[2]
+#except:
+#    outpath = '{0}.yml'.format(os.path.basename(path).rstrip('.xml'))
+    
+#with open(outpath, 'wb') as yml:
+#    yml.write(yaml.dump(gamedata, indent=4))
 
     
     
