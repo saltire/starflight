@@ -1,7 +1,7 @@
 import logging
 import textwrap
 
-import adventure
+from advengine import adventure
 
 gamefile = 'games/starflight.json'
 adv = adventure.Adventure(gamefile)

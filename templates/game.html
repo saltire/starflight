@@ -1,0 +1,23 @@
+<html>
+	<head>
+		<title>{{ title }}</title>
+	</head>
+	<link rel='stylesheet' type='text/css' href='static/style.css' />
+	<body>
+		<div class='main'>
+			<div class='output'>
+	{% for msg in output %}
+		{% if msg == 'PAUSE' %}
+				<p>Press Enter to continue...</p>
+		{% else %}
+				<p>{{ msg }}</p>
+		{% endif %}
+	{% endfor %}
+			</div>
+			<form class='command' method='post' action='command'>
+				&gt; <input type='text' name='command' />
+				<button type='submit'>&crarr;</button>
+			</form>
+		</div>
+	</body>
+</html>
