@@ -679,17 +679,15 @@
 					<action>message nothinghappens</action>
 				</cond>
 				<cond>
-					<if>var purify &lt;3</if>
+					<if>var purify 2</if>
 					<action>adjustvar purify +1</action>
-					<cond>
-						<if>var purify &lt;3</if>
-						<action>message nothinghappens</action>
-					</cond>
-					<cond>
-						<if>var purify 3</if>
-						<action>setnoundesc sign signnotflashing</action>
-						<action>message airispure</action>
-					</cond>
+					<action>setnoundesc sign signnotflashing</action>
+					<action>message airispure</action>
+				</cond>
+				<cond>
+					<if>var purify &lt;2</if>
+					<action>adjustvar purify +1</action>
+					<action>message nothinghappens</action>
 				</cond>
 				<done />
 			</cond>

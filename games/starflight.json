@@ -697,18 +697,12 @@
                         "then": ["message nothinghappens"]
                     }, 
                     {
-                        "if": ["var purify <3"], 
-                        "then": [
-                            "adjustvar purify +1", 
-                            {
-                                "if": ["var purify <3"], 
-                                "then": ["message nothinghappens"]
-                            }, 
-                            {
-                                "if": ["var purify 3"], 
-                                "then": ["setnoundesc sign signnotflashing", "message airispure"]
-                            }
-                        ]
+                        "if": ["var purify 2"], 
+                        "then": ["adjustvar purify +1", "setnoundesc sign signnotflashing", "message airispure"]
+                    }, 
+                    {
+                        "if": ["var purify <2"], 
+                        "then": ["adjustvar purify +1", "message nothinghappens"]
                     }
                 ], 
                 "done": true

@@ -39,7 +39,7 @@ ACTIONS
   destroy
   drop
   examine
-inv
+  inv
 load
   look
   message

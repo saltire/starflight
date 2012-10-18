@@ -59,14 +59,20 @@ class Game:
         return self.nouns.keys()
     
     
-    def get_nouns_by_name(self, word):
-        return set(noun for noun in self.nouns.values() if word in noun.get_words())
+    def get_nouns_by_name(self, *word):
+        return set(noun for noun in self.nouns.values() if set(word) & noun.get_words())
     
     
-    def get_nouns_by_loc(self, rid):
-        return set(noun for noun in self.nouns.values() if rid in noun.get_locs())
-        
+    def get_nouns_by_loc(self, *loc):
+        return set(noun for noun in self.nouns.values() if set(loc) & noun.get_locs())
+    
     
     def get_nouns_present(self):
+        def get_noun_containers(noun, recursive=True):
+            containers = set(self.nouns[nid] for nid in noun.get_locs() & set(self.nouns.keys()))
+            return (containers if not recursive else
+                    containers.union(*(get_noun_containers(cont) for cont in containers)))
+        
         return set(noun for noun in self.nouns.values()
-                    if noun.get_locs() & set([self.current_room, 'INVENTORY', 'WORN']))
+                   if (noun.get_locs().union(*(cont.get_locs() for cont in get_noun_containers(noun))) &
+                       set([self.current_room, 'INVENTORY', 'WORN'])))

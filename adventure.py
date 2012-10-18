@@ -116,7 +116,7 @@ class Adventure:
         if all(isinstance(subtest, list) for subtest in test):
             # test is a list of subtests (i.e. a list of lists)
             # any of these can be true
-            return any(all(self.cond_is_true(cond) for cond in subtest) for subtest in test)
+            return any(self.test_is_true(subtest) for subtest in test)
                   
         elif all(isinstance(cond, str) or isinstance(cond, unicode) for cond in test):
             # test is a list of conditions (i.e. a list of strings)
@@ -184,9 +184,9 @@ class Adventure:
         """Queue for output a list of nouns contained within a noun."""
         contents = self.game.get_nouns_by_loc(container.get_id())
         if contents:
-            self.queue_message(self.messages['invitemcontains'].replace('%NOUN', container.get_short_name()))
+            self.queue_output(self.messages['invitemcontains'].replace('%NOUN', container.get_short_name()))
             for noun in contents:
-                self.queue_message(self.messages['invitemcontained'].replace('%NOUN', noun.get_short_name()))
+                self.queue_output(self.messages['invitemcontained'].replace('%NOUN', noun.get_name()))
                 self.show_noun_contents(noun)
                 
         
@@ -331,7 +331,7 @@ class Adventure:
                     self.a_message('alreadycarrying')
                 else:
                     for noun in notcarried:
-                        noun.set_locs('INVENTORY')
+                        noun.set_loc('INVENTORY')
                     self.a_message('taken')
                     
                     
@@ -349,15 +349,15 @@ class Adventure:
                     self.a_message('alreadywearing')
                 else:
                     for noun in notworn:
-                        noun.set_locs('WORN')
+                        noun.set_loc('WORN')
                     self.a_message('wearing')
                 
             
     def a_drop(self, nword):
-        carried = self.match_nouns(nword) & self.game.get_nouns_by_loc('INVENTORY')
+        carried = self.match_nouns(nword) & self.game.get_nouns_by_loc('INVENTORY', 'WORN')
         if carried:
             for noun in carried:
-                noun.set_locs(self.game.get_current_room_id())
+                noun.set_loc(self.game.get_current_room_id())
             self.a_message('dropped')
         else:
             self.a_message('donthave')        
@@ -368,19 +368,23 @@ class Adventure:
             noun.clear_locs()
             
             
-    def a_sendnoun(self, nword, rid):
+    def a_sendnoun(self, nword, rword):
         for noun in self.match_nouns(nword):
-            noun.set_locs(rid)
+            noun.set_loc(*rword.split(','))
             
             
     def a_sendtoroom(self, nword):
         self.a_sendnoun(nword, self.game.get_current_room_id())
         
         
-    def a_sendtonoun(self, nword1, nword2):
-        locs = set.union(noun.get_locs() for noun in self.match_nouns(nword2))
+    def a_sendtonounloc(self, nword1, nword2):
+        locs = set.union(*(noun.get_locs() for noun in self.match_nouns(nword2)))
         for noun in self.match_nouns(nword1):
-            noun.set_locs(locs)
+            noun.set_loc(*locs)
+            
+            
+    def a_sendtonoun(self, nword1, nword2):
+        self.a_sendnoun(nword1, nword2)
             
             
     def a_swapnouns(self, nword1, nword2):
@@ -389,9 +393,9 @@ class Adventure:
         locs1 = set.union(*(noun.get_locs() for noun in nouns1))
         locs2 = set.union(*(noun.get_locs() for noun in nouns2))
         for noun in nouns1:
-            noun.set_locs(locs2)
+            noun.set_loc(*locs2)
         for noun in nouns2:
-            noun.set_locs(locs1)
+            noun.set_loc(*locs1)
             
             
     def a_setnoundesc(self, nword, mid):

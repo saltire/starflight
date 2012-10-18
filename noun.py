@@ -15,16 +15,16 @@ class Noun:
         return self.locs
     
     
-    def set_locs(self, rid):
-        self.locs = set([rid] if isinstance(rid, str) or isinstance(rid, unicode) else rid)
+    def set_loc(self, *rid):
+        self.locs = set(rid)
     
     
-    def add_loc(self, rid):
-        self.locs.add(rid)
+    def add_loc(self, *rid):
+        self.locs |= set(rid)
         
         
-    def remove_loc(self, rid):
-        self.locs.discard(rid)
+    def remove_loc(self, *rid):
+        self.locs -= set(rid)
     
     
     def clear_locs(self):
@@ -49,7 +49,7 @@ class Noun:
             
             
     def get_words(self):
-        return self.data.get('words', [])
+        return set(self.data.get('words', []))
     
     
     def get_name(self):
