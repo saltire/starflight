@@ -16,7 +16,7 @@ class Noun:
     
     
     def set_locs(self, rid):
-        self.locs = set(rid if isinstance(rid, list) else [rid])
+        self.locs = set([rid] if isinstance(rid, str) or isinstance(rid, unicode) else rid)
     
     
     def add_loc(self, rid):

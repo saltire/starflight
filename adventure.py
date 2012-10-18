@@ -40,11 +40,11 @@ class Adventure:
         return status, self.output
     
     
-    def substitute_words(self, phrase):
+    def sub_input_words(self, phrase):
         """Substitute %1, %2, etc. in phrase with words from the original command."""
-        sub_word = lambda m: self.words[int(m.group(1)) - 1] if len(self.words) >= int(m.group(1)) else ''
-        #logging.debug('substituting from: %s to: %s', phrase, re.sub('%(\d+)', sub_word, phrase))
-        return re.sub('%(\d+)', sub_word, phrase)
+        sub_input = lambda m: self.words[int(m.group(1)) - 1] if len(self.words) >= int(m.group(1)) else ''
+        #logging.debug('substituting from: %s to: %s', phrase, re.sub('%(\d+)', sub_word, phrase))        
+        return re.sub('%(\d+)', sub_input, phrase)
     
     
     def do_controls(self):
@@ -58,7 +58,7 @@ class Adventure:
                 allactions.extend(actions)
                 
                 if status == 'replace':
-                    self.words = self.substitute_words(actions).split()
+                    self.words = self.sub_input_words(actions).split()
                     logging.debug('replace: %s', ' '.join(self.words))
                     return 'replace'
                 elif status == 'gameover':
@@ -129,7 +129,7 @@ class Adventure:
     
     def cond_is_true(self, cond):
         """Decide whether a single condition evaluates to true."""
-        #cond = self.substitute_words(cond.strip())
+        #cond = self.sub_input_words(cond.strip())
         #logging.debug('test: %s:', cond)
         if cond == '*':
             return True
@@ -147,7 +147,7 @@ class Adventure:
     
     def do_action(self, action):
         """Call the method for a single action."""
-        #action = self.substitute_words(action.strip())
+        #action = self.sub_input_words(action.strip())
         awords = action.strip().split()
         logging.debug('action: %s', action)
         return getattr(self, 'a_{0}'.format(awords[0]))(*awords[1:])
@@ -158,8 +158,11 @@ class Adventure:
         if isinstance(message, list):
             for msg in message:
                 self.queue_output(msg)
+                
         elif len(message):
-            self.output.append(self.substitute_words(message))
+            message = re.sub('%VAR\((.+?)\)', lambda m: str(self.game.get_var(m.group(1))), message)
+            message = message.replace('%TURNS', str(self.game.get_turn()))
+            self.output.append(self.sub_input_words(message))
     
     
     def match_word(self, inputword, word):
@@ -172,7 +175,7 @@ class Adventure:
         the set will contain that one noun. If an input wildcard is passed, it will
         contain all nouns matching the input word."""
         if inputword[0] == '%':
-            return self.game.get_nouns_by_name(self.substitute_words(inputword))
+            return self.game.get_nouns_by_name(self.sub_input_words(inputword))
         else:
             return set(self.game.get_noun(nid) for nid in inputword.split(','))
     
@@ -225,7 +228,7 @@ class Adventure:
     
     
     def t_ininv(self, nword):
-        return self.t_nounloc(nword, 'INVENTORY')
+        return self.t_nounloc(nword, 'INVENTORY|WORN')
     
     
     def t_worn(self, nword):
@@ -290,7 +293,7 @@ class Adventure:
     
     
     def a_move(self, dir):
-        dir = self.substitute_words(dir)
+        dir = self.sub_input_words(dir)
         try:
             dest = next(dest for exit, dest in self.game.get_current_room().get_exits().items()
                         if self.match_word(dir, exit))
@@ -383,8 +386,8 @@ class Adventure:
     def a_swapnouns(self, nword1, nword2):
         nouns1 = self.match_nouns(nword1)
         nouns2 = self.match_nouns(nword2)
-        locs1 = set.union(noun.get_locs() for noun in nouns1)
-        locs2 = set.union(noun.get_locs() for noun in nouns2)
+        locs1 = set.union(*(noun.get_locs() for noun in nouns1))
+        locs2 = set.union(*(noun.get_locs() for noun in nouns2))
         for noun in nouns1:
             noun.set_locs(locs2)
         for noun in nouns2:
