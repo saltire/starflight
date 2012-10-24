@@ -3,13 +3,27 @@ import room
 
 
 class Game:
-    def __init__(self, data):
-        self.vars = {vid: int(value) for vid, value in data.get('vars', {}).items()}
-        self.rooms = {rid: room.Room(rid, rdata) for rid, rdata in data.get('rooms', {}).items()}
-        self.nouns = {nid: noun.Noun(nid, ndata) for nid, ndata in data.get('nouns', {}).items()}
-
-        self.turn = 0
-        self.current_room = next(rid for rid, room in self.rooms.items() if room.is_start())
+    def __init__(self, data, state=None):
+        if state is None:
+            self.vars = {vid: int(value) for vid, value in data.get('vars', {}).items()}
+            self.rooms = {rid: room.Room(rid, rdata) for rid, rdata in data.get('rooms', {}).items()}
+            self.nouns = {nid: noun.Noun(nid, ndata) for nid, ndata in data.get('nouns', {}).items()}
+    
+            self.turn = 0
+            self.current_room = next(rid for rid, room in self.rooms.items() if room.is_start())
+        else:
+            for key in ('vars', 'turn', 'current_room'):
+                setattr(self, key, state[key])
+            self.rooms = {rid: room.Room(rid, rdata, state['rooms'][rid])
+                          for rid, rdata in data.get('rooms', {}).items()}
+            self.nouns = {nid: noun.Noun(nid, ndata, state['nouns'][nid])
+                          for nid, ndata in data.get('nouns', {}).items()}
+        
+        
+    def export_state(self):
+        return {key: getattr(self, key) for key in ('vars', 'turn', 'current_room')}.update(
+               {'rooms': {rid: room.export_state() for rid, room in self.rooms.items()},
+                'nouns': {nid: noun.export_state() for nid, noun in self.nouns.items()}})        
         
         
     def get_turn(self):

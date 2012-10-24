@@ -8,22 +8,34 @@ app = Flask(__name__)
 app.secret_key = '\xaau!uhb\xec\x87\xcd\x94\x1d\xbf\x8eF/\x92|\x87\xcbko\xf1\xda3'
 
 
-@app.before_request
+def do_turn(input):
+    status, output = g.adv.do_command(input)
+    session['status'] = status
+    session['history'].append((input, output))
+    session.modified = True
+    
+    
+@app.before_first_request
 def init_adventure():
     g.adv = Adventure('games/starflight.json')
-    status, session['output'] = g.adv.do_command('')
+    session['state'] = g.adv.export_state()
+    session['history'] = []
+    do_turn('')
+
+
+@app.before_request
+def init_request():
+    g.adv = Adventure('games/starflight.json', session['state'])
     
     
 @app.route('/')
 def index():
-    print session['output']
-    return render_template('game.html', title='Starflight', output=session['output'])
+    return render_template('game.html', title='Starflight', history=session['history'])
 
 
 @app.route('/command', methods=['post'])
 def do_command():
-    status, session['output'] = g.adv.do_command(request.form.get('command'))
-    print session['output']
+    do_turn(request.form.get('command'))
     return redirect(url_for('index'))
 
 

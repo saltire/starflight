@@ -1,16 +1,25 @@
 class Noun:
-    def __init__(self, nid, ndata):
+    def __init__(self, nid, ndata, nstate=None):
         self.id = nid
         self.data = ndata
-        self.locs = set(self.data.get('locs', []))
-        self.notes = self.data.get('notes', [])
-        self.desc = self.data.get('desc',  '')
+        
+        if nstate is None:
+            self.locs = set(self.data.get('locs', []))
+            self.desc = None
+            self.notes = self.data.get('notes', [])
+        else:
+            for key, value in nstate:
+                setattr(self, key, value)
         
         
+    def export_state(self):
+        return {key: getattr(self, key) for key in ('locs', 'desc', 'notes')}
+    
+    
     def get_id(self):
         return self.id
-            
-            
+    
+    
     def get_locs(self):
         return self.locs
     
@@ -31,6 +40,14 @@ class Noun:
         self.locs = set()
     
     
+    def get_description(self):
+        return self.desc if self.desc is not None else self.data.get('desc', '')
+    
+    
+    def set_description(self, message):
+        self.desc = message
+        
+        
     def get_notes(self):
         return self.notes
     
@@ -64,14 +81,6 @@ class Noun:
         return self.data.get('shortdesc', '')
     
     
-    def get_description(self):
-        return self.desc
-    
-    
-    def set_description(self, message):
-        self.desc = message
-        
-        
     def is_movable(self):
         return bool(self.data.get('movable'))
     

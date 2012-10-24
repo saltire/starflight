@@ -8,13 +8,13 @@ import actions
 
 
 class Adventure(tests.Tests, actions.Actions):
-    def __init__(self, gamepath):
+    def __init__(self, gamepath, state=None):
         with open(gamepath, 'rb') as gamefile:
             data = json.load(gamefile)
         
         self.controls = data.get('controls', [])
         self.messages = data.get('messages', {})
-        self.game = game.Game(data)
+        self.game = game.Game(data, state)
         
         def add_to_synonyms(wordslist):
             for words in wordslist:
@@ -23,6 +23,10 @@ class Adventure(tests.Tests, actions.Actions):
         self.synonyms = {}
         add_to_synonyms(data.get('words', []))
         add_to_synonyms([noun.get('words', []) for noun in data.get('nouns', {}).values()])
+        
+        
+    def export_state(self):
+        return self.game.export_state()
                 
         
     def do_command(self, command):

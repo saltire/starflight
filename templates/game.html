@@ -6,6 +6,8 @@
 	<body>
 		<div class='main'>
 			<div class='output'>
+{% for input, output in history %}
+				<p>{{ input }}</p>
 	{% for msg in output %}
 		{% if msg == 'PAUSE' %}
 				<p>Press Enter to continue...</p>
@@ -13,6 +15,7 @@
 				<p>{{ msg }}</p>
 		{% endif %}
 	{% endfor %}
+{% endfor %}
 			</div>
 			<form class='command' method='post' action='command'>
 				&gt; <input type='text' name='command' />
