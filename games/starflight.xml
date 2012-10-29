@@ -418,23 +418,24 @@
 
 		<!-- pilot's cabin -->
 
-		<message id="lightflashing">&#10;&#10;A light is flashing on the console.</message>
+		<message id="lightflashing">A light is flashing on the console.</message>
 		<message id="consolelightflashing"> There is a light flashing near the top of the console.</message>
 		<message id="lightnotflashing">The light is no longer blinking.</message>
 		<message id="whichcolour">Please specify a colour.</message>
 		<message id="bluebutton">A prerecorded voice booms down from an overhead speaker:&#10;&#10;"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?&#10;&#10;"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.&#10;&#10;"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!"</message>
 		<message id="distress">The hauntingly human voice of the ship's computer booms down from the overhead speakers:&#10;&#10;"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!"</message>
-		<message id="cancelled">&#10;&#10;The ship's computer announces:&#10;&#10;"Acknowledgement not received. Request cancelled!"</message>
-		<message id="rendezvous">The ship's computer announces:&#10;&#10;"Rendezvous procedures have been initiated."&#10;&#10;As you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.</message>
-		<message id="functional">The ship's computer announces:&#10;&#10;"All systems are functional."</message>
+		<message id="announces">The ship's computer announces:</message>
+		<message id="cancelled">"Acknowledgement not received. Request cancelled!"</message>
+		<message id="rendezvous">"Rendezvous procedures have been initiated."&#10;&#10;As you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.</message>
+		<message id="functional">"All systems are functional."</message>
 		<message id="cantdock">The docking machinery whines uselessly, since there is nothing within the vicinity with which it can dock.</message>
 		<message id="dock">The Ganymede rises until it is touching the Armstrong. A loud grinding noise informs you that the airlocks are now connected and the ships are docked.</message>
 		<message id="undock">The Ganymede and Armstrong disconnect airlocks and undock. The Ganymede floats downward until about fifty metres of space separate it from the Armstrong.</message>
 		<message id="tachyon">There is a crackle from the overhead speaker, then you hear the voice of the communications officer back at base headquarters, transmitted to you via tachyon beam. You tell her what has happened. She replies:</message>
-		<message id="noprogress">&#10;&#10;"Please get back in contact after you've made some progress in your mission."</message>
-		<message id="horrible">&#10;&#10;"My God, that's horrible! Find out what happened and report back immediately!"</message>
-		<message id="astonishing">&#10;&#10;"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!"</message>
-		<message id="congratulations">&#10;&#10;"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!"&#10;&#10;Smiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...</message>
+		<message id="noprogress">"Please get back in contact after you've made some progress in your mission."</message>
+		<message id="horrible">"My God, that's horrible! Find out what happened and report back immediately!"</message>
+		<message id="astonishing">"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!"</message>
+		<message id="congratulations">"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!"&#10;&#10;Smiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...</message>
 
 		<!-- airlocks -->
 
@@ -454,10 +455,10 @@
 		<message id="innerclosedouterclosed"> The inner door is closed and the outer door is closed.</message>
 		<message id="spacednosuit">A violent gust of air pulls you from the airlock into the void of space. You are briefly aware of the Starflyer Ganymede receding into the distance, then you lose consciousness... forever.</message>
 		<message id="spacedwithsuit">A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.&#10;&#10;Your spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.</message>
-		<message id="finishdocking">&#10;&#10;Perhaps you should have finished docking with the Armstrong...</message>
-		<message id="pullforcewithyou">&#10;&#10;For what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...</message>
+		<message id="finishdocking">Perhaps you should have finished docking with the Armstrong...</message>
+		<message id="pullforcewithyou">For what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...</message>
 		<message id="airlockfumes">Dim light floods in from the airlock of the Armstrong &#x2013; and a cloud of noxious fumes floods in as well. You begin to choke and try to close the doors, but it's too late. You are losing consciousness. Your final thought is that you should have worn the spacesuit. It might have saved your life...</message>
-		<message id="suitfumes">&#10;&#10;...but you should have left it on! Noxious fumes inside the Armstrong asphyxiate you within seconds!</message>
+		<message id="suitfumes">...but you should have left it on! Noxious fumes inside the Armstrong asphyxiate you within seconds!</message>
 		<message id="openairlockmagnet">As the outer door opens, air bursts explosively into the vacuum of space, but you are held fast within the airlock by the strong grip of the bar magnet against the metallized glove of your spacesuit.</message>
 		<message id="openairlockforce"> A screaming sound inside your head tells you that the malevolent force has been yanked back into the vacuum of space from which it came, and can no longer menace the crew members of the Armstrong. You rejoice inwardly! You have accomplished your assigned mission and now have only to report back to headquarters!</message>
 		<message id="outerdoorstillopen">You don't really want to do that. The outer door is still open, leaving you exposed to the void of space.</message>
@@ -492,18 +493,18 @@
 		<message id="twistdisruptor">You twist the disruptor until it clicks.</message>
 		<message id="alreadyprimed">You've already primed the disruptor.</message>
 		<message id="notbloodylikely">Not bloody likely.</message>
-		<message id="glowingnumeral">&#10;&#10;A glowing numeral %VAR(sonic) appears on one side of the sonic disruptor.</message>
-		<message id="disruptorbursts">&#10;&#10;The sonic disruptor bursts forth with a spray of high-frequency sound that atomizes everything in its immediate vicinity... yourself included.</message>
+		<message id="glowingnumeral">A glowing numeral %VAR(sonic) appears on one side of the sonic disruptor.</message>
+		<message id="disruptorbursts">The sonic disruptor bursts forth with a spray of high-frequency sound that atomizes everything in its immediate vicinity... yourself included.</message>
 		<message id="destroyedfurniture"> For what it's worth, you did succeed in destroying the piece of furniture that had been blocking the stairshaft.</message>
-		<message id="heardisruptor">&#10;&#10;In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity.</message>
-		<message id="heardisruptorshatter">&#10;&#10;In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity, accompanied by the sound of shattering plastic.</message>
+		<message id="heardisruptor">In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity.</message>
+		<message id="heardisruptorshatter">In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity, accompanied by the sound of shattering plastic.</message>
 
 		<!-- malevolent force -->
 
-		<message id="forceinroom">&#10;&#10;You are aware of a powerful, invisible force in the room with you.</message>
-		<message id="jolt1">&#10;&#10;Your entire nervous system is jolted by a mental force the likes of which you have never experienced. Your head jerks back and your mouth opens in an involuntary scream. From the neck down your body is completely paralyzed, immobile; then the force relents and you go limp.</message>
-		<message id="jolt2">&#10;&#10;A second jolt, more powerful than the first and infinitely more painful, surges through your nervous system. For a moment you do not even recognize the sound of your own scream. After what seems like several eternities, the pain goes away.</message>
-		<message id="jolt3">&#10;&#10;The third jolt strikes you like a crackling bolt of lightning. The duration is shorter this time, because your weakened heart is incapable of sustaining further pain of this intensity. Within seconds you slump dead against the nearest wall, wondering in your last instant of consciousness just who will discover *your* decaying skeleton...</message>
+		<message id="forceinroom">You are aware of a powerful, invisible force in the room with you.</message>
+		<message id="jolt1">Your entire nervous system is jolted by a mental force the likes of which you have never experienced. Your head jerks back and your mouth opens in an involuntary scream. From the neck down your body is completely paralyzed, immobile; then the force relents and you go limp.</message>
+		<message id="jolt2">A second jolt, more powerful than the first and infinitely more painful, surges through your nervous system. For a moment you do not even recognize the sound of your own scream. After what seems like several eternities, the pain goes away.</message>
+		<message id="jolt3">The third jolt strikes you like a crackling bolt of lightning. The duration is shorter this time, because your weakened heart is incapable of sustaining further pain of this intensity. Within seconds you slump dead against the nearest wall, wondering in your last instant of consciousness just who will discover *your* decaying skeleton...</message>
 		<message id="healthhp3">You're in fine health... for the time being, anyway.</message>
 		<message id="healthhp2">The shock to your nervous system has left you in ragged shape. You are wobbly, disoriented, and slightly nauseous. You should avoid additional shocks of this nature.</message>
 		<message id="healthhp1">You are in critical condition. One more shock like that last one and your star-flying days will come to an abrupt halt.</message>
@@ -565,7 +566,7 @@
 		<message id="dontsee">That's not here.</message>
 		<message id="nothingunusual">You see nothing unusual.</message>
 		<message id="cantgo">You can't go that way.</message>
-		<message id="gameover">&#10;&#10;Would you like to play again?</message>
+		<message id="gameover">Would you like to play again?</message>
 	</messages>
 
 
@@ -620,6 +621,7 @@
 					<action>message distress</action>
 					<done />
 				</cond>
+				<action>message announces</action>
 				<action>message functional</action>
 				<done />
 			</cond>
@@ -627,6 +629,7 @@
 				<if>input push green,room pilot,var ack 1</if>
 				<action>setvar ack 0</action>
 				<action>setvar rendez 1</action>
+				<action>message announces</action>
 				<action>message rendezvous</action>
 				<done />
 			</cond>
@@ -1333,6 +1336,7 @@
 			<cond>
 				<if>var ack 1</if>
 				<action>setvar ack 0</action>
+				<action>message announces</action>
 				<action>message cancelled</action>
 			</cond>
 			<cond>

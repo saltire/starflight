@@ -470,23 +470,24 @@
     "messages": {
         "intro1": "They told you that star flight would be difficult. They told you and you believed them... sort of.\n\nWhat they hadn't told you was how grueling cold sleep could be, how the months and years of your flight would be filled with endless nightmares, countless replays of every terrible thing that had happened to you in a lifetime of terrible things. When the instructions finally arrived from the ship's computer telling the cold sleep machinery to revive you for the final phase of your flight, you were grateful.\n\nWhat you didn't realize, even as you stumbled groggily from the narrow sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the most nightmarish part of your mission was yet to come... and that you would face it fully awake.", 
         "intro2": "STARFLIGHT: A Cosmic Adventure\nWritten & Programmed for the C64 by Chris Lampton\nAdapted by Marcus Kamps\n\n", 
-        "lightflashing": "\n\nA light is flashing on the console.", 
+        "lightflashing": "A light is flashing on the console.", 
         "consolelightflashing": " There is a light flashing near the top of the console.", 
         "lightnotflashing": "The light is no longer blinking.", 
         "whichcolour": "Please specify a colour.", 
         "bluebutton": "A prerecorded voice booms down from an overhead speaker:\n\n\"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?\n\n\"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.\n\n\"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!\"", 
         "distress": "The hauntingly human voice of the ship's computer booms down from the overhead speakers:\n\n\"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!\"", 
-        "cancelled": "\n\nThe ship's computer announces:\n\n\"Acknowledgement not received. Request cancelled!\"", 
-        "rendezvous": "The ship's computer announces:\n\n\"Rendezvous procedures have been initiated.\"\n\nAs you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.", 
-        "functional": "The ship's computer announces:\n\n\"All systems are functional.\"", 
+        "announces": "The ship's computer announces:", 
+        "cancelled": "\"Acknowledgement not received. Request cancelled!\"", 
+        "rendezvous": "\"Rendezvous procedures have been initiated.\"\n\nAs you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.", 
+        "functional": "\"All systems are functional.\"", 
         "cantdock": "The docking machinery whines uselessly, since there is nothing within the vicinity with which it can dock.", 
         "dock": "The Ganymede rises until it is touching the Armstrong. A loud grinding noise informs you that the airlocks are now connected and the ships are docked.", 
         "undock": "The Ganymede and Armstrong disconnect airlocks and undock. The Ganymede floats downward until about fifty metres of space separate it from the Armstrong.", 
         "tachyon": "There is a crackle from the overhead speaker, then you hear the voice of the communications officer back at base headquarters, transmitted to you via tachyon beam. You tell her what has happened. She replies:", 
-        "noprogress": "\n\n\"Please get back in contact after you've made some progress in your mission.\"", 
-        "horrible": "\n\n\"My God, that's horrible! Find out what happened and report back immediately!\"", 
-        "astonishing": "\n\n\"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!\"", 
-        "congratulations": "\n\n\"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!\"\n\nSmiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...", 
+        "noprogress": "\"Please get back in contact after you've made some progress in your mission.\"", 
+        "horrible": "\"My God, that's horrible! Find out what happened and report back immediately!\"", 
+        "astonishing": "\"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!\"", 
+        "congratulations": "\"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!\"\n\nSmiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...", 
         "airclosed": "The airlock door is closed. You can't go that way.", 
         "whichdoor": "Please specify which door.", 
         "openinnerdoor": "The inner door is now open.", 
@@ -503,10 +504,10 @@
         "innerclosedouterclosed": " The inner door is closed and the outer door is closed.", 
         "spacednosuit": "A violent gust of air pulls you from the airlock into the void of space. You are briefly aware of the Starflyer Ganymede receding into the distance, then you lose consciousness... forever.", 
         "spacedwithsuit": "A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.\n\nYour spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.", 
-        "finishdocking": "\n\nPerhaps you should have finished docking with the Armstrong...", 
-        "pullforcewithyou": "\n\nFor what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...", 
+        "finishdocking": "Perhaps you should have finished docking with the Armstrong...", 
+        "pullforcewithyou": "For what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...", 
         "airlockfumes": "Dim light floods in from the airlock of the Armstrong \u2013 and a cloud of noxious fumes floods in as well. You begin to choke and try to close the doors, but it's too late. You are losing consciousness. Your final thought is that you should have worn the spacesuit. It might have saved your life...", 
-        "suitfumes": "\n\n...but you should have left it on! Noxious fumes inside the Armstrong asphyxiate you within seconds!", 
+        "suitfumes": "...but you should have left it on! Noxious fumes inside the Armstrong asphyxiate you within seconds!", 
         "openairlockmagnet": "As the outer door opens, air bursts explosively into the vacuum of space, but you are held fast within the airlock by the strong grip of the bar magnet against the metallized glove of your spacesuit.", 
         "openairlockforce": " A screaming sound inside your head tells you that the malevolent force has been yanked back into the vacuum of space from which it came, and can no longer menace the crew members of the Armstrong. You rejoice inwardly! You have accomplished your assigned mission and now have only to report back to headquarters!", 
         "outerdoorstillopen": "You don't really want to do that. The outer door is still open, leaving you exposed to the void of space.", 
@@ -534,15 +535,15 @@
         "twistdisruptor": "You twist the disruptor until it clicks.", 
         "alreadyprimed": "You've already primed the disruptor.", 
         "notbloodylikely": "Not bloody likely.", 
-        "glowingnumeral": "\n\nA glowing numeral %VAR(sonic) appears on one side of the sonic disruptor.", 
-        "disruptorbursts": "\n\nThe sonic disruptor bursts forth with a spray of high-frequency sound that atomizes everything in its immediate vicinity... yourself included.", 
+        "glowingnumeral": "A glowing numeral %VAR(sonic) appears on one side of the sonic disruptor.", 
+        "disruptorbursts": "The sonic disruptor bursts forth with a spray of high-frequency sound that atomizes everything in its immediate vicinity... yourself included.", 
         "destroyedfurniture": " For what it's worth, you did succeed in destroying the piece of furniture that had been blocking the stairshaft.", 
-        "heardisruptor": "\n\nIn the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity.", 
-        "heardisruptorshatter": "\n\nIn the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity, accompanied by the sound of shattering plastic.", 
-        "forceinroom": "\n\nYou are aware of a powerful, invisible force in the room with you.", 
-        "jolt1": "\n\nYour entire nervous system is jolted by a mental force the likes of which you have never experienced. Your head jerks back and your mouth opens in an involuntary scream. From the neck down your body is completely paralyzed, immobile; then the force relents and you go limp.", 
-        "jolt2": "\n\nA second jolt, more powerful than the first and infinitely more painful, surges through your nervous system. For a moment you do not even recognize the sound of your own scream. After what seems like several eternities, the pain goes away.", 
-        "jolt3": "\n\nThe third jolt strikes you like a crackling bolt of lightning. The duration is shorter this time, because your weakened heart is incapable of sustaining further pain of this intensity. Within seconds you slump dead against the nearest wall, wondering in your last instant of consciousness just who will discover *your* decaying skeleton...", 
+        "heardisruptor": "In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity.", 
+        "heardisruptorshatter": "In the distance, you hear the piercing whine of a sonic disruptor atomizing everything in its vicinity, accompanied by the sound of shattering plastic.", 
+        "forceinroom": "You are aware of a powerful, invisible force in the room with you.", 
+        "jolt1": "Your entire nervous system is jolted by a mental force the likes of which you have never experienced. Your head jerks back and your mouth opens in an involuntary scream. From the neck down your body is completely paralyzed, immobile; then the force relents and you go limp.", 
+        "jolt2": "A second jolt, more powerful than the first and infinitely more painful, surges through your nervous system. For a moment you do not even recognize the sound of your own scream. After what seems like several eternities, the pain goes away.", 
+        "jolt3": "The third jolt strikes you like a crackling bolt of lightning. The duration is shorter this time, because your weakened heart is incapable of sustaining further pain of this intensity. Within seconds you slump dead against the nearest wall, wondering in your last instant of consciousness just who will discover *your* decaying skeleton...", 
         "healthhp3": "You're in fine health... for the time being, anyway.", 
         "healthhp2": "The shock to your nervous system has left you in ragged shape. You are wobbly, disoriented, and slightly nauseous. You should avoid additional shocks of this nature.", 
         "healthhp1": "You are in critical condition. One more shock like that last one and your star-flying days will come to an abrupt halt.", 
@@ -595,7 +596,7 @@
         "dontsee": "That's not here.", 
         "nothingunusual": "You see nothing unusual.", 
         "cantgo": "You can't go that way.", 
-        "gameover": "\n\nWould you like to play again?"
+        "gameover": "Would you like to play again?"
     }, 
     "controls": [
         [
@@ -636,13 +637,14 @@
                         "then": ["setvar ack 2", "message distress"], 
                         "done": true
                     }, 
+                    "message announces", 
                     "message functional"
                 ], 
                 "done": true
             }, 
             {
                 "if": ["input push green", "room pilot", "var ack 1"], 
-                "then": ["setvar ack 0", "setvar rendez 1", "message rendezvous"], 
+                "then": ["setvar ack 0", "setvar rendez 1", "message announces", "message rendezvous"], 
                 "done": true
             }, 
             {
@@ -1321,7 +1323,7 @@
         [
             {
                 "if": ["var ack 1"], 
-                "then": ["setvar ack 0", "message cancelled"]
+                "then": ["setvar ack 0", "message announces", "message cancelled"]
             }, 
             {
                 "if": ["var ack 2"], 

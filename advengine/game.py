@@ -21,9 +21,10 @@ class Game:
         
         
     def export_state(self):
-        return {key: getattr(self, key) for key in ('vars', 'turn', 'current_room')}.update(
-               {'rooms': {rid: room.export_state() for rid, room in self.rooms.items()},
-                'nouns': {nid: noun.export_state() for nid, noun in self.nouns.items()}})        
+        state = {key: getattr(self, key) for key in ('vars', 'turn', 'current_room')}
+        state.update({'rooms': {rid: room.export_state() for rid, room in self.rooms.items()},
+                      'nouns': {nid: noun.export_state() for nid, noun in self.nouns.items()}})
+        return state
         
         
     def get_turn(self):

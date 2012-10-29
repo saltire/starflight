@@ -8,7 +8,7 @@ class Room:
             self.desc = None
             self.notes = self.data.get('notes', [])
         else:
-            for key, value in rstate:
+            for key, value in rstate.items():
                 setattr(self, key, value)
         
         

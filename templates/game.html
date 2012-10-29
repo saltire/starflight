@@ -5,14 +5,14 @@
 	<link rel='stylesheet' type='text/css' href='static/style.css' />
 	<body>
 		<div class='main'>
-			<div class='output'>
+			<div class='dialogue'>
 {% for input, output in history %}
-				<p>{{ input }}</p>
+				<p class='input'>{{ input }}</p>
 	{% for msg in output %}
 		{% if msg == 'PAUSE' %}
-				<p>Press Enter to continue...</p>
+				<p class='pause'>Press Enter to continue...</p>
 		{% else %}
-				<p>{{ msg }}</p>
+				<p class='output'>{{ msg|replace('\n', '<br />')|safe }}</p>
 		{% endif %}
 	{% endfor %}
 {% endfor %}

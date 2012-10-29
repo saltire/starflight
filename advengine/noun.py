@@ -8,7 +8,7 @@ class Noun:
             self.desc = None
             self.notes = self.data.get('notes', [])
         else:
-            for key, value in nstate:
+            for key, value in nstate.items():
                 setattr(self, key, value)
         
         
