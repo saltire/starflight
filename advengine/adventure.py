@@ -27,12 +27,10 @@ class Adventure(tests.Tests, actions.Actions):
         
     def export_state(self):
         return self.game.export_state()
-                
+        
         
     def do_command(self, command):
         """Get a command, and execute a single turn of the game."""
-        status = 'ok'
-        
         self.game.increment_turn()
         self.output = []
         self.words = [word for word in command.strip().split() if word not in ('the', 'a', 'an')]
@@ -59,20 +57,23 @@ class Adventure(tests.Tests, actions.Actions):
                     self.words = self.sub_input_words(actions).split()
                     logging.debug('replace: %s', ' '.join(self.words))
                     return 'replace'
+                
                 elif status == 'gameover':
                     logging.debug('gameover')
                     break
+                
                 elif status == 'done':
                     logging.debug('done')
+                    status = 'ok'
                     break
         
             for action in allactions:
                 self.do_action(action)
                 
             if status == 'gameover':
-                return 'gameover'
+                break
             
-        return 'ok'
+        return status
     
     
     def do_control(self, control):

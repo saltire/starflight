@@ -7,7 +7,7 @@ body { background: #808073; color: #f1f1da; font-size: 18px;
 	
 .input { margin: 20px; text-decoration: underline; }
 .pause { font-style: italic; }
-.output { margin: 10px 0; }
+.output { margin: 10px 0; color: #ffffff; }
 
 form { text-align: center; }
 input, button { border: 0; background: transparent; color: #f1f1da; font-size: 20px; }

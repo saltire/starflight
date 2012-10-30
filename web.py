@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import g, redirect, render_template, request, session, url_for
+from flask import g, jsonify, redirect, render_template, request, session, url_for
 
 from simplekv.memory import DictStore
 from flaskext.kvsession import KVSessionExtension
@@ -17,10 +17,20 @@ KVSessionExtension(store, app)
 
 def do_turn(input):
     print 'do_turn'
-    status, output = g.adv.do_command(input)
+    
+    if session['queue']:
+        status, output = session['queue']
+        session['queue'] = None
+    else:
+        status, output = g.adv.do_command(input)
+        session['state'] = g.adv.export_state()
+    
+    if 'PAUSE' in output:
+        i = output.index('PAUSE') + 1
+        session['queue'] = (status, output[i:])
+        output = output[:i]
+
     session['history'].append((input, output))
-    session['state'] = g.adv.export_state()
-    session.modified = True
     
     
 @app.before_first_request
@@ -28,6 +38,7 @@ def init_adventure():
     print 'init_adv'
     g.adv = Adventure('games/starflight.json')
     session['history'] = []
+    session['queue'] = None
     do_turn('')
     
     
@@ -43,6 +54,14 @@ def do_command():
     g.adv = Adventure('games/starflight.json', session['state'])
     do_turn(request.form.get('command'))
     return redirect(url_for('index'))
+
+
+@app.route('/fetch', methods=['post'])
+def do_ajax_command():
+    print 'do_ajax_command'
+    g.adv = Adventure('games/starflight.json', session['state'])
+    output = do_turn(request.form.get('command'))
+    return jsonify({'output': output})
 
 
 
