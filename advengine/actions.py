@@ -1,34 +1,34 @@
 class Actions:
     def a_message(self, mid):
-        self.queue_output(self.messages[mid])
+        self.queue_message(mid)
     
     
     def a_pause(self):
-        self.queue_output('PAUSE')
+        self.queue_raw_output('PAUSE')
     
     
     def a_look(self):
         room = self.game.get_current_room()
-        self.queue_output(room.get_description())
+        self.queue_raw_output(room.get_description())
         for mid in room.get_notes():
-            self.a_message(mid)
+            self.queue_message(mid)
             
         for noun in self.game.get_nouns_by_loc(self.game.get_current_room_id()):
             if noun.is_visible():
-                self.queue_output(noun.get_short_desc())
+                self.queue_raw_output(noun.get_short_desc())
                 self.show_noun_contents(noun)
                 
                 
     def a_inv(self):
         inv = self.game.get_nouns_by_loc('INVENTORY') | self.game.get_nouns_by_loc('WORN')
         if inv:
-            self.a_message('carrying')
+            self.queue_message('carrying')
             for noun in inv:
-                self.queue_output((self.messages['invitemworn'] if 'WORN' in noun.get_locs() else 
-                                   self.messages['invitem']).replace('%NOUN', noun.get_name()))
+                self.queue_message('invitemworn' if 'WORN' in noun.get_locs() else 'invitem',
+                                   '%NOUN', noun.get_name())
                 self.show_noun_contents(noun)
         else:
-            self.a_message('carryingnothing')
+            self.queue_message('carryingnothing')
     
     
     def a_move(self, dir):
@@ -40,7 +40,7 @@ class Actions:
             self.a_look()
             
         except StopIteration:
-            self.a_message('cantgo')
+            self.queue_message('cantgo')
             
             
     def a_examine(self, nword):
@@ -51,45 +51,45 @@ class Actions:
             msgs.extend(self.messages[mid] for mid in noun.get_notes())
         
         if msgs:
-            self.queue_output(msgs)
+            self.queue_raw_output(msgs)
         else:
-            self.a_message('nothingunusual')
+            self.queue_message('nothingunusual')
             
             
     def a_take(self, nword):
         presentnouns = self.match_nouns(nword) & self.game.get_nouns_present()
         if not presentnouns:
-            self.a_message('dontsee')
+            self.queue_message('dontsee')
         else:
             movables = set(noun for noun in presentnouns if noun.is_movable())
             if not movables:
-                self.a_message('cantverb')
+                self.queue_message('cantverb')
             else:
                 notcarried = set(noun for noun in movables if 'INVENTORY' not in noun.get_locs())
                 if not notcarried:
-                    self.a_message('alreadycarrying')
+                    self.queue_message('alreadycarrying')
                 else:
                     for noun in notcarried:
                         noun.set_loc('INVENTORY')
-                    self.a_message('taken')
+                    self.queue_message('taken')
                     
                     
     def a_wear(self, nword):
         presentnouns = self.match_nouns(nword) & self.game.get_nouns_present()
         if not presentnouns:
-            self.a_message('dontsee')
+            self.queue_message('dontsee')
         else:
             wearables = set(noun for noun in presentnouns if noun.is_wearable())
             if not wearables:
-                self.a_message('cantverb')
+                self.queue_message('cantverb')
             else:
                 notworn = set(noun for noun in wearables if 'WORN' not in noun.get_locs())
                 if not notworn:
-                    self.a_message('alreadywearing')
+                    self.queue_message('alreadywearing')
                 else:
                     for noun in notworn:
                         noun.set_loc('WORN')
-                    self.a_message('wearing')
+                    self.queue_message('wearing')
                 
             
     def a_drop(self, nword):
@@ -97,9 +97,9 @@ class Actions:
         if carried:
             for noun in carried:
                 noun.set_loc(self.game.get_current_room_id())
-            self.a_message('dropped')
+            self.queue_message('dropped')
         else:
-            self.a_message('donthave')        
+            self.queue_message('donthave')        
             
             
     def a_destroy(self, nword):

@@ -152,16 +152,22 @@ class Adventure(tests.Tests, actions.Actions):
         return getattr(self, 'a_{0}'.format(awords[0]))(*awords[1:])
     
     
-    def queue_output(self, message):
-        """Add a message or messages to the output queue."""
+    def queue_raw_output(self, message):
+        """Add a string or list of strings to the output queue."""
         if isinstance(message, list):
             for msg in message:
-                self.queue_output(msg)
+                self.queue_raw_output(msg)
                 
         elif len(message):
             message = re.sub('%VAR\((.+?)\)', lambda m: str(self.game.get_var(m.group(1))), message)
             message = message.replace('%TURNS', str(self.game.get_turn()))
             self.output.append(self.sub_input_words(message))
+            
+            
+    def queue_message(self, mid, search='', replace=''):
+        """Get a message from the list and queue it for output,
+        optionally replacing a substring."""
+        self.queue_raw_output(self.messages[mid].replace(search, replace))
     
     
     def sub_input_words(self, phrase):
@@ -190,9 +196,9 @@ class Adventure(tests.Tests, actions.Actions):
         """Queue for output a list of nouns contained within a noun."""
         contents = self.game.get_nouns_by_loc(container.get_id())
         if contents:
-            self.queue_output(self.messages['invitemcontains'].replace('%NOUN', container.get_short_name()))
+            self.queue_raw_output(self.messages['invitemcontains'].replace('%NOUN', container.get_short_name()))
             for noun in contents:
-                self.queue_output(self.messages['invitemcontained'].replace('%NOUN', noun.get_name()))
+                self.queue_raw_output(self.messages['invitemcontained'].replace('%NOUN', noun.get_name()))
                 self.show_noun_contents(noun)
                 
         
