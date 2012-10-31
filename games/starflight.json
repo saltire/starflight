@@ -468,17 +468,24 @@
         "hp": 3
     }, 
     "messages": {
-        "intro1": "They told you that star flight would be difficult. They told you and you believed them... sort of.\n\nWhat they hadn't told you was how grueling cold sleep could be, how the months and years of your flight would be filled with endless nightmares, countless replays of every terrible thing that had happened to you in a lifetime of terrible things. When the instructions finally arrived from the ship's computer telling the cold sleep machinery to revive you for the final phase of your flight, you were grateful.\n\nWhat you didn't realize, even as you stumbled groggily from the narrow sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the most nightmarish part of your mission was yet to come... and that you would face it fully awake.", 
-        "intro2": "STARFLIGHT: A Cosmic Adventure\nWritten & Programmed for the C64 by Chris Lampton\nAdapted by Marcus Kamps\n\n", 
+        "intro1": "They told you that star flight would be difficult. They told you and you believed them... sort of.", 
+        "intro2": "What they hadn't told you was how grueling cold sleep could be, how the months and years of your flight would be filled with endless nightmares, countless replays of every terrible thing that had happened to you in a lifetime of terrible things. When the instructions finally arrived from the ship's computer telling the cold sleep machinery to revive you for the final phase of your flight, you were grateful.", 
+        "intro3": "What you didn't realize, even as you stumbled groggily from the narrow sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the most nightmarish part of your mission was yet to come... and that you would face it fully awake.", 
+        "intro4": "STARFLIGHT: A Cosmic Adventure\nWritten & Programmed for the C64 by Chris Lampton\nAdapted by Marcus Kamps", 
         "lightflashing": "A light is flashing on the console.", 
         "consolelightflashing": " There is a light flashing near the top of the console.", 
         "lightnotflashing": "The light is no longer blinking.", 
         "whichcolour": "Please specify a colour.", 
-        "bluebutton": "A prerecorded voice booms down from an overhead speaker:\n\n\"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?\n\n\"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.\n\n\"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!\"", 
-        "distress": "The hauntingly human voice of the ship's computer booms down from the overhead speakers:\n\n\"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!\"", 
+        "bluebutton1": "A prerecorded voice booms down from an overhead speaker:", 
+        "bluebutton2": "\"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?", 
+        "bluebutton3": "\"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.", 
+        "bluebutton4": "\"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!\"", 
+        "distress1": "The hauntingly human voice of the ship's computer booms down from the overhead speakers:", 
+        "distress2": "\"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!\"", 
         "announces": "The ship's computer announces:", 
         "cancelled": "\"Acknowledgement not received. Request cancelled!\"", 
-        "rendezvous": "\"Rendezvous procedures have been initiated.\"\n\nAs you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.", 
+        "rendezvous1": "\"Rendezvous procedures have been initiated.\"", 
+        "rendezvous2": "As you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.", 
         "functional": "\"All systems are functional.\"", 
         "cantdock": "The docking machinery whines uselessly, since there is nothing within the vicinity with which it can dock.", 
         "dock": "The Ganymede rises until it is touching the Armstrong. A loud grinding noise informs you that the airlocks are now connected and the ships are docked.", 
@@ -487,7 +494,8 @@
         "noprogress": "\"Please get back in contact after you've made some progress in your mission.\"", 
         "horrible": "\"My God, that's horrible! Find out what happened and report back immediately!\"", 
         "astonishing": "\"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!\"", 
-        "congratulations": "\"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!\"\n\nSmiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...", 
+        "congratulations1": "\"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!\"", 
+        "congratulations2": "Smiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...", 
         "airclosed": "The airlock door is closed. You can't go that way.", 
         "whichdoor": "Please specify which door.", 
         "openinnerdoor": "The inner door is now open.", 
@@ -503,7 +511,8 @@
         "innerclosedouteropen": " The inner door is closed and the outer door is open.", 
         "innerclosedouterclosed": " The inner door is closed and the outer door is closed.", 
         "spacednosuit": "A violent gust of air pulls you from the airlock into the void of space. You are briefly aware of the Starflyer Ganymede receding into the distance, then you lose consciousness... forever.", 
-        "spacedwithsuit": "A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.\n\nYour spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.", 
+        "spacedwithsuit1": "A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.", 
+        "spacedwithsuit2": "Your spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.", 
         "finishdocking": "Perhaps you should have finished docking with the Armstrong...", 
         "pullforcewithyou": "For what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...", 
         "airlockfumes": "Dim light floods in from the airlock of the Armstrong \u2013 and a cloud of noxious fumes floods in as well. You begin to choke and try to close the doors, but it's too late. You are losing consciousness. Your final thought is that you should have worn the spacesuit. It might have saved your life...", 
@@ -522,8 +531,11 @@
         "cantprypanel": "You attempt to pry the locked panel with the crowbar, but are unsuccessful.", 
         "prypanel": "You pry open the panel with the crowbar.", 
         "panelopen": " The panel is open, revealing a computer video screen, a black button and a white button.", 
-        "emergencysystem": "There is a rumble from a speaker set into the science officer's console, then a voice speaks:\n\n\"This is the Armstrong's computerized emergency system. Since the crew of the Armstrong is now dead and all of the passengers remain in cold sleep, it is assumed that you are an outsider responding to the distress signal. Here are the details of the current emergency situation:\n\n\"An invisible, malevolent force has entered the Armstrong during a routine EVA. All crew members are deceased. Over the course of ten years, I have maneuvered the invading entity into the auxiliary storage area, behind the main storage room, where it is now imprisoned, though perhaps not for long. If you wish me to unlock the door to this room, please acknowledge immediately!\"", 
-        "storageunlocked": "The emergency computer announces:\n\n\"Door to the auxiliary storage room is now unlocked.\"", 
+        "emergencysystem1": "There is a rumble from a speaker set into the science officer's console, then a voice speaks:", 
+        "emergencysystem2": "\"This is the Armstrong's computerized emergency system. Since the crew of the Armstrong is now dead and all of the passengers remain in cold sleep, it is assumed that you are an outsider responding to the distress signal. Here are the details of the current emergency situation:", 
+        "emergencysystem3": "\"An invisible, malevolent force has entered the Armstrong during a routine EVA. All crew members are deceased. Over the course of ten years, I have maneuvered the invading entity into the auxiliary storage area, behind the main storage room, where it is now imprisoned, though perhaps not for long. If you wish me to unlock the door to this room, please acknowledge immediately!\"", 
+        "storageunlocked1": "The emergency computer announces:", 
+        "storageunlocked2": "\"Door to the auxiliary storage room is now unlocked.\"", 
         "opendooraft": " An open door is aft.", 
         "closeddooraft": " A closed door is aft.", 
         "itsopen": "Okay. It's open.", 
@@ -548,14 +560,13 @@
         "healthhp2": "The shock to your nervous system has left you in ragged shape. You are wobbly, disoriented, and slightly nauseous. You should avoid additional shocks of this nature.", 
         "healthhp1": "You are in critical condition. One more shock like that last one and your star-flying days will come to an abrupt halt.", 
         "nosleep": "You don't really want to do that. If you re-enter the suspended animation booth and revert to cold sleep, the ship will automatically return to its home port. Your mission will be a failure.", 
-        "skeletons": "You step cautiously over a pair of skeletons that have fallen together in the middle of the hallway.\n\n", 
+        "skeletons": "You step cautiously over a pair of skeletons that have fallen together in the middle of the hallway.", 
         "vaultlarge": "You don't really want to go that way. The passenger vault is so large that you could wander in it for days, to no particular avail.", 
         "electroniclock": "The door is locked electronically and can only be unlocked by order of the ship's computer system.", 
-        "debris": "The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members.", 
-        "dropsuit": " Unfortunately, you will need to drop your bulky space suit before you can squeeze through the debris.", 
-        "squeeze": " You are barely able to squeeze through the debris.\n\n", 
+        "dropsuit": "The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members. Unfortunately, you will need to drop your bulky space suit before you can squeeze through the debris.", 
+        "squeeze": "The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members. You are barely able to squeeze through the debris.", 
         "blockedfurniture": "There is a large item of plastic furniture blocking your descent. Below the plastic, you can just make out the skeletal remains of one of the crew members, who had apparently placed the furniture here in an unsuccessful attempt to ward off an attacker.", 
-        "descend": "You descend into the shaft, picking your way past the shattered remains of the piece of plastic furniture and the skeleton that was holding it in place.\n\n", 
+        "descend": "You descend into the shaft, picking your way past the shattered remains of the piece of plastic furniture and the skeleton that was holding it in place.", 
         "airispure": "You hear a hissing sound from the ventilation system. After a few moments the sign on the control panel indicates that the air is pure enough to breathe.", 
         "signnotflashing": "The sign is no longer flashing.", 
         "takemagnet": "With a bone-wrenching tug, you pull the magnet loose from the metal bulkhead where it had attached itself.", 
@@ -563,7 +574,7 @@
         "feelslikemagnet": "It feels like a magnet.", 
         "clingstofingers": "It clings to the metallic fingers of your spacesuit glove.", 
         "immobilized": "The fingers of your spacesuit attach themselves tightly to the magnet. Since you are *in* the spacesuit, you are temporarily immobilized.", 
-        "pullfreeofmagnet": "First, you tug yourself free of the bar magnet...\n\n", 
+        "pullfreeofmagnet": "First, you tug yourself free of the bar magnet...", 
         "timepasses": "One minute passes...", 
         "touched": "Okay. You've touched it.", 
         "violent": "Feeling violent today, are we?", 
@@ -575,15 +586,15 @@
         "dontknowhowsomething": "I don't know how to %1 something.", 
         "turns": "You have taken %TURNS turns.", 
         "saved": "Saved game.", 
-        "loadedsave": "Loaded save game.\n\n", 
+        "loadedsave": "Loaded save game.", 
         "nosave": "No save game to load.", 
         "cantverb": "You can't %1 that.", 
         "nothinghappens": "Nothing happens.", 
         "carrying": "You are carrying:", 
-        "invitem": "\n%NOUN.", 
-        "invitemworn": "\n%NOUN (being worn).", 
-        "invitemcontains": "\n\tThe %NOUN contains:", 
-        "invitemcontained": "\n\t\t%NOUN.", 
+        "invitem": "%NOUN.", 
+        "invitemworn": "%NOUN (being worn).", 
+        "invitemcontains": "\tThe %NOUN contains:", 
+        "invitemcontained": "\t\t%NOUN.", 
         "taken": "Taken.", 
         "dropped": "Dropped.", 
         "donthave": "You don't have it.", 
@@ -602,7 +613,7 @@
         [
             {
                 "if": ["start"], 
-                "then": ["message intro1", "pause", "message intro2", "look"], 
+                "then": ["message intro1", "message intro2", "message intro3", "pause", "message intro4", "look"], 
                 "done": true
             }, 
             {
@@ -616,7 +627,7 @@
             }, 
             {
                 "if": ["input push blue", "room pilot", "var blue 0"], 
-                "then": ["setvar blue 1", "removeroomnote pilot lightflashing", "removenounnote console consolelightflashing", "setnoundesc light lightnotflashing", "message bluebutton"], 
+                "then": ["setvar blue 1", "removeroomnote pilot lightflashing", "removenounnote console consolelightflashing", "setnoundesc light lightnotflashing", "message bluebutton1", "message bluebutton2", "message bluebutton3", "message bluebutton4"], 
                 "done": true
             }, 
             {
@@ -634,7 +645,7 @@
                 "then": [
                     {
                         "if": ["var blue 1", "var rendez 0"], 
-                        "then": ["setvar ack 2", "message distress"], 
+                        "then": ["setvar ack 2", "message distress1", "message distress2"], 
                         "done": true
                     }, 
                     "message announces", 
@@ -644,7 +655,7 @@
             }, 
             {
                 "if": ["input push green", "room pilot", "var ack 1"], 
-                "then": ["setvar ack 0", "setvar rendez 1", "message announces", "message rendezvous"], 
+                "then": ["setvar ack 0", "setvar rendez 1", "message announces", "message rendezvous1", "message rendezvous2"], 
                 "done": true
             }, 
             {
@@ -685,7 +696,7 @@
                     }, 
                     {
                         "if": ["var tachyon 3"], 
-                        "then": ["message congratulations"], 
+                        "then": ["message congratulations1", "message congratulations2"], 
                         "gameover": true
                     }
                 ], 
@@ -711,12 +722,12 @@
             }, 
             {
                 "if": ["input push black", "room e_bridge", "var storage 0"], 
-                "then": ["setvar ack 2", "setvar tachyon 2", "message emergencysystem"], 
+                "then": ["setvar ack 2", "setvar tachyon 2", "message emergencysystem1", "message emergencysystem2", "message emergencysystem3"], 
                 "done": true
             }, 
             {
                 "if": ["input push white", "room e_bridge", "var ack 1"], 
-                "then": ["setvar ack 0", "setvar storage 1", "message storageunlocked"], 
+                "then": ["setvar ack 0", "setvar storage 1", "message storageunlocked1", "message storageunlocked2"], 
                 "done": true
             }, 
             {
@@ -813,7 +824,7 @@
                                     }, 
                                     {
                                         "if": ["worn spacesuit"], 
-                                        "then": ["message spacedwithsuit"]
+                                        "then": ["message spacedwithsuit1", "message spacedwithsuit2"]
                                     }, 
                                     {
                                         "if": ["nounloc force g_airlock"], 
@@ -1036,7 +1047,6 @@
             {
                 "if": ["input go north", "room out_bridge"], 
                 "then": [
-                    "message debris", 
                     {
                         "if": ["ininv spacesuit"], 
                         "then": ["message dropsuit"], 

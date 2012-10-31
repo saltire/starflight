@@ -1,8 +1,5 @@
 TO DO
 
-- implement tests and actions (list of ones used in starflight below)
-
-then:
 - break down some tests/actions into more atomic ones called from controls
     e.g. a_examine -> control that tests t_nounpresent and calls a_shownoundesc
     goal: no hardcoded message calls in action methods; move that to controls
@@ -11,48 +8,3 @@ then:
     - test/action arguments
     - room start
     - loc/exit/etc fields must contain known ids
-
-
-TESTS
-
-  contained
-  exitexists
-  ininv
-  input
-  inroom
-  nounloc
-  present
-  random
-  room
-  somewhere
-  start
-  var
-  wearable
-  worn
-
-
-ACTIONS
-
-  addroomnote
-  adjustvar
-  clearroomnotes
-  destroy
-  drop
-  examine
-  inv
-load
-  look
-  message
-  move
-  pause
-  removeroomnote
-  removenounnote
-save
-  sendnoun
-  sendtonoun
-  sendtoroom
-  setnoundesc
-  setvar
-  swapnouns
-  take
-  wear

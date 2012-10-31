@@ -413,8 +413,10 @@
 
 
 	<messages>
-		<message id="intro1">They told you that star flight would be difficult. They told you and you believed them... sort of.&#10;&#10;What they hadn't told you was how grueling cold sleep could be, how the months and years of your flight would be filled with endless nightmares, countless replays of every terrible thing that had happened to you in a lifetime of terrible things. When the instructions finally arrived from the ship's computer telling the cold sleep machinery to revive you for the final phase of your flight, you were grateful.&#10;&#10;What you didn't realize, even as you stumbled groggily from the narrow sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the most nightmarish part of your mission was yet to come... and that you would face it fully awake.</message>
-		<message id="intro2">STARFLIGHT: A Cosmic Adventure&#10;Written &amp; Programmed for the C64 by Chris Lampton&#10;Adapted by Marcus Kamps&#10;&#10;</message>
+		<message id="intro1">They told you that star flight would be difficult. They told you and you believed them... sort of.</message>
+		<message id="intro2">What they hadn't told you was how grueling cold sleep could be, how the months and years of your flight would be filled with endless nightmares, countless replays of every terrible thing that had happened to you in a lifetime of terrible things. When the instructions finally arrived from the ship's computer telling the cold sleep machinery to revive you for the final phase of your flight, you were grateful.</message>
+		<message id="intro3">What you didn't realize, even as you stumbled groggily from the narrow sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the most nightmarish part of your mission was yet to come... and that you would face it fully awake.</message>
+		<message id="intro4">STARFLIGHT: A Cosmic Adventure&#10;Written &amp; Programmed for the C64 by Chris Lampton&#10;Adapted by Marcus Kamps</message>
 
 		<!-- pilot's cabin -->
 
@@ -422,11 +424,16 @@
 		<message id="consolelightflashing"> There is a light flashing near the top of the console.</message>
 		<message id="lightnotflashing">The light is no longer blinking.</message>
 		<message id="whichcolour">Please specify a colour.</message>
-		<message id="bluebutton">A prerecorded voice booms down from an overhead speaker:&#10;&#10;"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?&#10;&#10;"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.&#10;&#10;"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!"</message>
-		<message id="distress">The hauntingly human voice of the ship's computer booms down from the overhead speakers:&#10;&#10;"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!"</message>
+		<message id="bluebutton1">A prerecorded voice booms down from an overhead speaker:</message>
+		<message id="bluebutton2">"Congratulations, lieutenant! You seem to have come through the cold sleep with your sanity intact. I don't need to tell you that not everyone does. It's a rough experience, but it's better than spending ten years staring at blank walls, eh?</message>
+		<message id="bluebutton3">"Now that you're almost at your destination, it's safe for me to tell you the object of your mission. Sorry to keep you in the dark so long, but it's an extremely sensitive matter.</message>
+		<message id="bluebutton4">"The Megaship Armstrong has run into some kind of problem en route to the colony on IV Barnard. We've been out of contact with them for a decade. We want you to find out what happened, and report back by tachyon beam. Good luck!"</message>
+		<message id="distress1">The hauntingly human voice of the ship's computer booms down from the overhead speakers:</message>
+		<message id="distress2">"Automated distress signal being received from the Megaship Armstrong. Is a rendezvous desired? Immediate acknowledgement requested!"</message>
 		<message id="announces">The ship's computer announces:</message>
 		<message id="cancelled">"Acknowledgement not received. Request cancelled!"</message>
-		<message id="rendezvous">"Rendezvous procedures have been initiated."&#10;&#10;As you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.</message>
+		<message id="rendezvous1">"Rendezvous procedures have been initiated."</message>
+		<message id="rendezvous2">As you watch through the forward viewscreen, the stars seem to change position around you. A distant point of light swells until it becomes a starship. As it comes closer, you recognize the mindboggling bulk of an immense megaship, a starship as large as a small planet. On its side, in large red letters, are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly beneath the Armstrong's belly.</message>
 		<message id="functional">"All systems are functional."</message>
 		<message id="cantdock">The docking machinery whines uselessly, since there is nothing within the vicinity with which it can dock.</message>
 		<message id="dock">The Ganymede rises until it is touching the Armstrong. A loud grinding noise informs you that the airlocks are now connected and the ships are docked.</message>
@@ -435,7 +442,8 @@
 		<message id="noprogress">"Please get back in contact after you've made some progress in your mission."</message>
 		<message id="horrible">"My God, that's horrible! Find out what happened and report back immediately!"</message>
 		<message id="astonishing">"What an astonishing story! You must save the ship's passengers from this malevolent force before it can escape again. It will be two years before we can have another ship in your vicinity! Report back when you're done!"</message>
-		<message id="congratulations">"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!"&#10;&#10;Smiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...</message>
+		<message id="congratulations1">"Congratulations! You've succeeded admirably! The new crew will arrive in two years. Come on home!"</message>
+		<message id="congratulations2">Smiling, you return to the cold sleep booth and sink into its depths. Your fear of the coming nightmares is offset by thought of the hero's welcome that awaits you when you return home. But even as the cold sleep begins, you see an image in the back of your mind of a malevolent evil force, ready to spring on you as soon as you surrender to the oncoming sleep...</message>
 
 		<!-- airlocks -->
 
@@ -454,7 +462,8 @@
 		<message id="innerclosedouteropen"> The inner door is closed and the outer door is open.</message>
 		<message id="innerclosedouterclosed"> The inner door is closed and the outer door is closed.</message>
 		<message id="spacednosuit">A violent gust of air pulls you from the airlock into the void of space. You are briefly aware of the Starflyer Ganymede receding into the distance, then you lose consciousness... forever.</message>
-		<message id="spacedwithsuit">A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.&#10;&#10;Your spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.</message>
+		<message id="spacedwithsuit1">A violent gust of air pulls you from the airlock into the void of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling until it is no more than a point of light among the stars.</message>
+		<message id="spacedwithsuit2">Your spacesuit has sufficient oxygen to sustain you for 72 hours adrift in space, cold comfort considering that your chances of rescue are effectively nil.</message>
 		<message id="finishdocking">Perhaps you should have finished docking with the Armstrong...</message>
 		<message id="pullforcewithyou">For what it's worth, the malevolent force is also pulled into the depths of space with you, so that it can no longer menace the passengers on board the Armstrong. You have succeeded in your mission, but have lost your life...</message>
 		<message id="airlockfumes">Dim light floods in from the airlock of the Armstrong &#x2013; and a cloud of noxious fumes floods in as well. You begin to choke and try to close the doors, but it's too late. You are losing consciousness. Your final thought is that you should have worn the spacesuit. It might have saved your life...</message>
@@ -476,8 +485,11 @@
 		<message id="cantprypanel">You attempt to pry the locked panel with the crowbar, but are unsuccessful.</message>
 		<message id="prypanel">You pry open the panel with the crowbar.</message>
 		<message id="panelopen"> The panel is open, revealing a computer video screen, a black button and a white button.</message>
-		<message id="emergencysystem">There is a rumble from a speaker set into the science officer's console, then a voice speaks:&#10;&#10;"This is the Armstrong's computerized emergency system. Since the crew of the Armstrong is now dead and all of the passengers remain in cold sleep, it is assumed that you are an outsider responding to the distress signal. Here are the details of the current emergency situation:&#10;&#10;"An invisible, malevolent force has entered the Armstrong during a routine EVA. All crew members are deceased. Over the course of ten years, I have maneuvered the invading entity into the auxiliary storage area, behind the main storage room, where it is now imprisoned, though perhaps not for long. If you wish me to unlock the door to this room, please acknowledge immediately!"</message>
-		<message id="storageunlocked">The emergency computer announces:&#10;&#10;"Door to the auxiliary storage room is now unlocked."</message>
+		<message id="emergencysystem1">There is a rumble from a speaker set into the science officer's console, then a voice speaks:</message>
+		<message id="emergencysystem2">"This is the Armstrong's computerized emergency system. Since the crew of the Armstrong is now dead and all of the passengers remain in cold sleep, it is assumed that you are an outsider responding to the distress signal. Here are the details of the current emergency situation:</message>
+		<message id="emergencysystem3">"An invisible, malevolent force has entered the Armstrong during a routine EVA. All crew members are deceased. Over the course of ten years, I have maneuvered the invading entity into the auxiliary storage area, behind the main storage room, where it is now imprisoned, though perhaps not for long. If you wish me to unlock the door to this room, please acknowledge immediately!"</message>
+		<message id="storageunlocked1">The emergency computer announces:</message>
+		<message id="storageunlocked2">"Door to the auxiliary storage room is now unlocked."</message>
 		<message id="opendooraft"> An open door is aft.</message>
 		<message id="closeddooraft"> A closed door is aft.</message>
 		<message id="itsopen">Okay. It's open.</message>
@@ -512,14 +524,13 @@
 		<!-- various -->
 
 		<message id="nosleep">You don't really want to do that. If you re-enter the suspended animation booth and revert to cold sleep, the ship will automatically return to its home port. Your mission will be a failure.</message>
-		<message id="skeletons">You step cautiously over a pair of skeletons that have fallen together in the middle of the hallway.&#10;&#10;</message>
+		<message id="skeletons">You step cautiously over a pair of skeletons that have fallen together in the middle of the hallway.</message>
 		<message id="vaultlarge">You don't really want to go that way. The passenger vault is so large that you could wander in it for days, to no particular avail.</message>
 		<message id="electroniclock">The door is locked electronically and can only be unlocked by order of the ship's computer system.</message>
-		<message id="debris">The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members.</message>
-		<message id="dropsuit"> Unfortunately, you will need to drop your bulky space suit before you can squeeze through the debris.</message>
-		<message id="squeeze"> You are barely able to squeeze through the debris.&#10;&#10;</message>
+		<message id="dropsuit">The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members. Unfortunately, you will need to drop your bulky space suit before you can squeeze through the debris.</message>
+		<message id="squeeze">The hall ahead of you is crammed with debris and the skeletal remains of the Armstrong's crew members. You are barely able to squeeze through the debris.</message>
 		<message id="blockedfurniture">There is a large item of plastic furniture blocking your descent. Below the plastic, you can just make out the skeletal remains of one of the crew members, who had apparently placed the furniture here in an unsuccessful attempt to ward off an attacker.</message>
-		<message id="descend">You descend into the shaft, picking your way past the shattered remains of the piece of plastic furniture and the skeleton that was holding it in place.&#10;&#10;</message>
+		<message id="descend">You descend into the shaft, picking your way past the shattered remains of the piece of plastic furniture and the skeleton that was holding it in place.</message>
 		<message id="airispure">You hear a hissing sound from the ventilation system. After a few moments the sign on the control panel indicates that the air is pure enough to breathe.</message>
 		<message id="signnotflashing">The sign is no longer flashing.</message>
 		<message id="takemagnet">With a bone-wrenching tug, you pull the magnet loose from the metal bulkhead where it had attached itself.</message>
@@ -527,7 +538,7 @@
 		<message id="feelslikemagnet">It feels like a magnet.</message>
 		<message id="clingstofingers">It clings to the metallic fingers of your spacesuit glove.</message>
 		<message id="immobilized">The fingers of your spacesuit attach themselves tightly to the magnet. Since you are *in* the spacesuit, you are temporarily immobilized.</message>
-		<message id="pullfreeofmagnet">First, you tug yourself free of the bar magnet...&#10;&#10;</message>
+		<message id="pullfreeofmagnet">First, you tug yourself free of the bar magnet...</message>
 
 		<!-- game-specific defaults -->
 
@@ -545,15 +556,15 @@
 		<!-- engine defaults -->
 
 		<message id="saved">Saved game.</message>
-		<message id="loadedsave">Loaded save game.&#10;&#10;</message>
+		<message id="loadedsave">Loaded save game.</message>
 		<message id="nosave">No save game to load.</message>
 		<message id="cantverb">You can't %1 that.</message>
 		<message id="nothinghappens">Nothing happens.</message>
 		<message id="carrying">You are carrying:</message>
-		<message id="invitem">&#10;%NOUN.</message>
-		<message id="invitemworn">&#10;%NOUN (being worn).</message>
-		<message id="invitemcontains">&#10;&#09;The %NOUN contains:</message>
-		<message id="invitemcontained">&#10;&#09;&#09;%NOUN.</message>
+		<message id="invitem">%NOUN.</message>
+		<message id="invitemworn">%NOUN (being worn).</message>
+		<message id="invitemcontains">&#09;The %NOUN contains:</message>
+		<message id="invitemcontained">&#09;&#09;%NOUN.</message>
 		<message id="taken">Taken.</message>
 		<message id="dropped">Dropped.</message>
 		<message id="donthave">You don't have it.</message>
@@ -576,8 +587,10 @@
 			<cond>
 				<if>start</if>
 				<action>message intro1</action>
-				<action>pause</action>
 				<action>message intro2</action>
+				<action>message intro3</action>
+				<action>pause</action>
+				<action>message intro4</action>
 				<action>look</action>
 				<done />
 			</cond>
@@ -602,7 +615,10 @@
 				<action>removeroomnote pilot lightflashing</action>
 				<action>removenounnote console consolelightflashing</action>
 				<action>setnoundesc light lightnotflashing</action>
-				<action>message bluebutton</action>
+				<action>message bluebutton1</action>
+				<action>message bluebutton2</action>
+				<action>message bluebutton3</action>
+				<action>message bluebutton4</action>
 				<done />
 			</cond>
 			<cond>
@@ -618,7 +634,8 @@
 				<cond>
 					<if>var blue 1,var rendez 0</if>
 					<action>setvar ack 2</action>
-					<action>message distress</action>
+					<action>message distress1</action>
+					<action>message distress2</action>
 					<done />
 				</cond>
 				<action>message announces</action>
@@ -630,7 +647,8 @@
 				<action>setvar ack 0</action>
 				<action>setvar rendez 1</action>
 				<action>message announces</action>
-				<action>message rendezvous</action>
+				<action>message rendezvous1</action>
+				<action>message rendezvous2</action>
 				<done />
 			</cond>
 			<cond>
@@ -670,7 +688,8 @@
 				</cond>
 				<cond>
 					<if>var tachyon 3</if>
-					<action>message congratulations</action>
+					<action>message congratulations1</action>
+					<action>message congratulations2</action>
 					<gameover />
 				</cond>
 				<done />
@@ -698,14 +717,17 @@
 				<if>input push black,room e_bridge,var storage 0</if>
 				<action>setvar ack 2</action>
 				<action>setvar tachyon 2</action>
-				<action>message emergencysystem</action>
+				<action>message emergencysystem1</action>
+				<action>message emergencysystem2</action>
+				<action>message emergencysystem3</action>
 				<done />
 			</cond>
 			<cond>
 				<if>input push white,room e_bridge,var ack 1</if>
 				<action>setvar ack 0</action>
 				<action>setvar storage 1</action>
-				<action>message storageunlocked</action>
+				<action>message storageunlocked1</action>
+				<action>message storageunlocked2</action>
 				<done />
 			</cond>
 
@@ -789,7 +811,8 @@
 						</cond>
 						<cond>
 							<if>worn spacesuit</if>
-							<action>message spacedwithsuit</action>
+							<action>message spacedwithsuit1</action>
+							<action>message spacedwithsuit2</action>
 						</cond>
 						<cond>
 							<if>nounloc force g_airlock</if>
@@ -1033,7 +1056,6 @@
 
 			<cond>
 				<if>input go north,room out_bridge</if>
-				<action>message debris</action>
 				<cond>
 					<if>ininv spacesuit</if>
 					<action>message dropsuit</action>

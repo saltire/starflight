@@ -16,7 +16,6 @@ KVSessionExtension(store, app)
 
 
 def do_turn(input):
-    print 'do_turn'
     if session['queue']:
         input = ''
         status, output = session['queue']
@@ -34,7 +33,6 @@ def do_turn(input):
     
     
 def init_adventure():
-    print 'init_adv'
     g.adv = Adventure('games/starflight.json')
     session['history'] = []
     session['queue'] = None
@@ -48,13 +46,11 @@ def before_first_req():
     
 @app.route('/')
 def index():
-    print 'index'
     return render_template('game.html', title='Starflight', history=session['history'])
 
 
 @app.route('/command', methods=['post'])
 def do_command():
-    print 'do_command'
     g.adv = Adventure('games/starflight.json', session['state'])
     do_turn(request.form.get('command'))
     return redirect(url_for('index'))
@@ -62,7 +58,6 @@ def do_command():
 
 @app.route('/fetch', methods=['post'])
 def do_ajax_command():
-    print 'do_ajax_command'
     g.adv = Adventure('games/starflight.json', session['state'])
     do_turn(request.form.get('command'))    
     input, output = session['history'][-1]
