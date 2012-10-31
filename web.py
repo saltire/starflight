@@ -17,8 +17,8 @@ KVSessionExtension(store, app)
 
 def do_turn(input):
     print 'do_turn'
-    
     if session['queue']:
+        input = ''
         status, output = session['queue']
         session['queue'] = None
     else:
@@ -29,17 +29,21 @@ def do_turn(input):
         i = output.index('PAUSE') + 1
         session['queue'] = (status, output[i:])
         output = output[:i]
-
+        
     session['history'].append((input, output))
     
     
-@app.before_first_request
 def init_adventure():
     print 'init_adv'
     g.adv = Adventure('games/starflight.json')
     session['history'] = []
     session['queue'] = None
     do_turn('')
+    
+    
+@app.before_first_request
+def before_first_req():
+    init_adventure()
     
     
 @app.route('/')
@@ -60,8 +64,15 @@ def do_command():
 def do_ajax_command():
     print 'do_ajax_command'
     g.adv = Adventure('games/starflight.json', session['state'])
-    output = do_turn(request.form.get('command'))
-    return jsonify({'output': output})
+    do_turn(request.form.get('command'))    
+    input, output = session['history'][-1]
+    return jsonify({'input': input, 'output': output})
+
+
+@app.route('/newgame', methods=['get','post'])
+def new_game():
+    init_adventure()
+    return redirect(url_for('index'))
 
 
 

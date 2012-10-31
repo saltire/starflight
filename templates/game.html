@@ -9,7 +9,9 @@
 		<div class='main'>
 			<div class='dialogue'>
 {% for input, output in history %}
+	{% if input %}
 				<p class='input'>{{ input }}</p>
+	{% endif %}
 	{% for msg in output %}
 		{% if msg == 'PAUSE' %}
 				<p class='pause'>Press Enter to continue...</p>
@@ -22,6 +24,9 @@
 			<form class='command' method='post' action='command'>
 				&gt; <input type='text' name='command' />
 				<button type='submit'>&crarr;</button>
+			</form>
+			<form class='newgame' method='post' action='newgame'>
+				<button type='submit'>New game</button>
 			</form>
 		</div>
 	</body>

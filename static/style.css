@@ -2,14 +2,19 @@ body { background: #808073; color: #f1f1da; font-size: 18px;
 	font-family: calibri, helvetica, arial, sans-serif; }
 	
 .main { width: 666px; margin: auto; }
-.dialogue { height: 500px; margin: 20px 0 10px; padding: 10px; border: 1px solid #b3b3a1;
+.dialogue { height: 500px; margin: 20px 0 15px; padding: 10px; border: 1px solid #b3b3a1;
 	overflow: auto; }
 	
-.input { margin: 20px; text-decoration: underline; }
-.pause { font-style: italic; }
-.output { margin: 10px 0; color: #ffffff; }
+.input { margin: 20px; color: #ffffff; }
+.pause { margin: 20px; font-style: italic; color: #ffffff; }
+.output { margin: 10px 0; }
 
-form { text-align: center; }
-input, button { border: 0; background: transparent; color: #f1f1da; font-size: 20px; }
-input { width: 400px; border: solid #f1f1da; border-width: 0 0 1px 0;  }
+form { display: inline-block; }
+input, button { margin: 0; border: 0; background: transparent; color: #f1f1da;
+	font-size: 20px; line-height: 22px; }
+input { width: 400px; border: 0; border-bottom: 1px solid #f1f1da; }
 input:focus { outline: none; }
+
+.command { float: left; }
+.newgame { float: right; }
+.newgame button { border: 1px solid #b3b3a1; font-size: 14px; }
