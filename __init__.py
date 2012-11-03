@@ -1,8 +1,10 @@
+import os
+
 from flask import Flask
 from flask import g, jsonify, redirect, render_template, request, session, url_for
 
 from simplekv.memory import DictStore
-from flaskext.kvsession import KVSessionExtension
+from flask.ext.kvsession import KVSessionExtension
 
 from advengine.adventure import Adventure
 
@@ -13,6 +15,9 @@ app = Flask(__name__)
 app.secret_key = '\xaau!uhb\xec\x87\xcd\x94\x1d\xbf\x8eF/\x92|\x87\xcbko\xf1\xda3'
 
 KVSessionExtension(store, app)
+
+game = 'starflight'
+gamepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'games/{0}.json'.format(game))
 
 
 def do_turn(input):
@@ -33,7 +38,7 @@ def do_turn(input):
     
     
 def init_adventure():
-    g.adv = Adventure('games/starflight.json')
+    g.adv = Adventure(gamepath)
     session['history'] = []
     session['queue'] = None
     do_turn('')
@@ -51,14 +56,14 @@ def index():
 
 @app.route('/command', methods=['post'])
 def do_command():
-    g.adv = Adventure('games/starflight.json', session['state'])
+    g.adv = Adventure(gamepath, session['state'])
     do_turn(request.form.get('command'))
     return redirect(url_for('index'))
 
 
 @app.route('/fetch', methods=['post'])
 def do_ajax_command():
-    g.adv = Adventure('games/starflight.json', session['state'])
+    g.adv = Adventure(gamepath, session['state'])
     do_turn(request.form.get('command'))    
     input, output = session['history'][-1]
     return jsonify({'input': input, 'output': output})
