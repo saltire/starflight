@@ -34,6 +34,10 @@ class Tests:
         return any(self.match_word(direction, rexit) for rexit in self.game.get_current_room().get_exits())
     
     
+    def t_carrying(self):
+        return bool(self.game.get_nouns_by_loc('INVENTORY', 'WORN'))
+    
+    
     def t_nounloc(self, nword, rword):
         return any(noun for noun in self.match_nouns(nword)
                    for rid in rword.split('|') if rid in noun.get_locs())

@@ -1304,7 +1304,12 @@
 			</cond>
 			<cond>
 				<if>input inventory</if>
-				<action>inv</action>
+				<cond>
+					<if>carrying</if>
+					<action>inv carrying invitem invitemworn</action>
+					<done />
+				</cond>
+				<action>message carryingnothing</action>
 				<done />
 			</cond>
 			<cond>

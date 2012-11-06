@@ -1286,7 +1286,14 @@
             }, 
             {
                 "if": ["input inventory"], 
-                "then": ["inv"], 
+                "then": [
+                    {
+                        "if": ["carrying"], 
+                        "then": ["inv carrying invitem invitemworn"], 
+                        "done": true
+                    }, 
+                    "message carryingnothing"
+                ], 
                 "done": true
             }, 
             {

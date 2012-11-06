@@ -19,18 +19,6 @@ class Actions:
                 self.show_noun_contents(noun)
                 
                 
-    def a_inv(self):
-        inv = self.game.get_nouns_by_loc('INVENTORY') | self.game.get_nouns_by_loc('WORN')
-        if inv:
-            self.queue_message('carrying')
-            for noun in inv:
-                self.queue_message('invitemworn' if 'WORN' in noun.get_locs() else 'invitem',
-                                   '%NOUN', noun.get_name())
-                self.show_noun_contents(noun)
-        else:
-            self.queue_message('carryingnothing')
-    
-    
     def a_move(self, dir):
         dir = self.sub_input_words(dir)
         try:
@@ -43,6 +31,16 @@ class Actions:
             self.queue_message('cantgo')
             
             
+    def a_inv(self, intro_msg, carry_msg, wear_msg):
+        inv = self.game.get_nouns_by_loc('INVENTORY') | self.game.get_nouns_by_loc('WORN')
+        if inv:
+            self.queue_message(intro_msg)
+            for noun in inv:
+                self.queue_message(wear_msg if 'WORN' in noun.get_locs() else carry_msg,
+                                   '%NOUN', noun.get_name())
+                self.show_noun_contents(noun)
+    
+    
     def a_examine(self, nword):
         msgs = []
         for noun in self.match_nouns(nword) & self.game.get_nouns_present():
