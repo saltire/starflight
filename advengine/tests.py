@@ -68,6 +68,10 @@ class Tests:
         return any(noun.get_locs() for noun in self.match_nouns(nword))
     
     
+    def t_movable(self, nword):
+        return any(noun.is_movable() for noun in self.match_nouns(nword))
+    
+    
     def t_wearable(self, nword):
         return any(noun.is_wearable() for noun in self.match_nouns(nword))
     

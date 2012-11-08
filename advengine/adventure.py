@@ -179,6 +179,7 @@ class Adventure(tests.Tests, actions.Actions):
     
     def match_word(self, inputword, word):
         """Check if an input word is a synonym of another word."""
+        inputword = self.sub_input_words(inputword)
         return word == '*' or any(inputword in self.synonyms.get(word, []) for word in word.split('|'))
     
     

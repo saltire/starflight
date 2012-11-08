@@ -1085,7 +1085,7 @@
             }, 
             {
                 "if": ["input take magnet", "inroom magnet"], 
-                "then": ["sendnoun magnet INVENTORY", "message takemagnet"], 
+                "then": ["sendtoinv magnet", "message takemagnet"], 
                 "done": true
             }, 
             {
@@ -1218,33 +1218,6 @@
                 "replace": "pry %3"
             }, 
             {
-                "if": ["input wear *"], 
-                "then": ["wear %2"], 
-                "done": true
-            }, 
-            {
-                "if": ["input remove *", "wearable %2"], 
-                "then": [
-                    {
-                        "if": ["worn %2"], 
-                        "then": ["sendnoun %2 INVENTORY", "message nolongerwearing"], 
-                        "done": true
-                    }, 
-                    "message notwearing"
-                ], 
-                "done": true
-            }, 
-            {
-                "if": ["input take|remove *", "contained %2", "present %2"], 
-                "then": ["sendnoun %2 INVENTORY", "message okay"], 
-                "done": true
-            }, 
-            {
-                "if": ["input remove *", "present %2", "!contained %2", "!worn %2"], 
-                "then": ["message fromwhat"], 
-                "done": true
-            }, 
-            {
                 "if": ["input push|open|close|unlock|cut|pry|remove *", "!present %2"], 
                 "then": ["message dontsee"], 
                 "done": true
@@ -1270,13 +1243,83 @@
                 "done": true
             }, 
             {
-                "if": ["input take"], 
-                "then": ["take %2"], 
+                "if": ["input take *"], 
+                "then": [
+                    {
+                        "if": ["!present %2"], 
+                        "then": ["message dontsee"], 
+                        "done": true
+                    }, 
+                    {
+                        "if": ["!movable %2"], 
+                        "then": ["message cantverb"], 
+                        "done": true
+                    }, 
+                    {
+                        "if": ["ininv %2"], 
+                        "then": ["message alreadycarrying"], 
+                        "done": true
+                    }, 
+                    "sendtoinv %2", 
+                    "message taken"
+                ], 
                 "done": true
             }, 
             {
-                "if": ["input drop"], 
-                "then": ["drop %2"], 
+                "if": ["input wear *"], 
+                "then": [
+                    {
+                        "if": ["!present %2"], 
+                        "then": ["message dontsee"], 
+                        "done": true
+                    }, 
+                    {
+                        "if": ["!wearable %2"], 
+                        "then": ["message cantverb"], 
+                        "done": true
+                    }, 
+                    {
+                        "if": ["worn %2"], 
+                        "then": ["message alreadywearing"], 
+                        "done": true
+                    }, 
+                    "wear %2", 
+                    "message wearing"
+                ], 
+                "done": true
+            }, 
+            {
+                "if": ["input drop *"], 
+                "then": [
+                    {
+                        "if": ["ininv %2"], 
+                        "then": ["sendtoroom %2", "message dropped"], 
+                        "done": true
+                    }, 
+                    "message donthave"
+                ], 
+                "done": true
+            }, 
+            {
+                "if": ["input remove *", "wearable %2"], 
+                "then": [
+                    {
+                        "if": ["worn %2"], 
+                        "then": ["sendtoinv %2", "message nolongerwearing"], 
+                        "done": true
+                    }, 
+                    "message notwearing"
+                ], 
+                "done": true
+            }, 
+            {
+                "if": ["input take|remove *", "contained %2", "present %2"], 
+                "then": ["sendtoinv %2", "message okay"], 
+                "done": true
+            }, 
+            {
+                "if": ["input remove *", "present %2", "!contained %2", "!worn %2"], 
+                "then": ["message fromwhat"], 
                 "done": true
             }, 
             {
@@ -1303,7 +1346,14 @@
             }, 
             {
                 "if": ["input go north|south|east|west|up|down"], 
-                "then": ["move %2"], 
+                "then": [
+                    {
+                        "if": ["exitexists %2"], 
+                        "then": ["move %2"], 
+                        "done": true
+                    }, 
+                    "message cantgo"
+                ], 
                 "done": true
             }, 
             {

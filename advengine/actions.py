@@ -19,16 +19,16 @@ class Actions:
                 self.show_noun_contents(noun)
                 
                 
-    def a_move(self, dir):
-        dir = self.sub_input_words(dir)
+    def a_move(self, movedir, error_msg=None):
         try:
-            dest = next(dest for exit, dest in self.game.get_current_room().get_exits().items()
-                        if self.match_word(dir, exit))
+            dest = next(dest for exitdir, dest in self.game.get_current_room().get_exits().items()
+                        if self.match_word(movedir, exitdir))
             self.game.go_to_room(dest)
             self.a_look()
             
         except StopIteration:
-            self.queue_message('cantgo')
+            if error_msg is not None:
+                self.queue_message(error_msg)
             
             
     def a_inv(self, intro_msg, carry_msg, wear_msg):
@@ -54,52 +54,6 @@ class Actions:
             self.queue_message('nothingunusual')
             
             
-    def a_take(self, nword):
-        presentnouns = self.match_nouns(nword) & self.game.get_nouns_present()
-        if not presentnouns:
-            self.queue_message('dontsee')
-        else:
-            movables = set(noun for noun in presentnouns if noun.is_movable())
-            if not movables:
-                self.queue_message('cantverb')
-            else:
-                notcarried = set(noun for noun in movables if 'INVENTORY' not in noun.get_locs())
-                if not notcarried:
-                    self.queue_message('alreadycarrying')
-                else:
-                    for noun in notcarried:
-                        noun.set_loc('INVENTORY')
-                    self.queue_message('taken')
-                    
-                    
-    def a_wear(self, nword):
-        presentnouns = self.match_nouns(nword) & self.game.get_nouns_present()
-        if not presentnouns:
-            self.queue_message('dontsee')
-        else:
-            wearables = set(noun for noun in presentnouns if noun.is_wearable())
-            if not wearables:
-                self.queue_message('cantverb')
-            else:
-                notworn = set(noun for noun in wearables if 'WORN' not in noun.get_locs())
-                if not notworn:
-                    self.queue_message('alreadywearing')
-                else:
-                    for noun in notworn:
-                        noun.set_loc('WORN')
-                    self.queue_message('wearing')
-                
-            
-    def a_drop(self, nword):
-        carried = self.match_nouns(nword) & self.game.get_nouns_by_loc('INVENTORY', 'WORN')
-        if carried:
-            for noun in carried:
-                noun.set_loc(self.game.get_current_room_id())
-            self.queue_message('dropped')
-        else:
-            self.queue_message('donthave')        
-            
-            
     def a_destroy(self, nword):
         for noun in self.match_nouns(nword):
             noun.clear_locs()
@@ -114,6 +68,14 @@ class Actions:
         self.a_sendnoun(nword, self.game.get_current_room_id())
         
         
+    def a_sendtoinv(self, nword):
+        self.a_sendnoun(nword, 'INVENTORY')
+        
+        
+    def a_wear(self, nword):
+        self.a_sendnoun(nword, 'WORN')
+        
+        
     def a_sendtonounloc(self, nword1, nword2):
         locs = set.union(*(noun.get_locs() for noun in self.match_nouns(nword2)))
         for noun in self.match_nouns(nword1):
@@ -122,8 +84,8 @@ class Actions:
             
     def a_sendtonoun(self, nword1, nword2):
         self.a_sendnoun(nword1, nword2)
-            
-            
+        
+        
     def a_swapnouns(self, nword1, nword2):
         nouns1 = self.match_nouns(nword1)
         nouns2 = self.match_nouns(nword2)

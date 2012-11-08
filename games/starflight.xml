@@ -1094,7 +1094,7 @@
 
 			<cond>
 				<if>input take magnet,inroom magnet</if>
-				<action>sendnoun magnet INVENTORY</action>
+				<action>sendtoinv magnet</action>
 				<action>message takemagnet</action>
 				<done />
 			</cond>
@@ -1232,34 +1232,6 @@
 		<!-- default responses -->
 
 			<cond>
-				<if>input wear *</if>
-				<action>wear %2</action>
-				<done />
-			</cond>
-			<cond>
-				<if>input remove *,wearable %2</if>
-				<cond>
-					<if>worn %2</if>
-					<action>sendnoun %2 INVENTORY</action>
-					<action>message nolongerwearing</action>
-					<done />
-				</cond>
-				<action>message notwearing</action>
-				<done />
-			</cond>
-			<cond>
-				<if>input take|remove *,contained %2,present %2</if>
-				<action>sendnoun %2 INVENTORY</action>
-				<action>message okay</action>
-				<done />
-			</cond>
-			<cond>
-				<if>input remove *,present %2,!contained %2,!worn %2</if>
-				<action>message fromwhat</action>
-				<done />
-			</cond>
-
-			<cond>
 				<if>input push|open|close|unlock|cut|pry|remove *,!present %2</if>
 				<action>message dontsee</action>
 				<done />
@@ -1288,13 +1260,78 @@
 				<done />
 			</cond>
 			<cond>
-				<if>input take</if>
-				<action>take %2</action>
+				<if>input take *</if>
+				<cond>
+					<if>!present %2</if>
+					<action>message dontsee</action>
+					<done />
+				</cond>
+				<cond>
+					<if>!movable %2</if>
+					<action>message cantverb</action>
+					<done />
+				</cond>
+				<cond>
+					<if>ininv %2</if>
+					<action>message alreadycarrying</action>
+					<done />
+				</cond>
+				<action>sendtoinv %2</action>
+				<action>message taken</action>
 				<done />
 			</cond>
 			<cond>
-				<if>input drop</if>
-				<action>drop %2</action>
+				<if>input wear *</if>
+				<cond>
+					<if>!present %2</if>
+					<action>message dontsee</action>
+					<done />
+				</cond>
+				<cond>
+					<if>!wearable %2</if>
+					<action>message cantverb</action>
+					<done />
+				</cond>
+				<cond>
+					<if>worn %2</if>
+					<action>message alreadywearing</action>
+					<done />
+				</cond>
+				<action>wear %2</action>
+				<action>message wearing</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input drop *</if>
+				<cond>
+					<if>ininv %2</if>
+					<action>sendtoroom %2</action>
+					<action>message dropped</action>
+					<done />
+				</cond>
+				<action>message donthave</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input remove *,wearable %2</if>
+				<cond>
+					<if>worn %2</if>
+					<action>sendtoinv %2</action>
+					<action>message nolongerwearing</action>
+					<done />
+				</cond>
+				<action>message notwearing</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input take|remove *,contained %2,present %2</if>
+				<action>sendtoinv %2</action>
+				<action>message okay</action>
+				<done />
+			</cond>
+			<cond>
+				<if>input remove *,present %2,!contained %2,!worn %2</if>
+				<action>message fromwhat</action>
 				<done />
 			</cond>
 			<cond>
@@ -1319,7 +1356,12 @@
 			</cond>
 			<cond>
 				<if>input go north|south|east|west|up|down</if>
-				<action>move %2</action>
+				<cond>
+					<if>exitexists %2</if>
+					<action>move %2</action>
+					<done />
+				</cond>
+				<action>message cantgo</action>
 				<done />
 			</cond>
 			<cond>
