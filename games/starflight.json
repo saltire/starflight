@@ -613,7 +613,7 @@
         [
             {
                 "if": ["start"], 
-                "then": ["message intro1", "message intro2", "message intro3", "pause", "message intro4", "look"], 
+                "then": ["message intro1", "message intro2", "message intro3", "pause", "message intro4", "showdesc", "shownotes", "showcontents"], 
                 "done": true
             }, 
             {
@@ -1341,7 +1341,7 @@
             }, 
             {
                 "if": ["input look"], 
-                "then": ["look"], 
+                "then": ["showdesc", "shownotes", "showcontents"], 
                 "done": true
             }, 
             {
@@ -1349,7 +1349,7 @@
                 "then": [
                     {
                         "if": ["exitexists %2"], 
-                        "then": ["move %2"], 
+                        "then": ["move %2", "showdesc", "shownotes", "showcontents"], 
                         "done": true
                     }, 
                     "message cantgo"

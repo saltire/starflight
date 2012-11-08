@@ -164,10 +164,13 @@ class Adventure(tests.Tests, actions.Actions):
             self.output.append(self.sub_input_words(message))
             
             
-    def queue_message(self, mid, search='', replace=''):
+    def queue_message(self, mid, sub={}):
         """Get a message from the list and queue it for output,
-        optionally replacing a substring."""
-        self.queue_raw_output(self.messages[mid].replace(search, replace))
+        optionally replacing one or more substrings passed in a dict."""
+        message = self.messages[mid]
+        for search, replace in sub.items():
+            message = message.replace(search, replace)
+        self.queue_raw_output(message)
     
     
     def sub_input_words(self, phrase):

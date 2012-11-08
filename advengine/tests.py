@@ -30,6 +30,10 @@ class Tests:
         return any(self.game.get_current_room_id() == rid for rid in rword.split('|'))
     
     
+    def t_visited(self, rword):
+        return any(self.game.get_room(rid).visited() for rid in rword.split('|'))
+    
+    
     def t_exitexists(self, direction):
         return any(self.match_word(direction, rexit) for rexit in self.game.get_current_room().get_exits())
     

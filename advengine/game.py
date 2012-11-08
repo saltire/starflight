@@ -11,6 +11,7 @@ class Game:
     
             self.turn = 0
             self.current_room = next(rid for rid, room in self.rooms.items() if room.is_start())
+            self.rooms[self.current_room].visit()
         else:
             for key in ('vars', 'turn', 'current_room'):
                 setattr(self, key, state[key])
@@ -36,7 +37,7 @@ class Game:
         
         
     def get_var(self, vid):
-        return self.vars[vid]
+        return self.vars.get(vid)
     
     
     def set_var(self, vid, value):
@@ -44,10 +45,11 @@ class Game:
         
         
     def adjust_var(self, vid, value):
-        if value[0] == '+':
-            self.vars[vid] += int(value[1:])
-        elif value[0] == '-':
-            self.vars[vid] -= int(value[1:])
+        if vid in self.vars:
+            if value[0] == '+':
+                self.vars[vid] += int(value[1:])
+            elif value[0] == '-':
+                self.vars[vid] -= int(value[1:])
     
     
     def get_current_room_id(self):
@@ -55,7 +57,9 @@ class Game:
     
     
     def go_to_room(self, rid):
-        self.current_room = rid
+        if rid in self.rooms:
+            self.current_room = rid
+            self.rooms[rid].visit()
     
     
     def get_current_room(self):
@@ -63,11 +67,11 @@ class Game:
     
     
     def get_room(self, rid):
-        return self.rooms[rid]
+        return self.rooms.get(rid)
     
     
     def get_noun(self, nid):
-        return self.nouns[nid]
+        return self.nouns.get(nid)
     
     
     def get_noun_list(self):

@@ -7,13 +7,14 @@ class Room:
             self.exits = self.data.get('exits', {})
             self.desc = None
             self.notes = self.data.get('notes', [])
+            self.visited = False
         else:
             for key, value in rstate.items():
                 setattr(self, key, value)
         
         
     def export_state(self):
-        return {key: getattr(self, key) for key in ('exits', 'desc', 'notes')}
+        return {key: getattr(self, key) for key in ('exits', 'desc', 'notes', 'visited')}
          
     
     def get_id(self):
@@ -22,25 +23,33 @@ class Room:
             
     def is_start(self):
         return bool(self.data.get('start'))
+    
+    
+    def visit(self):
+        self.visited = True
+        
+        
+    def visited(self):
+        return self.visited
             
             
     def get_exits(self):
         return self.exits
     
     
-    def set_exit(self, dir, rid):
-        self.exits[dir] = rid
+    def set_exit(self, exitdir, rid):
+        self.exits[exitdir] = rid
         
         
-    def remove_exit_dir(self, dir):
-        if dir in self.exits:
-            del self.exits[dir]
+    def remove_exit_dir(self, exitdir):
+        if exitdir in self.exits:
+            del self.exits[exitdir]
             
             
     def remove_exit_dest(self, rid):
-        for dir, dest in self.exits.items():
+        for exitdir, dest in self.exits.items():
             if dest == rid:
-                del self.exits[dir]
+                del self.exits[exitdir]
         
         
     def clear_exits(self):

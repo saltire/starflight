@@ -7,28 +7,40 @@ class Actions:
         self.queue_raw_output('PAUSE')
     
     
-    def a_look(self):
-        room = self.game.get_current_room()
-        self.queue_raw_output(room.get_description())
-        for mid in room.get_notes():
+    def a_showdesc(self, oid=None):
+        obj = (self.game.get_current_room() if oid is None else 
+            self.game.get_noun(oid) or self.game.get_room(oid))
+        self.queue_raw_output(obj.get_description())
+        
+        
+    def a_shownotes(self, oid=None):
+        obj = (self.game.get_current_room() if oid is None else 
+            self.game.get_noun(oid) or self.game.get_room(oid))
+        for mid in obj.get_notes():
             self.queue_message(mid)
-            
-        for noun in self.game.get_nouns_by_loc(self.game.get_current_room_id()):
+
+
+    def a_showcontents(self, oid=None, by_name=False):
+        obj = (self.game.get_current_room() if oid is None else 
+            self.game.get_noun(oid) or self.game.get_room(oid))
+        for noun in self.game.get_nouns_by_loc(obj.get_id()):
             if noun.is_visible():
-                self.queue_raw_output(noun.get_short_desc())
+                self.queue_raw_output(noun.get_name() if by_name else noun.get_short_desc())
                 self.show_noun_contents(noun)
                 
                 
-    def a_move(self, movedir, error_msg=None):
+    def a_listcontents(self, oid=None):
+        self.a_showcontents(oid, True)
+                
+                
+    def a_move(self, movedir):
         try:
             dest = next(dest for exitdir, dest in self.game.get_current_room().get_exits().items()
                         if self.match_word(movedir, exitdir))
             self.game.go_to_room(dest)
             self.a_look()
-            
-        except StopIteration:
-            if error_msg is not None:
-                self.queue_message(error_msg)
+        except:
+            pass
             
             
     def a_inv(self, intro_msg, carry_msg, wear_msg):
@@ -37,7 +49,7 @@ class Actions:
             self.queue_message(intro_msg)
             for noun in inv:
                 self.queue_message(wear_msg if 'WORN' in noun.get_locs() else carry_msg,
-                                   '%NOUN', noun.get_name())
+                                   {'%NOUN': noun.get_name()})
                 self.show_noun_contents(noun)
     
     

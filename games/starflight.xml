@@ -591,7 +591,9 @@
 				<action>message intro3</action>
 				<action>pause</action>
 				<action>message intro4</action>
-				<action>look</action>
+				<action>showdesc</action>
+				<action>shownotes</action>
+				<action>showcontents</action>
 				<done />
 			</cond>
 
@@ -1351,7 +1353,9 @@
 			</cond>
 			<cond>
 				<if>input look</if>
-				<action>look</action>
+				<action>showdesc</action>
+				<action>shownotes</action>
+				<action>showcontents</action>
 				<done />
 			</cond>
 			<cond>
@@ -1359,6 +1363,9 @@
 				<cond>
 					<if>exitexists %2</if>
 					<action>move %2</action>
+					<action>showdesc</action>
+					<action>shownotes</action>
+					<action>showcontents</action>
 					<done />
 				</cond>
 				<action>message cantgo</action>
