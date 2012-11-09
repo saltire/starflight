@@ -1,23 +1,31 @@
+import errno
 import os
 
 from flask import Flask
 from flask import g, jsonify, redirect, render_template, request, session, url_for
 
-from simplekv.memory import DictStore
+from simplekv.fs import FilesystemStore
 from flask.ext.kvsession import KVSessionExtension
 
 from advengine.adventure import Adventure
 
 
-store = DictStore()
-
 app = Flask(__name__)
 app.secret_key = '\xaau!uhb\xec\x87\xcd\x94\x1d\xbf\x8eF/\x92|\x87\xcbko\xf1\xda3'
 
+flask_dir = os.path.dirname(os.path.realpath(__file__))
+
+try:
+    os.makedirs(os.path.join(flask_dir, 'sessions'))
+except OSError as exception:
+    if exception.errno != errno.EEXIST:
+        raise
+        
+store = FilesystemStore(os.path.join(flask_dir, 'sessions'))
 KVSessionExtension(store, app)
 
 game = 'starflight'
-gamepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'games/{0}.json'.format(game))
+gamepath = os.path.join(flask_dir, 'games/{0}.json'.format(game))
 
 
 def do_turn(input):
