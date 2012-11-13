@@ -49,6 +49,7 @@ def init_adventure():
     session['history'] = []
     session['queue'] = None
     session['state'] = None
+    session.permanent = True
     g.adv = Adventure(gamepath)
     do_turn('')
     
