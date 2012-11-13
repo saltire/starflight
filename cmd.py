@@ -26,5 +26,3 @@ while True:
     print
     print '>',
     command = raw_input().strip()
-            
-            

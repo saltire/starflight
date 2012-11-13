@@ -762,7 +762,7 @@
 				<if>input examine inner,room storage|g_airlock,var g_inner 0</if>
 				<if>input examine inner,room trans|a_airlock,var a_inner 0</if>
 				<if>input examine outer,room a_airlock|g_airlock,var outer 0</if>
-				<action>examine</action>
+				<action>showdesc %2</action>
 				<action>message doorclosed</action>
 				<done />
 			</cond>
@@ -770,7 +770,7 @@
 				<if>input examine inner,room storage|g_airlock,var g_inner 1</if>
 				<if>input examine inner,room trans|a_airlock,var a_inner 1</if>
 				<if>input examine outer,room a_airlock|g_airlock,var outer 1</if>
-				<action>examine</action>
+				<action>showdesc %2</action>
 				<action>message dooropen</action>
 				<done />
 			</cond>
@@ -1150,12 +1150,12 @@
 			</cond>
 			<cond>
 				<if>input read terminal|sign</if>
-				<action>examine %2</action>
+				<action>showdesc %2</action>
 				<done />
 			</cond>
 			<cond>
 				<if>input touch controls,room c_bridge</if>
-				<action>examine %2</action>
+				<action>showdesc %2</action>
 				<done />
 			</cond>
 			<cond>
@@ -1338,7 +1338,14 @@
 			</cond>
 			<cond>
 				<if>input examine</if>
-				<action>examine %2</action>
+				<cond>
+					<if>present %2,hasdesc %2</if>
+					<if>present %2,hasnotes %2</if>
+					<action>showdesc %2</action>
+					<action>shownotes %2</action>
+					<done />
+				</cond>
+				<action>message nothingunusual</action>
 				<done />
 			</cond>
 			<cond>

@@ -762,7 +762,7 @@
                     ["input examine inner", "room trans|a_airlock", "var a_inner 0"], 
                     ["input examine outer", "room a_airlock|g_airlock", "var outer 0"]
                 ], 
-                "then": ["examine", "message doorclosed"], 
+                "then": ["showdesc %2", "message doorclosed"], 
                 "done": true
             }, 
             {
@@ -771,7 +771,7 @@
                     ["input examine inner", "room trans|a_airlock", "var a_inner 1"], 
                     ["input examine outer", "room a_airlock|g_airlock", "var outer 1"]
                 ], 
-                "then": ["examine", "message dooropen"], 
+                "then": ["showdesc %2", "message dooropen"], 
                 "done": true
             }, 
             {
@@ -1136,12 +1136,12 @@
             }, 
             {
                 "if": ["input read terminal|sign"], 
-                "then": ["examine %2"], 
+                "then": ["showdesc %2"], 
                 "done": true
             }, 
             {
                 "if": ["input touch controls", "room c_bridge"], 
-                "then": ["examine %2"], 
+                "then": ["showdesc %2"], 
                 "done": true
             }, 
             {
@@ -1324,7 +1324,17 @@
             }, 
             {
                 "if": ["input examine"], 
-                "then": ["examine %2"], 
+                "then": [
+                    {
+                        "if": [
+                            ["present %2", "hasdesc %2"], 
+                            ["present %2", "hasnotes %2"]
+                        ], 
+                        "then": ["showdesc %2", "shownotes %2"], 
+                        "done": true
+                    }, 
+                    "message nothingunusual"
+                ], 
                 "done": true
             }, 
             {

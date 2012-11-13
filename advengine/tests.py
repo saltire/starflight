@@ -80,6 +80,14 @@ class Tests:
         return any(noun.is_wearable() for noun in self.match_nouns(nword))
     
     
+    def t_hasdesc(self, nword):
+        return any(noun.get_description() for noun in self.match_nouns(nword))
+    
+    
+    def t_hasnotes(self, nword):
+        return any(noun.get_notes() for noun in self.match_nouns(nword))
+    
+    
     def t_random(self, percent):
         return random.random() * 100 < percent
     

@@ -194,8 +194,15 @@ class Adventure(tests.Tests, actions.Actions):
             return self.game.get_nouns_by_name(self.sub_input_words(inputword))
         else:
             return set(self.game.get_noun(nid) for nid in inputword.split(','))
-    
-    
+        
+        
+    def match_objects(self, inputword=None):
+        """Return a set containing either a single room (default the current room)
+        or a number of nouns matching the given word or id."""
+        return set([self.game.get_current_room()] if inputword is None else 
+                   self.match_nouns(inputword) or [self.game.get_room(inputword)])
+        
+        
     def show_noun_contents(self, container):
         """Queue for output a list of nouns contained within a noun."""
         contents = self.game.get_nouns_by_loc(container.get_id())

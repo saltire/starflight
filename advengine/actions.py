@@ -8,25 +8,22 @@ class Actions:
     
     
     def a_showdesc(self, oid=None):
-        obj = (self.game.get_current_room() if oid is None else 
-            self.game.get_noun(oid) or self.game.get_room(oid))
-        self.queue_raw_output(obj.get_description())
+        for obj in self.match_objects(oid):
+            self.queue_raw_output(obj.get_description())
         
         
     def a_shownotes(self, oid=None):
-        obj = (self.game.get_current_room() if oid is None else 
-            self.game.get_noun(oid) or self.game.get_room(oid))
-        for mid in obj.get_notes():
-            self.queue_message(mid)
+        for obj in self.match_objects(oid):
+            for mid in obj.get_notes():
+                self.queue_message(mid)
 
 
     def a_showcontents(self, oid=None, by_name=False):
-        obj = (self.game.get_current_room() if oid is None else 
-            self.game.get_noun(oid) or self.game.get_room(oid))
-        for noun in self.game.get_nouns_by_loc(obj.get_id()):
-            if noun.is_visible():
-                self.queue_raw_output(noun.get_name() if by_name else noun.get_short_desc())
-                self.show_noun_contents(noun)
+        for obj in self.match_objects(oid):
+            for noun in self.game.get_nouns_by_loc(obj.get_id()):
+                if noun.is_visible():
+                    self.queue_raw_output(noun.get_name() if by_name else noun.get_short_desc())
+                    self.show_noun_contents(noun)
                 
                 
     def a_listcontents(self, oid=None):
@@ -53,19 +50,6 @@ class Actions:
                 self.show_noun_contents(noun)
     
     
-    def a_examine(self, nword):
-        msgs = []
-        for noun in self.match_nouns(nword) & self.game.get_nouns_present():
-            if noun.get_description():
-                msgs.append(noun.get_description())
-            msgs.extend(self.messages[mid] for mid in noun.get_notes())
-        
-        if msgs:
-            self.queue_raw_output(msgs)
-        else:
-            self.queue_message('nothingunusual')
-            
-            
     def a_destroy(self, nword):
         for noun in self.match_nouns(nword):
             noun.clear_locs()
