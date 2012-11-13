@@ -1330,7 +1330,7 @@
                             ["present %2", "hasdesc %2"], 
                             ["present %2", "hasnotes %2"]
                         ], 
-                        "then": ["showdesc %2", "shownotes %2"], 
+                        "then": ["showdesc %2:present", "shownotes %2:present"], 
                         "done": true
                     }, 
                     "message nothingunusual"

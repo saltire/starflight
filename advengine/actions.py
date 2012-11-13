@@ -7,27 +7,27 @@ class Actions:
         self.queue_raw_output('PAUSE')
     
     
-    def a_showdesc(self, oid=None):
-        for obj in self.match_objects(oid):
+    def a_showdesc(self, oword=None):
+        for obj in self.match_objects(oword):
             self.queue_raw_output(obj.get_description())
         
         
-    def a_shownotes(self, oid=None):
-        for obj in self.match_objects(oid):
+    def a_shownotes(self, oword=None):
+        for obj in self.match_objects(oword):
             for mid in obj.get_notes():
                 self.queue_message(mid)
 
 
-    def a_showcontents(self, oid=None, by_name=False):
-        for obj in self.match_objects(oid):
+    def a_showcontents(self, oword=None, by_name=False):
+        for obj in self.match_objects(oword):
             for noun in self.game.get_nouns_by_loc(obj.get_id()):
                 if noun.is_visible():
                     self.queue_raw_output(noun.get_name() if by_name else noun.get_short_desc())
                     self.show_noun_contents(noun)
                 
                 
-    def a_listcontents(self, oid=None):
-        self.a_showcontents(oid, True)
+    def a_listcontents(self, oword=None):
+        self.a_showcontents(oword, True)
                 
                 
     def a_move(self, movedir):

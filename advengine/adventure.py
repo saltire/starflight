@@ -140,8 +140,8 @@ class Adventure(tests.Tests, actions.Actions):
             
         cwords = cond.strip().split()
         success = getattr(self, 't_{0}'.format(cwords[0]))(*cwords[1:])
-        logging.debug('test: %s%s: %s', '!' if neg else '', cond, not success if neg else success)
-        return not success if neg else success
+        logging.debug('test: %s%s: %s', '!' if neg else '', cond, success ^ neg)
+        return success ^ neg
     
     
     def do_action(self, action):
@@ -189,9 +189,28 @@ class Adventure(tests.Tests, actions.Actions):
     def match_nouns(self, inputword):
         """Return a set of nouns matching an input. If the noun is passed by ID,
         the set will contain that one noun. If an input wildcard is passed, it will
-        contain all nouns matching the input word."""
+        contain all nouns matching the input word. If a filter is specified, it
+        will narrow the results based on whether they pass the corresponding test."""
         if inputword[0] == '%':
-            return self.game.get_nouns_by_name(self.sub_input_words(inputword))
+            try:
+                iword, test = inputword.split(':')
+                neg = False
+                if test[0] == '!':
+                    neg = True
+                    test = test[1:]
+                    
+                fmethod = getattr(self, 't_{0}'.format(test))
+                if not hasattr(fmethod, 'is_filter'):
+                    raise AttributeError
+                
+                return set(noun for noun in self.game.get_nouns_by_name(self.sub_input_words(iword))
+                           if fmethod(noun.get_id()) ^ neg)
+                               
+            except (ValueError, AttributeError):
+                # ValueError if there is no ':' in input
+                # AttributeError if there is no existing filter function
+                return self.game.get_nouns_by_name(self.sub_input_words(inputword))
+            
         else:
             return set(self.game.get_noun(nid) for nid in inputword.split(','))
         

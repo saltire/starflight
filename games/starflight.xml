@@ -1341,8 +1341,8 @@
 				<cond>
 					<if>present %2,hasdesc %2</if>
 					<if>present %2,hasnotes %2</if>
-					<action>showdesc %2</action>
-					<action>shownotes %2</action>
+					<action>showdesc %2:present</action>
+					<action>shownotes %2:present</action>
 					<done />
 				</cond>
 				<action>message nothingunusual</action>
