@@ -64,7 +64,7 @@ def before_request():
     
 @app.route('/')
 def index():
-    return render_template('game.html', title='Starflight', history=session['history'])
+    return render_template('game.html', history=session['history'], title='Starflight')
 
 
 @app.route('/command', methods=['post'])
@@ -86,6 +86,12 @@ def do_ajax_command():
 def new_game():
     init_adventure()
     return redirect(url_for('index'))
+
+
+@app.route('/help')
+def show_help():
+    root = url_for('index', _external=True).rstrip('/')
+    return render_template('help.html', title='Help', root=root)
 
 
 

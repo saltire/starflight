@@ -2,19 +2,22 @@ body { background: #808073; color: #f1f1da; font-size: 18px;
 	font-family: calibri, helvetica, arial, sans-serif; }
 	
 .main { width: 666px; margin: auto; }
-.dialogue { height: 500px; margin: 20px 0 15px; padding: 10px; border: 1px solid #b3b3a1;
-	overflow: auto; }
+.dialogue, .helptext { margin: 20px 0 15px; padding: 15px; border: 1px solid #b3b3a1; }
+.dialogue { height: 500px; overflow: auto; }
+
+p { margin: 0 0 0.8em; }
 	
 .input { margin: 20px; color: #ffffff; }
 .pause { margin: 20px; font-style: italic; color: #ffffff; }
-.output { margin: 10px 0; }
+
+.help em { color: #ffffff; }
 
 form { display: inline-block; }
-input, button { margin: 0; border: 0; background: transparent; color: #f1f1da;
-	font-size: 20px; line-height: 22px; }
-input { width: 400px; border: 0; border-bottom: 1px solid #f1f1da; }
-input:focus { outline: none; }
+.rightform { float: right; }
+.rightform form { margin-left: 10px; }
 
-.command { float: left; }
-.newgame { float: right; }
-.newgame button { border: 1px solid #b3b3a1; font-size: 14px; }
+input, button { margin: 0; line-height: 22px; color: #f1f1da; background: transparent; }
+input { border: 0; font-size: 20px; width: 400px; border-bottom: 1px solid #f1f1da; }
+input:focus, button:focus { background: #8c8c7e; outline: none; }
+button { border: 1px solid #b3b3a1; font-size: 14px; }
+button.enter { border: 0; font-size: 20px; }

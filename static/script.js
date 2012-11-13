@@ -17,4 +17,10 @@ $(function() {
 		});
 	});
 	
+	// open GET forms like links (i.e. without appending a query string)
+	$('.goback, .help').submit(function(e) {
+		e.preventDefault();
+		window.location = $(this).attr('action');
+	});
+	
 });

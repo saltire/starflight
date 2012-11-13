@@ -1,33 +1,30 @@
-<html>
-	<head>
-		<title>{{ title }}</title>
-		<link rel='stylesheet' type='text/css' href='static/style.css' />
-		<script type='text/javascript' src='static/jquery-1.8.2.min.js'></script>
-		<script type='text/javascript' src='static/script.js'></script>
-	</head>
-	<body>
-		<div class='main'>
+{% extends "layout.html" %}
+
+{% block content %}
 			<div class='dialogue'>
-{% for input, output in history %}
-	{% if input %}
+	{% for input, output in history %}
+		{% if input %}
 				<p class='input'>{{ input }}</p>
-	{% endif %}
-	{% for msg in output %}
-		{% if msg == 'PAUSE' %}
-				<p class='pause'>Press Enter to continue...</p>
-		{% else %}
-				<p class='output'>{{ msg|replace('\n', '<br />')|safe }}</p>
 		{% endif %}
+		{% for msg in output %}
+			{% if msg == 'PAUSE' %}
+				<p class='pause'>Press Enter to continue...</p>
+			{% else %}
+				<p class='output'>{{ msg|replace('\n', '<br />')|safe }}</p>
+			{% endif %}
+		{% endfor %}
 	{% endfor %}
-{% endfor %}
 			</div>
 			<form class='command' method='post' action='command'>
 				&gt; <input type='text' name='command' />
-				<button type='submit'>&crarr;</button>
+				<button class='enter' type='submit'>&crarr;</button>
 			</form>
-			<form class='newgame' method='post' action='newgame'>
-				<button type='submit'>New game</button>
-			</form>
-		</div>
-	</body>
-</html>
+			<div class='rightform'>
+				<form class='help' method='get' action='help'>
+					<button type='submit'>Help</button>
+				</form>
+				<form class='newgame' method='post' action='newgame'>
+					<button type='submit'>New game</button>
+				</form>
+			</div>
+{% endblock %}
