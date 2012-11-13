@@ -7,7 +7,7 @@ from flask import g, jsonify, redirect, render_template, request, session, url_f
 from simplekv.fs import FilesystemStore
 from flask.ext.kvsession import KVSessionExtension
 
-from advengine.adventure import Adventure
+from advengine import Adventure
 
 
 app = Flask(__name__)
@@ -28,13 +28,13 @@ game = 'starflight'
 gamepath = os.path.join(flask_dir, 'games/{0}.json'.format(game))
 
 
-def do_turn(input):
+def do_turn(command):
     if session['queue']:
-        input = ''
+        command = ''
         status, output = session['queue']
         session['queue'] = None
     else:
-        status, output = g.adv.do_command(input)
+        status, output = g.adv.do_command(command)
         session['state'] = g.adv.export_state()
     
     if 'PAUSE' in output:
@@ -42,19 +42,23 @@ def do_turn(input):
         session['queue'] = (status, output[i:])
         output = output[:i]
         
-    session['history'].append((input, output))
+    session['history'].append((command, output))
     
     
 def init_adventure():
-    g.adv = Adventure(gamepath)
     session['history'] = []
     session['queue'] = None
+    session['state'] = None
+    g.adv = Adventure(gamepath)
     do_turn('')
     
     
-@app.before_first_request
-def before_first_req():
-    init_adventure()
+@app.before_request
+def before_request():
+    if 'state' in session:
+        g.adv = Adventure(gamepath, session['state'])
+    else:
+        init_adventure()
     
     
 @app.route('/')
@@ -73,8 +77,8 @@ def do_command():
 def do_ajax_command():
     g.adv = Adventure(gamepath, session['state'])
     do_turn(request.form.get('command'))    
-    input, output = session['history'][-1]
-    return jsonify({'input': input, 'output': output})
+    command, output = session['history'][-1]
+    return jsonify({'input': command, 'output': output})
 
 
 @app.route('/newgame', methods=['get','post'])
@@ -84,6 +88,6 @@ def new_game():
 
 
 
-if __name__ == '__main__':  
+if __name__ == '__main__':
     app.debug = True
     app.run()

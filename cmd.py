@@ -1,12 +1,12 @@
 import logging
 import textwrap
 
-from advengine import adventure
+from advengine import Adventure
 
 gamefile = 'games/starflight.json'
-adv = adventure.Adventure(gamefile)
+adv = Adventure(gamefile)
 
-#logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(filename='debug.log', level=logging.DEBUG)
 
 command = ''
 while True:
