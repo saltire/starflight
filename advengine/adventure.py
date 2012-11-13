@@ -133,10 +133,7 @@ class Adventure(tests.Tests, actions.Actions):
         if cond == '*':
             return True
         
-        neg = False
-        if cond[0] == '!':
-            neg = True
-            cond = cond[1:]
+        cond, neg = (cond[1:], True) if cond[0] == '!' else (cond, False)
             
         cwords = cond.strip().split()
         success = getattr(self, 't_{0}'.format(cwords[0]))(*cwords[1:])
@@ -186,32 +183,38 @@ class Adventure(tests.Tests, actions.Actions):
         return word == '*' or any(inputword in self.synonyms.get(word, []) for word in word.split('|'))
     
     
+    def filter_is_true(self, nid, test):
+        """Run a test on a particular noun, passed by ID."""
+        try:
+            tmethod, neg = ((getattr(self, 't_{0}'.format(test[1:])), True) if test[0] == '!'
+                            else (getattr(self, 't_{0}'.format(test)), False))
+            if not hasattr(tmethod, 'is_filter'):
+                raise AttributeError
+            return tmethod(nid) ^ neg
+        
+        except AttributeError:
+            # test doesn't exist or doesn't have is_filter attribute
+            return True
+
+    
     def match_nouns(self, inputword):
-        """Return a set of nouns matching an input. If the noun is passed by ID,
-        the set will contain that one noun. If an input wildcard is passed, it will
-        contain all nouns matching the input word. If a filter is specified, it
-        will narrow the results based on whether they pass the corresponding test."""
+        """Return a set of nouns matching an input. If input is a noun ID or a
+        comma-separated list of IDs, the set will contain said noun or nouns.
+        If an input wildcard is passed, it will contain all nouns matching that
+        input word. If a filter is specified after the wildcard, the results
+        will be narrowed based on whether they pass the corresponding test."""
         if inputword[0] == '%':
-            try:
-                iword, test = inputword.split(':')
-                neg = False
-                if test[0] == '!':
-                    neg = True
-                    test = test[1:]
-                    
-                fmethod = getattr(self, 't_{0}'.format(test))
-                if not hasattr(fmethod, 'is_filter'):
-                    raise AttributeError
-                
+            if ':' in inputword:
+                # filter matching nouns using tests
+                iword, tests = inputword.split(':', 1)
                 return set(noun for noun in self.game.get_nouns_by_name(self.sub_input_words(iword))
-                           if fmethod(noun.get_id()) ^ neg)
-                               
-            except (ValueError, AttributeError):
-                # ValueError if there is no ':' in input
-                # AttributeError if there is no existing filter function
+                           if all(self.filter_is_true(noun.get_id(), test)
+                                  for test in tests.split(':')))
+            else:
+                # return all nouns matching wildcard
                 return self.game.get_nouns_by_name(self.sub_input_words(inputword))
-            
         else:
+            # return all nouns with these exact ids
             return set(self.game.get_noun(nid) for nid in inputword.split(','))
         
         
