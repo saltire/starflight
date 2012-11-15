@@ -41,15 +41,18 @@ def do_turn(command):
         i = output.index('PAUSE') + 1
         session['queue'] = (status, output[i:])
         output = output[:i]
+        status = 'paused'
         
     session['history'].append((command, output))
+    session['status'] = status
     
     
 def init_adventure():
     session['history'] = []
+    session['status'] = 'new'
     session['queue'] = None
     session['state'] = None
-    session.permanent = True
+    #session.permanent = True
     g.adv = Adventure(gamepath)
     do_turn('')
     
@@ -64,7 +67,8 @@ def before_request():
     
 @app.route('/')
 def index():
-    return render_template('game.html', history=session['history'], title='Starflight')
+    return render_template('game.html', title='Starflight',
+                           history=session['history'], status=session['status'])
 
 
 @app.route('/command', methods=['post'])
@@ -79,7 +83,7 @@ def do_ajax_command():
     g.adv = Adventure(gamepath, session['state'])
     do_turn(request.form.get('command'))    
     command, output = session['history'][-1]
-    return jsonify({'input': command, 'output': output})
+    return jsonify({'input': command, 'output': output, 'status': session['status']})
 
 
 @app.route('/newgame', methods=['get','post'])

@@ -5,9 +5,9 @@ import room
 class Game:
     def __init__(self, data, state=None):
         if state is None:
-            self.vars = {vid: int(value) for vid, value in data.get('vars', {}).items()}
-            self.rooms = {rid: room.Room(rid, rdata) for rid, rdata in data.get('rooms', {}).items()}
-            self.nouns = {nid: noun.Noun(nid, ndata) for nid, ndata in data.get('nouns', {}).items()}
+            self.vars = {vid: int(value) for vid, value in data['vars'].items()}
+            self.rooms = {rid: room.Room(rid, rdata) for rid, rdata in data['rooms'].items()}
+            self.nouns = {nid: noun.Noun(nid, ndata) for nid, ndata in data['nouns'].items()}
     
             self.turn = 0
             self.current_room = next(rid for rid, room in self.rooms.items() if room.is_start())
@@ -16,9 +16,9 @@ class Game:
             for key in ('vars', 'turn', 'current_room'):
                 setattr(self, key, state[key])
             self.rooms = {rid: room.Room(rid, rdata, state['rooms'][rid])
-                          for rid, rdata in data.get('rooms', {}).items()}
+                          for rid, rdata in data['rooms'].items()}
             self.nouns = {nid: noun.Noun(nid, ndata, state['nouns'][nid])
-                          for nid, ndata in data.get('nouns', {}).items()}
+                          for nid, ndata in data['nouns'].items()}
         
         
     def export_state(self):

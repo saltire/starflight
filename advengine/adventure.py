@@ -1,7 +1,7 @@
-import json
 import logging
 import re
 
+import datafile
 import game
 import tests
 import actions
@@ -9,11 +9,10 @@ import actions
 
 class Adventure(tests.Tests, actions.Actions):
     def __init__(self, gamepath, state=None):
-        with open(gamepath, 'rb') as gamefile:
-            data = json.load(gamefile)
+        data = datafile.DataFile().get_data(gamepath)
         
-        self.controls = data.get('controls', [])
-        self.messages = data.get('messages', {})
+        self.controls = data['controls']
+        self.messages = data['messages']
         self.game = game.Game(data, state)
         
         def add_to_synonyms(wordslist):
@@ -21,8 +20,8 @@ class Adventure(tests.Tests, actions.Actions):
                 self.synonyms.update({word: self.synonyms.setdefault(word, set()) | set(words) for word in words})
             
         self.synonyms = {}
-        add_to_synonyms(data.get('words', []))
-        add_to_synonyms([noun.get('words', []) for noun in data.get('nouns', {}).values()])
+        add_to_synonyms(data['words'])
+        add_to_synonyms([noun.get('words', []) for noun in data['nouns'].values()])
         
         
     def export_state(self):
