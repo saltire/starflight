@@ -2,7 +2,9 @@ from collections import OrderedDict as odict
 import json
 import os
 import re
+from xml.dom import minidom
 import xml.etree.ElementTree as xml
+import yaml
 
 
 class DataFile:
@@ -17,14 +19,19 @@ class DataFile:
                 }
         
         
-    def convert_file(self, gamepath, ext):
-        gamedata = self.import_file(gamepath)
+    def convert_file(self, gamepath, ext, outpath=None):
+        data = self.import_file(gamepath)
         if ext == 'json':
-            outdata = self.export_json(gamedata)
+            outdata = self.export_json(data)
+        elif ext in ('yaml', 'yml'):
+            outdata = self.export_yaml(data)
         elif ext == 'xml':
-            outdata = self.export_xml(gamedata)
+            outdata = self.export_xml(data)
+        else:
+            raise ValueError('Invalid or unrecognized file type')
         
-        outpath = '{0}.{1}'.format(os.path.basename(gamepath).rsplit('.', 1)[0], ext)
+        if outpath is None:
+            outpath = '{0}.{1}'.format(os.path.basename(gamepath).rsplit('.', 1)[0], ext)
         with open(outpath, 'wb') as outfile:
             outfile.write(outdata)
         
@@ -33,17 +40,21 @@ class DataFile:
         ext = gamepath.rsplit('.', 1)[1]
         if ext == 'json':
             return self.import_json(gamepath)
+        elif ext in ('yaml', 'yml'):
+            return self.import_yaml(gamepath)
         elif ext == 'xml':
             return self.import_xml(gamepath)        
-        
+        else:
+            raise ValueError('Invalid or unrecognized file type')
+    
     
     def import_json(self, gamepath):
         with open(gamepath, 'rb') as gamefile:
             return json.load(gamefile, object_pairs_hook=odict)
 
 
-    def export_json(self, gamedata):
-        jsondata = json.dumps(gamedata, indent=4)
+    def export_json(self, data):
+        jsondata = json.dumps(data, indent=4)
         
         # remove prettyprinting for bottom-level lists (personal formatting preference)
         pattern, repl = r'\[(("[^"]*",\s)*)\s*("[^"]*"(,\s)?)\s+(("[^"]*",?\s*)*)\]', r'[\1\3\5]'
@@ -53,11 +64,33 @@ class DataFile:
         return jsondata
     
     
+    def import_yaml(self, gamepath):
+        with open(gamepath, 'rb') as gamefile:
+            return yaml.load(gamefile)
+    
+    
+    def export_yaml(self, data):
+        def contains_composites(seq):
+            return seq and not any(isinstance(x, list) or isinstance(x, odict) for x in seq)
+        
+        yaml.add_representer(odict, lambda dumper, data:
+                             dumper.represent_mapping('tag:yaml.org,2002:map', data.items(), False))
+        yaml.add_representer(unicode, lambda dumper, data:
+                             dumper.represent_scalar('tag:yaml.org,2002:str', data))
+        yaml.add_representer(list, lambda dumper, data:
+                             dumper.represent_sequence('tag:yaml.org,2002:seq', data,
+                                                       contains_composites(data)))
+
+        yamldata = yaml.dump(data, indent=4)
+         
+        return yamldata
+
+    
     def import_xml(self, gamepath):
         data = xml.parse(gamepath)
         
         def get_room(rdata):
-            room = dict(rdata.items())
+            room = odict(rdata.items())
             room.update({item.tag: item.text for item in rdata if item.text})
             room['exits'] = {ex.get('dir'): ex.get('room') for ex in rdata.findall('exit')}
             room['notes'] = [note.get('id') for note in rdata.findall('note')]
@@ -68,7 +101,7 @@ class DataFile:
 
             
         def get_noun(ndata):
-            noun = dict(ndata.items())
+            noun = odict(ndata.items())
             noun.update({item.tag: item.text for item in ndata if item.text})
             if 'words' in noun:
                 noun['words'] = ndata.find('words').text.split(',')
@@ -122,12 +155,78 @@ class DataFile:
                       ])
         
 
-    def export_xml(self, gamedata):
+    def export_xml(self, data):
         root = xml.Element('adventure')
         
+        rooms = xml.SubElement(root, 'rooms')
+        for rid, rdata in data['rooms'].items():
+            room = xml.SubElement(rooms, 'room')
+            room.set('id', rid)
+            if 'start' in rdata:
+                room.set('start', '1')
+            for sub in set(['name', 'desc']) & set(rdata):
+                xml.SubElement(room, sub).text = rdata[sub]
+            for mid in rdata.get('notes', []):
+                xml.SubElement(room, 'note').set('id', mid)
+            for exitdir, exid in rdata.get('exits', {}).items():
+                ex = xml.SubElement(room, 'exit')
+                ex.set('dir', exitdir)
+                ex.set('room', exid)
+                
+        nouns = xml.SubElement(root, 'nouns')
+        for nid, ndata in data['nouns'].items():
+            noun = xml.SubElement(nouns, 'noun')
+            noun.set('id', nid)
+            for flag in set(['visible', 'movable', 'wearable']) & set(ndata):
+                noun.set(flag, '1')
+            for sub in set(['name', 'desc', 'shortname', 'shortdesc']) & set(ndata):
+                xml.SubElement(noun, sub).text = ndata[sub]
+            for loc in ndata.get('locs', []):
+                xml.SubElement(noun, 'loc').set('id', loc)
+            if 'words' in ndata:
+                xml.SubElement(noun, 'words').text = ','.join(ndata['words'])
+                
+        words = xml.SubElement(root, 'words')
+        for wordlist in data['words']:
+            xml.SubElement(words, 'word').text = ','.join(wordlist)
+            
+        variables = xml.SubElement(root, 'vars')
+        for vid, value in data['vars'].items():
+            var = xml.SubElement(variables, 'var')
+            var.set('id', vid)
+            var.set('value', str(value))
+            
+        messages = xml.SubElement(root, 'messages')
+        for mid, message in data['messages'].items():
+            msg = xml.SubElement(messages, 'message')
+            msg.set('id', mid)
+            msg.text = message
         
         
-        return root.dump()
+        def create_cond(cond):
+            condtag = xml.Element('cond')
+            for test in cond.get('if', []):
+                if isinstance(test, list):
+                    for subtest in test:
+                        xml.SubElement(condtag, 'if').text = subtest
+                else:
+                    xml.SubElement(condtag, 'if').text = test
+            for action in cond.get('then', []):
+                if isinstance(action, dict):
+                    condtag.append(create_cond(action))
+                else:
+                    xml.SubElement(condtag, 'action').text = action
+            for flag in set(['done', 'gameover']) & set(cond):
+                xml.SubElement(condtag, flag)
+            return condtag
+            
+        controls = xml.SubElement(root, 'controls')
+        for condset in data['controls']:
+            cset = xml.SubElement(controls, 'condset')
+            for cond in condset:
+                cset.append(create_cond(cond))
+        
+        
+        return minidom.parseString(xml.tostring(root)).toprettyxml(indent='\t', encoding='UTF-8')
 
-    
-        
+

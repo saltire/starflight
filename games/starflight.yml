@@ -1,0 +1,1222 @@
+rooms:
+    pilot:
+        name: Pilot's Cabin
+        exits:
+            south: sleep
+        notes: [lightflashing]
+        start: true
+        desc: You are in the pilot's cabin of the Starflyer Ganymede. In front of
+            you is a console covered with instruments, gauges and controls. To aft
+            is the cold sleep chamber.
+    sleep:
+        notes: []
+        desc: You are in the cold sleep chamber. In front of you is the coffin-like
+            suspended animation booth in which you recently awoke from your decade-long
+            nap. To starboard is an open door. Forward is the door to the main cabin.
+        exits:
+            east: storage
+            north: pilot
+        name: Cold Sleep Chamber
+    storage:
+        notes: []
+        desc: You are in the storage cabin of the Ganymede. The wall is lined with
+            metal hooks on which have been anchored small objects so that they will
+            not float about in the absence of gravity. There is an entrance to the
+            airlock set in the ceiling and a door to port leading back to the cold
+            sleep chamber.
+        exits:
+            west: sleep
+            up: g_airlock
+        name: Storage Cabin
+    g_airlock:
+        notes: [inneropenouterclosed]
+        desc: You are in the Ganymede's airlock, with the inner door below you and
+            the outer door above you.
+        exits:
+            down: storage
+            up: a_airlock
+        name: Ganymede's Airlock
+    a_airlock:
+        notes: []
+        desc: You are in the Armstrong's airlock, with the inner door above you and
+            the outer door below you.
+        exits:
+            down: g_airlock
+            up: trans
+        name: Armstrong's Airlock
+    trans:
+        notes: []
+        desc: You are in the transportation room of the Armstrong. To your horror,
+            you see a human skeleton dressed in a petty officer's uniform seated to
+            one side of the entranceway, its head hunched over a computer terminal.
+            Forward is a doorway, below is the airlock.
+        exits:
+            down: a_airlock
+            north: out_trans
+        name: Transporter Room
+    out_trans:
+        notes: []
+        desc: You are in a long hallway running from port to starboard. To aft is
+            a door labelled TRANSPORTATION ROOM.
+        exits:
+            west: out_stair
+            east: out_vault
+            south: trans
+        name: Outside Transporter Room
+    out_vault:
+        notes: []
+        desc: You are in a long hallway running from port to starboard. Forward is
+            a door labelled PASSENGER VAULT.
+        exits:
+            west: out_trans
+            east: out_storage
+            north: vault
+        name: Outside Passenger Vault
+    vault:
+        notes: []
+        desc: You are in the passenger vault, a chamber so immense that the forward
+            side of it is lost in dark mists. Lined up to port and starboard are tier
+            after tier of cold sleep booths, containing the hibernating bodies of
+            the Armstrong's passengers. To aft is a door.
+        exits:
+            south: out_vault
+        name: Passenger Vault
+    out_storage:
+        notes: []
+        desc: You are at the starboard end of a long hallway. To aft is a door labelled
+            STORAGE.
+        exits:
+            west: out_vault
+            south: main_storage
+        name: Outside Storage Room
+    main_storage:
+        notes: [closeddooraft]
+        desc: You are in the Armstrong's main storage room. The exit is forward.
+        exits:
+            north: out_storage
+            south: aux_storage
+        name: Main Storage Room
+    aux_storage:
+        notes: []
+        desc: You are in the Armstrong's auxiliary storage room. Unopened boxes are
+            anchored to the walls with baling wire.
+        exits:
+            north: main_storage
+        name: Auxiliary Storage Room
+    out_stair:
+        notes: []
+        desc: You are in a long hallway running from port to starboard. Aft is a door
+            labelled STAIRSHAFT.
+        exits:
+            west: corner
+            east: out_trans
+            south: stair
+        name: Outside Stairshaft
+    stair:
+        notes: []
+        desc: You are in a winding stairshaft leading downward to a lower level of
+            the ship. There is a door to forward.
+        exits:
+            down: maintenance
+            north: out_stair
+        name: Winding Stairshaft
+    maintenance:
+        notes: []
+        desc: You are in the Armstrong's maintenance room. Another uniformed skeleton
+            is sprawled over a console covered with gauges and instruments. There
+            is a stairshaft leading up.
+        exits:
+            up: stair
+        name: Maintenance Room
+    corner:
+        notes: []
+        desc: You are at the corner of two hallways, one heading forward, the other
+            to starboard.
+        exits:
+            east: out_stair
+            north: hallway
+        name: Corner of Two Hallways
+    hallway:
+        notes: []
+        desc: You are in a long hallway running from fore to aft.
+        exits:
+            north: out_bridge
+            south: corner
+        name: Long Hallway
+    out_bridge:
+        notes: []
+        desc: You are in a long hallway running from fore to aft. To starboard is
+            a door labelled BRIDGE.
+        exits:
+            east: w_bridge
+            north: debris
+            south: hallway
+        name: Outside Bridge
+    w_bridge:
+        notes: []
+        desc: You are on the port side of the Armstrong's bridge. In front of you
+            is a scene of unparalleled carnage. Long decayed skeletons in varicoloured
+            uniforms are sprawled to all sides, some seated in contoured plastic chairs,
+            some collapsed on the floor in grotesque attitudes. There is a door to
+            port. The bridge continues to starboard.
+        exits:
+            west: out_bridge
+            east: c_bridge
+        name: Port Side of Bridge
+    c_bridge:
+        notes: []
+        desc: You are in the centre of the Armstrong's bridge. You see a skeleton
+            dressed in a captain's uniform, seated in a large chair, its hand perched
+            over the navigational override controls.
+        exits:
+            west: w_bridge
+            east: e_bridge
+        name: Centre of Bridge
+    e_bridge:
+        notes: []
+        desc: You are on the starboard side of the Armstrong's bridge. A skeleton
+            in a science officer's uniform is sprawled next to a plastic panel set
+            into the wall.
+        exits:
+            west: c_bridge
+        name: Starboard Side of Bridge
+    debris:
+        notes: []
+        desc: You are in the middle of a vast assortment of debris. You can go no
+            farther forward.
+        exits:
+            south: out_bridge
+        name: In the Middle of Debris
+nouns:
+    spacesuit:
+        name: a bulky spacesuit
+        locs: [storage]
+        movable: true
+        wearable: true
+        visible: true
+        words: [spacesuit, suit]
+        shortdesc: There is a bulky spacesuit here.
+        shortname: spacesuit
+        desc: Almost the entire suit, including the flexible portions, is made of
+            heavily metallized fabric, apparently incorporating some sort of iron
+            mesh.
+    pouch:
+        name: a plastic pouch
+        locs: [storage]
+        movable: true
+        visible: true
+        words: [pouch, bag, plastic]
+        shortdesc: There is a plastic pouch here.
+        shortname: plastic pouch
+        desc: It's heavy.
+    crowbar:
+        visible: true
+        name: a crowbar
+        words: [crowbar, bar]
+        shortdesc: There is a crowbar here.
+        shortname: crowbar
+        movable: true
+    knife:
+        visible: true
+        name: a small knife
+        words: [knife]
+        shortdesc: There is a small knife here.
+        shortname: knife
+        movable: true
+    keys:
+        visible: true
+        name: a set of keys
+        words: [keys, key, set]
+        shortdesc: There is a set of keys here.
+        shortname: set of keys
+        movable: true
+    sonic:
+        name: a sonic disruptor
+        movable: true
+        visible: true
+        words: [sonic, disruptor, cylinder, cylinders]
+        shortdesc: There is a sonic disruptor here.
+        shortname: sonic disruptor
+        desc: The sonic disruptor is made of two independently rotatable metal cylinders,
+            mounted end to end.
+    molten:
+        shortdesc: There is a molten sonic disruptor here.
+        visible: true
+        words: [molten, sonic, disruptor, cylinder, cylinders]
+        name: a molten sonic disruptor
+    box:
+        name: a wooden box
+        locs: [main_storage]
+        movable: true
+        visible: true
+        words: [box, wooden, wood, crate]
+        shortdesc: There is a wooden box here.
+        shortname: wooden box
+        desc: There seems to be something inside.
+    magnet:
+        visible: true
+        name: a powerful bar magnet
+        words: [magnet]
+        locs: [debris]
+        shortdesc: There is a powerful bar magnet here.
+        shortname: magnet
+        movable: true
+    radio:
+        name: a two-way radio
+        locs: [storage]
+        movable: true
+        visible: true
+        words: [radio, twoway]
+        shortdesc: There is a two-way radio here.
+        shortname: two-way radio
+        desc: It appears to need batteries.
+    inner:
+        locs: [storage, g_airlock, a_airlock, trans]
+        words: [inner, innerdoor]
+        desc: An iris-shaped airlock door, allowing passage between the airlock and
+            the ship.
+    outer:
+        locs: [g_airlock, a_airlock]
+        words: [outer, outerdoor]
+        desc: An iris-shaped airlock door. This one exits the ship.
+    light:
+        locs: [pilot]
+        words: [light]
+        desc: It is blinking rapidly. Below the light is a small blue button.
+    blue:
+        locs: [pilot]
+        words: [blue, bluebutton]
+    console:
+        locs: [pilot]
+        notes: [consolelightflashing]
+        words: [console, instrument, instruments, gauge, gauges, buttons]
+        desc: The console is covered mostly with digital gauges that allow you to
+            monitor the functioning of the ship's computer. In the centre of the console,
+            however, are four buttons, one green, one yellow, one orange, and one
+            red.
+    green:
+        locs: [pilot]
+        words: [green, greenbutton, acknowledge]
+        desc: Beneath the green button is the word ACKNOWLEDGE.
+    yellow:
+        locs: [pilot]
+        words: [yellow, yellowbutton, tachyon, tachyonbeam]
+        desc: Beneath the yellow button are the words TACHYON BEAM.
+    orange:
+        locs: [pilot]
+        words: [orange, orangebutton, docking, dockingcontrol]
+        desc: Beneath the orange button are the words DOCKING CONTROL.
+    red:
+        locs: [pilot]
+        words: [red, redbutton, status, report, statusreport]
+        desc: Beneath the red button are the words STATUS REPORT.
+    booth:
+        locs: [sleep]
+        words: [booth, cold, sleep, coffin]
+    petty:
+        locs: [trans]
+        words: [skeleton, body, pettyofficer, petty, officer, crewmember, crew]
+        desc: It appears to have been typing at the computer terminal.
+    terminal:
+        locs: [trans]
+        words: [computer, terminal, screen]
+        desc: 'On the video display you see the words:
+
+
+            "SHIP''S LOG, ENTRY 2,349.6.
+
+
+            "Whatever it is, we can''t seem to stop it. The carnage is horrible. Most
+            of the crew has succumbed, and I don''t know how much longer I can hold
+            out. Even now, the screams in the distance are hideous. Is there any way
+            to"
+
+
+            At that point, the message ends.'
+    booths:
+        locs: [vault]
+        words: [booths, booth, tier, cold, sleep]
+        desc: Through the frosty window of the nearest booth you see the face of a
+            young girl, apparently well and unharmed by whatever has struck the ship's
+            crew.
+    captain:
+        locs: [c_bridge]
+        words: [skeleton, body, captain, capn, skipper, jtk, officer, crewmember,
+            crew]
+        desc: Just beneath the collar of the captain's uniform is the monogram JTK.
+    navcontrols:
+        locs: [c_bridge]
+        words: [nav, navigation, navigational, controls, navigationalcontrols, navcontrols]
+        desc: Considering your rudimentary knowledge of megaship navigation, you shouldn't
+            even be *thinking* of touching the navigational controls.
+    science:
+        locs: [e_bridge]
+        words: [skeleton, body, scienceofficer, science, officer, skull, spock]
+        desc: The skull is cracked where it fell against the panel.
+    m_officer:
+        locs: [maintenance]
+        words: [skeleton, body, officer, crewmember, crew]
+        desc: The skeleton is sprawled across the instrument console.
+    m_console:
+        locs: [maintenance]
+        words: [console, instrument, instruments, gauge, gauges]
+        desc: Although the skeleton is covering most of the console, you can see a
+            flashing sign at one end. Below the sign is a yellow button.
+    sign:
+        locs: [maintenance]
+        words: [sign, words]
+        desc: 'The flashing sign reads:
+
+
+            AIR LEVEL TOXIC!
+
+            PRESS PURIFICATION CONTROL THREE TIMES!'
+    m_yellow:
+        locs: [maintenance]
+        words: [yellow, yellowbutton, purification]
+        desc: Beneath the yellow button are the words PURIFICATION CONTROL.
+    screen:
+        words: [video, screen, computer, monitor]
+        desc: The video screen is blank.
+    black:
+        words: [black, blackbutton, emergency, monitoring, system]
+        desc: Beneath the black button are the words EMERGENCY MONITORING SYSTEM.
+    white:
+        words: [white, whitebutton, acknowledge]
+        desc: Beneath the white button is the word ACKNOWLEDGE.
+    force:
+        locs: [aux_storage]
+words:
+- [load, restore]
+- [save]
+- [quit, q, exit]
+- [score]
+- [north, n, fore, forward]
+- [south, s, aft]
+- [east, e, starboard, right]
+- [west, w, port, left]
+- [up, u]
+- [down, d]
+- [inventory, inv, i]
+- [go, walk, run]
+- [look, l]
+- [examine, x]
+- [take, get, grab]
+- [drop, put, throw]
+- [wear, equip]
+- [remove]
+- [read]
+- [wait]
+- [open]
+- [close, shut]
+- [push, press]
+- [unlock]
+- [touch]
+- [turn, twist, rotate]
+- [pry, prise, jimmy]
+- [cut, slash, slice, puncture]
+- [enter]
+- [search]
+- [health, diagnose, diagnosis]
+- [with]
+- [at]
+- ['on']
+- ['off']
+- [in]
+- [door, airlock]
+- [button]
+- [panel]
+- [uniform, clothing, clothes, pocket, pockets]
+- [hit, kick, punch, kill, smash, smack]
+- [fuck, shit]
+vars:
+    blue: 0
+    tachyon: 0
+    ack: 0
+    rendez: 0
+    dock: 0
+    a_inner: 0
+    outer: 0
+    g_inner: 1
+    box: 0
+    pouch: 0
+    panel: 0
+    storage: 0
+    sonic: -1
+    furniture: 0
+    purify: 0
+    magnet: 0
+    force: 0
+    hp: 3
+messages:
+    intro1: They told you that star flight would be difficult. They told you and you
+        believed them... sort of.
+    intro2: What they hadn't told you was how grueling cold sleep could be, how the
+        months and years of your flight would be filled with endless nightmares, countless
+        replays of every terrible thing that had happened to you in a lifetime of
+        terrible things. When the instructions finally arrived from the ship's computer
+        telling the cold sleep machinery to revive you for the final phase of your
+        flight, you were grateful.
+    intro3: What you didn't realize, even as you stumbled groggily from the narrow
+        sleep chamber into the pilot's cabin of the Starflyer Ganymede, was that the
+        most nightmarish part of your mission was yet to come... and that you would
+        face it fully awake.
+    intro4: 'STARFLIGHT: A Cosmic Adventure
+
+        Written & Programmed for the C64 by Chris Lampton
+
+        Adapted by Marcus Kamps'
+    lightflashing: A light is flashing on the console.
+    consolelightflashing: ' There is a light flashing near the top of the console.'
+    lightnotflashing: The light is no longer blinking.
+    whichcolour: Please specify a colour.
+    bluebutton1: 'A prerecorded voice booms down from an overhead speaker:'
+    bluebutton2: '"Congratulations, lieutenant! You seem to have come through the
+        cold sleep with your sanity intact. I don''t need to tell you that not everyone
+        does. It''s a rough experience, but it''s better than spending ten years staring
+        at blank walls, eh?'
+    bluebutton3: '"Now that you''re almost at your destination, it''s safe for me
+        to tell you the object of your mission. Sorry to keep you in the dark so long,
+        but it''s an extremely sensitive matter.'
+    bluebutton4: '"The Megaship Armstrong has run into some kind of problem en route
+        to the colony on IV Barnard. We''ve been out of contact with them for a decade.
+        We want you to find out what happened, and report back by tachyon beam. Good
+        luck!"'
+    distress1: 'The hauntingly human voice of the ship''s computer booms down from
+        the overhead speakers:'
+    distress2: '"Automated distress signal being received from the Megaship Armstrong.
+        Is a rendezvous desired? Immediate acknowledgement requested!"'
+    announces: 'The ship''s computer announces:'
+    cancelled: '"Acknowledgement not received. Request cancelled!"'
+    rendezvous1: '"Rendezvous procedures have been initiated."'
+    rendezvous2: As you watch through the forward viewscreen, the stars seem to change
+        position around you. A distant point of light swells until it becomes a starship.
+        As it comes closer, you recognize the mindboggling bulk of an immense megaship,
+        a starship as large as a small planet. On its side, in large red letters,
+        are the words GCC ARMSTRONG. The Ganymede finally comes to a halt directly
+        beneath the Armstrong's belly.
+    functional: '"All systems are functional."'
+    cantdock: The docking machinery whines uselessly, since there is nothing within
+        the vicinity with which it can dock.
+    dock: The Ganymede rises until it is touching the Armstrong. A loud grinding noise
+        informs you that the airlocks are now connected and the ships are docked.
+    undock: The Ganymede and Armstrong disconnect airlocks and undock. The Ganymede
+        floats downward until about fifty metres of space separate it from the Armstrong.
+    tachyon: 'There is a crackle from the overhead speaker, then you hear the voice
+        of the communications officer back at base headquarters, transmitted to you
+        via tachyon beam. You tell her what has happened. She replies:'
+    noprogress: '"Please get back in contact after you''ve made some progress in your
+        mission."'
+    horrible: '"My God, that''s horrible! Find out what happened and report back immediately!"'
+    astonishing: '"What an astonishing story! You must save the ship''s passengers
+        from this malevolent force before it can escape again. It will be two years
+        before we can have another ship in your vicinity! Report back when you''re
+        done!"'
+    congratulations1: '"Congratulations! You''ve succeeded admirably! The new crew
+        will arrive in two years. Come on home!"'
+    congratulations2: Smiling, you return to the cold sleep booth and sink into its
+        depths. Your fear of the coming nightmares is offset by thought of the hero's
+        welcome that awaits you when you return home. But even as the cold sleep begins,
+        you see an image in the back of your mind of a malevolent evil force, ready
+        to spring on you as soon as you surrender to the oncoming sleep...
+    airclosed: The airlock door is closed. You can't go that way.
+    whichdoor: Please specify which door.
+    openinnerdoor: The inner door is now open.
+    closeinnerdoor: The inner door is now closed.
+    openouterdoor: The outer door is now open.
+    closeouterdoor: The outer door is now closed.
+    alreadyopen: It's already open.
+    alreadyclosed: It's already closed.
+    dooropen: The door is currently open.
+    doorclosed: The door is currently closed.
+    closeotherdoor: The other door must be closed first.
+    inneropenouterclosed: ' The inner door is open and the outer door is closed.'
+    innerclosedouteropen: ' The inner door is closed and the outer door is open.'
+    innerclosedouterclosed: ' The inner door is closed and the outer door is closed.'
+    spacednosuit: A violent gust of air pulls you from the airlock into the void of
+        space. You are briefly aware of the Starflyer Ganymede receding into the distance,
+        then you lose consciousness... forever.
+    spacedwithsuit1: A violent gust of air pulls you from the airlock into the void
+        of space. The Starflyer Ganymede recedes rapidly into the distance, dwindling
+        until it is no more than a point of light among the stars.
+    spacedwithsuit2: Your spacesuit has sufficient oxygen to sustain you for 72 hours
+        adrift in space, cold comfort considering that your chances of rescue are
+        effectively nil.
+    finishdocking: Perhaps you should have finished docking with the Armstrong...
+    pullforcewithyou: For what it's worth, the malevolent force is also pulled into
+        the depths of space with you, so that it can no longer menace the passengers
+        on board the Armstrong. You have succeeded in your mission, but have lost
+        your life...
+    airlockfumes: "Dim light floods in from the airlock of the Armstrong \u2013 and\
+        \ a cloud of noxious fumes floods in as well. You begin to choke and try to\
+        \ close the doors, but it's too late. You are losing consciousness. Your final\
+        \ thought is that you should have worn the spacesuit. It might have saved\
+        \ your life..."
+    suitfumes: '...but you should have left it on! Noxious fumes inside the Armstrong
+        asphyxiate you within seconds!'
+    openairlockmagnet: As the outer door opens, air bursts explosively into the vacuum
+        of space, but you are held fast within the airlock by the strong grip of the
+        bar magnet against the metallized glove of your spacesuit.
+    openairlockforce: ' A screaming sound inside your head tells you that the malevolent
+        force has been yanked back into the vacuum of space from which it came, and
+        can no longer menace the crew members of the Armstrong. You rejoice inwardly!
+        You have accomplished your assigned mission and now have only to report back
+        to headquarters!'
+    outerdoorstillopen: You don't really want to do that. The outer door is still
+        open, leaving you exposed to the void of space.
+    somethinginpocket: You find something in the pocket.
+    withwhat: With what?
+    locked: You can't. It's locked.
+    nokeys: You don't have any keys.
+    unlocked: Okay. It's unlocked.
+    alreadyunlocked: It's already unlocked.
+    jammed: You can't. The panel's unlocked, but it's jammed shut, probably from the
+        force of the science officer's body falling against it.
+    strongerthanknife: You'll need something stronger than a knife.
+    cantprypanel: You attempt to pry the locked panel with the crowbar, but are unsuccessful.
+    prypanel: You pry open the panel with the crowbar.
+    panelopen: ' The panel is open, revealing a computer video screen, a black button
+        and a white button.'
+    emergencysystem1: 'There is a rumble from a speaker set into the science officer''s
+        console, then a voice speaks:'
+    emergencysystem2: '"This is the Armstrong''s computerized emergency system. Since
+        the crew of the Armstrong is now dead and all of the passengers remain in
+        cold sleep, it is assumed that you are an outsider responding to the distress
+        signal. Here are the details of the current emergency situation:'
+    emergencysystem3: '"An invisible, malevolent force has entered the Armstrong during
+        a routine EVA. All crew members are deceased. Over the course of ten years,
+        I have maneuvered the invading entity into the auxiliary storage area, behind
+        the main storage room, where it is now imprisoned, though perhaps not for
+        long. If you wish me to unlock the door to this room, please acknowledge immediately!"'
+    storageunlocked1: 'The emergency computer announces:'
+    storageunlocked2: '"Door to the auxiliary storage room is now unlocked."'
+    opendooraft: ' An open door is aft.'
+    closeddooraft: ' A closed door is aft.'
+    itsopen: Okay. It's open.
+    openfellout: Okay. It's open... and something fell out.
+    itsempty: It's empty.
+    zipperstuck: You can't. The zipper's stuck.
+    cutpouch: You cut open the pouch with the knife.
+    alreadycut: It's already been cut, thank you.
+    twistdisruptor: You twist the disruptor until it clicks.
+    alreadyprimed: You've already primed the disruptor.
+    notbloodylikely: Not bloody likely.
+    glowingnumeral: A glowing numeral %VAR(sonic) appears on one side of the sonic
+        disruptor.
+    disruptorbursts: The sonic disruptor bursts forth with a spray of high-frequency
+        sound that atomizes everything in its immediate vicinity... yourself included.
+    destroyedfurniture: ' For what it''s worth, you did succeed in destroying the
+        piece of furniture that had been blocking the stairshaft.'
+    heardisruptor: In the distance, you hear the piercing whine of a sonic disruptor
+        atomizing everything in its vicinity.
+    heardisruptorshatter: In the distance, you hear the piercing whine of a sonic
+        disruptor atomizing everything in its vicinity, accompanied by the sound of
+        shattering plastic.
+    forceinroom: You are aware of a powerful, invisible force in the room with you.
+    jolt1: Your entire nervous system is jolted by a mental force the likes of which
+        you have never experienced. Your head jerks back and your mouth opens in an
+        involuntary scream. From the neck down your body is completely paralyzed,
+        immobile; then the force relents and you go limp.
+    jolt2: A second jolt, more powerful than the first and infinitely more painful,
+        surges through your nervous system. For a moment you do not even recognize
+        the sound of your own scream. After what seems like several eternities, the
+        pain goes away.
+    jolt3: The third jolt strikes you like a crackling bolt of lightning. The duration
+        is shorter this time, because your weakened heart is incapable of sustaining
+        further pain of this intensity. Within seconds you slump dead against the
+        nearest wall, wondering in your last instant of consciousness just who will
+        discover *your* decaying skeleton...
+    healthhp3: You're in fine health... for the time being, anyway.
+    healthhp2: The shock to your nervous system has left you in ragged shape. You
+        are wobbly, disoriented, and slightly nauseous. You should avoid additional
+        shocks of this nature.
+    healthhp1: You are in critical condition. One more shock like that last one and
+        your star-flying days will come to an abrupt halt.
+    nosleep: You don't really want to do that. If you re-enter the suspended animation
+        booth and revert to cold sleep, the ship will automatically return to its
+        home port. Your mission will be a failure.
+    skeletons: You step cautiously over a pair of skeletons that have fallen together
+        in the middle of the hallway.
+    vaultlarge: You don't really want to go that way. The passenger vault is so large
+        that you could wander in it for days, to no particular avail.
+    electroniclock: The door is locked electronically and can only be unlocked by
+        order of the ship's computer system.
+    dropsuit: The hall ahead of you is crammed with debris and the skeletal remains
+        of the Armstrong's crew members. Unfortunately, you will need to drop your
+        bulky space suit before you can squeeze through the debris.
+    squeeze: The hall ahead of you is crammed with debris and the skeletal remains
+        of the Armstrong's crew members. You are barely able to squeeze through the
+        debris.
+    blockedfurniture: There is a large item of plastic furniture blocking your descent.
+        Below the plastic, you can just make out the skeletal remains of one of the
+        crew members, who had apparently placed the furniture here in an unsuccessful
+        attempt to ward off an attacker.
+    descend: You descend into the shaft, picking your way past the shattered remains
+        of the piece of plastic furniture and the skeleton that was holding it in
+        place.
+    airispure: You hear a hissing sound from the ventilation system. After a few moments
+        the sign on the control panel indicates that the air is pure enough to breathe.
+    signnotflashing: The sign is no longer flashing.
+    takemagnet: With a bone-wrenching tug, you pull the magnet loose from the metal
+        bulkhead where it had attached itself.
+    dropmagnet: You drop the magnet. With a powerful leap and a loud clang, it attaches
+        itself to the nearest metal bulkhead.
+    feelslikemagnet: It feels like a magnet.
+    clingstofingers: It clings to the metallic fingers of your spacesuit glove.
+    immobilized: The fingers of your spacesuit attach themselves tightly to the magnet.
+        Since you are *in* the spacesuit, you are temporarily immobilized.
+    pullfreeofmagnet: First, you tug yourself free of the bar magnet...
+    timepasses: One minute passes...
+    touched: Okay. You've touched it.
+    violent: Feeling violent today, are we?
+    nothere: Please! Not here!
+    cantgothere: You can't go there!
+    okay: Okay.
+    fromwhat: From what?
+    dontknowhow: I don't know how to %1.
+    dontknowhowsomething: I don't know how to %1 something.
+    turns: You have taken %TURNS turns.
+    saved: Saved game.
+    loadedsave: Loaded save game.
+    nosave: No save game to load.
+    cantverb: You can't %1 that.
+    nothinghappens: Nothing happens.
+    carrying: 'You are carrying:'
+    invitem: '%NOUN.'
+    invitemworn: '%NOUN (being worn).'
+    invitemcontains: "\tThe %NOUN contains:"
+    invitemcontained: "\t\t%NOUN."
+    taken: Taken.
+    dropped: Dropped.
+    donthave: You don't have it.
+    alreadycarrying: You've already got it.
+    carryingnothing: You're not carrying anything.
+    wearing: You are now wearing the %2.
+    nolongerwearing: You are no longer wearing the %2.
+    notwearing: You're not wearing it.
+    alreadywearing: You're already wearing it.
+    dontsee: That's not here.
+    nothingunusual: You see nothing unusual.
+    cantgo: You can't go that way.
+    gameover: Would you like to play again?
+controls:
+-   -   if: [start]
+        then: [message intro1, message intro2, message intro3, pause, message intro4,
+            showdesc, shownotes, showcontents]
+        done: true
+    -   if: [var storage 2, somewhere force]
+        then: [sendtoroom force]
+    -   if: [input * button]
+        then: [message whichcolour]
+        done: true
+    -   if: [input push blue, room pilot, var blue 0]
+        then: [setvar blue 1, removeroomnote pilot lightflashing, removenounnote console
+                consolelightflashing, setnoundesc light lightnotflashing, message
+                bluebutton1, message bluebutton2, message bluebutton3, message bluebutton4]
+        done: true
+    -   if:
+        - [input push blue, room pilot, var blue 1]
+        - [input push green, room pilot, var ack 0]
+        - [input push black, room e_bridge, '!var storage 0']
+        - [input push white, room e_bridge, var ack 0]
+        then: [message nothinghappens]
+        done: true
+    -   if: [input push red, room pilot]
+        then:
+        -   if: [var blue 1, var rendez 0]
+            then: [setvar ack 2, message distress1, message distress2]
+            done: true
+        - message announces
+        - message functional
+        done: true
+    -   if: [input push green, room pilot, var ack 1]
+        then: [setvar ack 0, setvar rendez 1, message announces, message rendezvous1,
+            message rendezvous2]
+        done: true
+    -   if: [input push orange, room pilot]
+        then:
+        -   if: [var rendez 0]
+            then: [message cantdock]
+            done: true
+        -   if: [var rendez 1, var dock 0]
+            then: [setvar dock 1, message dock]
+            done: true
+        -   if: [var dock 1]
+            then: [setvar dock 0, message undock]
+            done: true
+    -   if: [input push yellow, room pilot]
+        then:
+        - message tachyon
+        -   if: [var tachyon 0]
+            then: [message noprogress]
+        -   if: [var tachyon 1]
+            then: [message horrible]
+        -   if: [var tachyon 2]
+            then: [message astonishing]
+        -   if: [var tachyon 3]
+            then: [message congratulations1, message congratulations2]
+            gameover: true
+        done: true
+    -   if: [input push yellow, room maintenance]
+        then:
+        -   if: [var purify 3]
+            then: [message nothinghappens]
+        -   if: [var purify 2]
+            then: [adjustvar purify +1, setnoundesc sign signnotflashing, message
+                    airispure]
+        -   if: [var purify <2]
+            then: [adjustvar purify +1, message nothinghappens]
+        done: true
+    -   if: [input push black, room e_bridge, var storage 0]
+        then: [setvar ack 2, setvar tachyon 2, message emergencysystem1, message emergencysystem2,
+            message emergencysystem3]
+        done: true
+    -   if: [input push white, room e_bridge, var ack 1]
+        then: [setvar ack 0, setvar storage 1, message storageunlocked1, message storageunlocked2]
+        done: true
+    -   if:
+        - [input up, room storage, var g_inner 0]
+        - [input up, room g_airlock, var outer 0]
+        - [input up, room a_airlock, var a_inner 0]
+        - [input down, room trans, var a_inner 0]
+        - [input down, room a_airlock, var outer 0]
+        - [input down, room g_airlock, var g_inner 0]
+        then: [message airclosed]
+        done: true
+    -   if: [input * door]
+        then:
+        -   if: [room a_airlock|g_airlock]
+            then: [message whichdoor]
+            done: true
+        -   if: [room storage|trans]
+            replace: '%1 inner'
+    -   if:
+        - [input examine inner, room storage|g_airlock, var g_inner 0]
+        - [input examine inner, room trans|a_airlock, var a_inner 0]
+        - [input examine outer, room a_airlock|g_airlock, var outer 0]
+        then: [showdesc %2, message doorclosed]
+        done: true
+    -   if:
+        - [input examine inner, room storage|g_airlock, var g_inner 1]
+        - [input examine inner, room trans|a_airlock, var a_inner 1]
+        - [input examine outer, room a_airlock|g_airlock, var outer 1]
+        then: [showdesc %2, message dooropen]
+        done: true
+    -   if:
+        - [input open inner, room g_airlock|a_airlock, var outer 1]
+        - [input open outer, room g_airlock, var g_inner 1]
+        - [input open outer, room a_airlock, var a_inner 1]
+        then: [message closeotherdoor]
+        done: true
+    -   if:
+        - [input open inner, room storage|g_airlock, var g_inner 1]
+        - [input open inner, room trans|a_airlock, var a_inner 1]
+        - [input open outer, room g_airlock|a_airlock, var outer 1]
+        then: [message alreadyopen]
+        done: true
+    -   if:
+        - [input close inner, room storage|g_airlock, var g_inner 0]
+        - [input close inner, room trans|a_airlock, var a_inner 0]
+        - [input close outer, room g_airlock|a_airlock, var outer 0]
+        then: [message alreadyclosed]
+        done: true
+    -   if:
+        - [input open inner|close inner, '!room storage|g_airlock|a_airlock|trans']
+        - [input open outer|close outer, '!room g_airlock|a_airlock']
+        then: [message dontsee]
+        done: true
+    -   if: [input open outer, room g_airlock]
+        then:
+        -   if: [var dock 0]
+            then:
+            -   if: [var magnet 0]
+                then:
+                -   if: ['!worn spacesuit']
+                    then: [message spacednosuit]
+                -   if: [worn spacesuit]
+                    then: [message spacedwithsuit1, message spacedwithsuit2]
+                -   if: [nounloc force g_airlock]
+                    then: [message pullforcewithyou]
+                -   if: ['!nounloc force g_airlock', var rendez 1]
+                    then: [message finishdocking]
+                gameover: true
+            - setvar outer 1
+            - message openairlockmagnet
+            -   if: [nounloc force g_airlock]
+                then: [setvar tachyon 3, destroy force, message openairlockforce]
+            done: true
+        -   if: [var dock 1, '!var purify 3', '!worn spacesuit']
+            then: [message airlockfumes]
+            gameover: true
+    -   if: [input open inner, room storage|g_airlock, var g_inner 0]
+        then: [setvar g_inner 1, clearroomnotes g_airlock, addroomnote g_airlock inneropenouterclosed,
+            message openinnerdoor]
+        done: true
+    -   if: [input open inner, room trans|a_airlock, var a_inner 0]
+        then: [setvar a_inner 1, clearroomnotes a_airlock, addroomnote a_airlock inneropenouterclosed,
+            message openinnerdoor]
+        done: true
+    -   if: [input open outer, room g_airlock|a_airlock, var outer 0]
+        then: [setvar outer 1, 'clearroomnotes g_airlock,a_airlock', 'addroomnote
+                g_airlock,a_airlock innerclosedouteropen', message openouterdoor]
+        done: true
+    -   if: [input close inner, room storage|g_airlock, var g_inner 1]
+        then: [setvar g_inner 0, clearroomnotes g_airlock, addroomnote g_airlock innerclosedouterclosed,
+            message closeinnerdoor]
+        done: true
+    -   if: [input close inner, room trans|a_airlock, var a_inner 1]
+        then: [setvar a_inner 0, clearroomnotes a_airlock, addroomnote a_airlock innerclosedouterclosed,
+            message closeinnerdoor]
+        done: true
+    -   if: [input close outer, room g_airlock|a_airlock, var outer 1]
+        then: [setvar outer 0, 'clearroomnotes g_airlock,a_airlock', 'addroomnote
+                g_airlock,a_airlock innerclosedouterclosed', message closeouterdoor]
+        done: true
+    -   if: [input go up, room g_airlock, var dock 0, var outer 1]
+        then: [message cantgo]
+        done: true
+    -   if: [input remove suit, room g_airlock, var dock 0, var outer 1]
+        then: [message outerdoorstillopen]
+        done: true
+    -   if:
+        - [input open box, present box, var box 0]
+        - [input open panel, room e_bridge, var panel 0]
+        - [input open door, room main_storage, var storage 0]
+        then: [message locked]
+        done: true
+    -   if:
+        - [input unlock panel, room e_bridge, '!ininv keys', var panel 0]
+        - [input unlock box, present box, '!ininv keys', var box 0]
+        then: [message nokeys]
+        done: true
+    -   if: [input unlock door, room main_storage, var storage 0]
+        then: [message electroniclock]
+        done: true
+    -   if:
+        - [input unlock box, present box, var box 1]
+        - [input unlock panel, room e_bridge, var panel 1]
+        - [input unlock door, room main_storage, var storage 1]
+        then: [message alreadyunlocked]
+        done: true
+    -   if:
+        - [input open box, present box, var box 2]
+        - [input open|pry panel, room e_bridge, var panel 2]
+        - [input open door, room main_storage, var storage 2]
+        then: [message alreadyopen]
+        done: true
+    -   if:
+        - [input examine|search uniform]
+        - [input search skeleton]
+        then:
+        -   if: [room e_bridge, '!somewhere keys']
+            then: [sendnoun keys e_bridge, message somethinginpocket]
+            done: true
+        -   if: [room maintenance, '!somewhere knife']
+            then: [sendnoun knife maintenance, message somethinginpocket]
+            done: true
+    -   if: [input open pouch, present pouch]
+        then: [message zipperstuck]
+        done: true
+    -   if: [input cut pouch, var pouch 1]
+        then: [message alreadycut]
+        done: true
+    -   if: [input cut pouch with knife, '!ininv knife']
+        then: [message donthave]
+        done: true
+    -   if: [input cut pouch, '!ininv knife']
+        then: [message withwhat]
+        done: true
+    -   if: [input cut pouch, ininv knife, present pouch]
+        then: [setvar pouch 1, setnoundesc pouch nothingunusual, sendtonoun crowbar
+                pouch, message cutpouch]
+        done: true
+    -   if: [input unlock panel, room e_bridge, ininv keys, var panel 0]
+        then: [setvar panel 1, message unlocked]
+        done: true
+    -   if: [input open panel, room e_bridge, var panel 1]
+        then: [message jammed]
+        done: true
+    -   if:
+        - [input pry panel with crowbar, room e_bridge, '!ininv crowbar']
+        - [input pry panel with crowbar, room e_bridge, contained crowbar]
+        then: [message donthave]
+        done: true
+    -   if: [input pry panel, room e_bridge]
+        then:
+        -   if:
+            - ['!ininv crowbar']
+            - [contained crowbar]
+            then:
+            -   if: [ininv knife]
+                then: [message strongerthanknife]
+                done: true
+            - message withwhat
+            done: true
+        -   if: [var panel 0]
+            then: [message cantprypanel]
+            done: true
+        - setvar panel 2
+        - sendnoun screen,black,white e_bridge
+        - addroomnote e_bridge panelopen
+        - message prypanel
+        done: true
+    -   if: [input unlock box, present box, ininv keys, var box 0]
+        then: [setvar box 1, message unlocked]
+        done: true
+    -   if: [input open box, present box, var box 1]
+        then: [setvar box 2, setnoundesc box itsempty, sendtoroom sonic, message openfellout]
+        done: true
+    -   if: [input go south, room main_storage, '!var storage 2']
+        then: [message cantgo]
+        done: true
+    -   if: [input open door, room main_storage, var storage 1]
+        then: [removeroomnote main_storage closeddooraft, addroomnote main_storage
+                opendooraft, setvar storage 2, sendnoun force aux_storage, message
+                itsopen]
+        done: true
+    -   if: [input go north, room out_bridge]
+        then:
+        -   if: [ininv spacesuit]
+            then: [message dropsuit]
+            done: true
+        - message squeeze
+    -   if: [input go down, room stair]
+        then:
+        -   if: [var furniture 0]
+            then: [message blockedfurniture]
+            done: true
+        - message descend
+    -   if: [input turn sonic, present sonic]
+        then:
+        -   if: [var sonic -1]
+            then: [setvar sonic 4, message twistdisruptor]
+            done: true
+        - message alreadyprimed
+        done: true
+    -   if: [input turn molten, inroom molten]
+        then: [message notbloodylikely]
+        done: true
+    -   if: [input take magnet, inroom magnet]
+        then: [sendtoinv magnet, message takemagnet]
+        done: true
+    -   if: [input drop magnet, ininv magnet]
+        then: [sendtoroom magnet, message dropmagnet]
+        done: true
+    -   if: [input touch magnet]
+        then:
+        -   if: ['!worn spacesuit', inroom magnet]
+            then: [message feelslikemagnet]
+            done: true
+        -   if: [worn spacesuit]
+            then:
+            -   if: [ininv magnet]
+                then: [message clingstofingers]
+            -   if: [inroom magnet]
+                then: [setvar magnet 1, message immobilized]
+            done: true
+    -   if:
+        - [input go *, exitexists %2, var magnet 1]
+        - [input remove suit, var magnet 1]
+        then: [setvar magnet 0, message pullfreeofmagnet]
+    -   if: [input remove suit, '!var purify 3', room a_airlock|trans|out_trans|vault|out_vault|out_storage|main_storage|aux_storage|out_stair|stair|maintenance|corner|hallway|out_bridge|w_bridge|c_bridge|e_bridge]
+        then: [message nolongerwearing, message suitfumes]
+        gameover: true
+    -   if: [input examine uniform, room c_bridge]
+        replace: examine captain
+        done: true
+    -   if: [input read terminal|sign]
+        then: [showdesc %2]
+        done: true
+    -   if: [input touch controls, room c_bridge]
+        then: [showdesc %2]
+        done: true
+    -   if: [input go|enter booth, room sleep]
+        then: [message nosleep]
+        done: true
+    -   if:
+        - [input go east, room out_trans]
+        - [input go west, room out_vault]
+        then: [message skeletons]
+    -   if: [input go north, room vault]
+        then: [message vaultlarge]
+        done: true
+    -   if: [input hit]
+        then: [message violent]
+        done: true
+    -   if: [input fuck]
+        then: [message nothere]
+        done: true
+    -   if: [input health]
+        then:
+        -   if: [var hp 3]
+            then: [message healthhp3]
+        -   if: [var hp 2]
+            then: [message healthhp2]
+        -   if: [var hp 1]
+            then: [message healthhp1]
+        done: true
+    -   if: [input take inventory]
+        replace: inventory
+    -   if: [input put on *]
+        replace: wear %3
+    -   if: [input take off *]
+        replace: remove %3
+    -   if: [input go in *]
+        replace: enter %3
+    -   if: [input look at *]
+        replace: examine %3
+    -   if: [input north|south|east|west|up|down]
+        replace: go %1
+    -   if: [input pry open *]
+        replace: pry %3
+    -   if: [input push|open|close|unlock|cut|pry|remove *, '!present %2']
+        then: [message dontsee]
+        done: true
+    -   if: [input push|open|close|unlock|cut|pry|enter *]
+        then: [message cantverb]
+        done: true
+    -   if: [input search]
+        then: [message nothingunusual]
+        done: true
+    -   if: [input touch *]
+        then: [message touched]
+        done: true
+    -   if: [input wait]
+        then: [message timepasses]
+        done: true
+    -   if: [input take *]
+        then:
+        -   if: ['!present %2']
+            then: [message dontsee]
+            done: true
+        -   if: ['!movable %2']
+            then: [message cantverb]
+            done: true
+        -   if: [ininv %2]
+            then: [message alreadycarrying]
+            done: true
+        - sendtoinv %2
+        - message taken
+        done: true
+    -   if: [input wear *]
+        then:
+        -   if: ['!present %2']
+            then: [message dontsee]
+            done: true
+        -   if: ['!wearable %2']
+            then: [message cantverb]
+            done: true
+        -   if: [worn %2]
+            then: [message alreadywearing]
+            done: true
+        - wear %2
+        - message wearing
+        done: true
+    -   if: [input drop *]
+        then:
+        -   if: [ininv %2]
+            then: [sendtoroom %2, message dropped]
+            done: true
+        - message donthave
+        done: true
+    -   if: [input remove *, wearable %2]
+        then:
+        -   if: [worn %2]
+            then: [sendtoinv %2, message nolongerwearing]
+            done: true
+        - message notwearing
+        done: true
+    -   if: [input take|remove *, contained %2, present %2]
+        then: [sendtoinv %2, message okay]
+        done: true
+    -   if: [input remove *, present %2, '!contained %2', '!worn %2']
+        then: [message fromwhat]
+        done: true
+    -   if: [input examine]
+        then:
+        -   if:
+            - [present %2, hasdesc %2]
+            - [present %2, hasnotes %2]
+            then: ['showdesc %2:present', 'shownotes %2:present']
+            done: true
+        - message nothingunusual
+        done: true
+    -   if: [input inventory]
+        then:
+        -   if: [carrying]
+            then: [inv carrying invitem invitemworn]
+            done: true
+        - message carryingnothing
+        done: true
+    -   if: [input look]
+        then: [showdesc, shownotes, showcontents]
+        done: true
+    -   if: [input go north|south|east|west|up|down]
+        then:
+        -   if: [exitexists %2]
+            then: [move %2, showdesc, shownotes, showcontents]
+            done: true
+        - message cantgo
+        done: true
+    -   if: [input go]
+        then: [message cantgothere]
+        done: true
+    -   if: [input score]
+        then: [message turns]
+        done: true
+    -   if: [input load]
+        then: [load]
+        done: true
+    -   if: [input save]
+        then: [save]
+        done: true
+    -   if: [input * *]
+        then: [message dontknowhowsomething]
+        done: true
+    -   if: [input *]
+        then: [message dontknowhow]
+        done: true
+-   -   if: [var ack 1]
+        then: [setvar ack 0, message announces, message cancelled]
+    -   if: [var ack 2]
+        then: [setvar ack 1]
+    -   if: [room trans, var tachyon 0]
+        then: [setvar tachyon 1]
+    -   if: [var sonic >-1]
+        then:
+        - adjustvar sonic -1
+        -   if: [var sonic >0, present sonic]
+            then: [message glowingnumeral]
+        -   if: [var sonic 0]
+            then:
+            -   if: [present sonic]
+                then:
+                - message disruptorbursts
+                -   if: [room stair]
+                    then: [message destroyedfurniture]
+                gameover: true
+            -   if: [nounloc sonic stair]
+                then: [setvar furniture 1, message heardisruptorshatter]
+            -   if: ['!nounloc sonic stair']
+                then: [message heardisruptor]
+            - swapnouns sonic molten
+    -   if: [var storage 2]
+        then:
+        -   if: ['!inroom force']
+            then: [setvar force 0]
+        -   if: [inroom force]
+            then:
+            - message forceinroom
+            -   if: [var force 1]
+                then:
+                -   if: [random 50]
+                    then:
+                    - adjustvar hp -1
+                    -   if: [var hp 2]
+                        then: [message jolt1]
+                    -   if: [var hp 1]
+                        then: [message jolt2]
+                    -   if: [var hp 0]
+                        then: [message jolt3]
+                        gameover: true
+            - setvar force 1
