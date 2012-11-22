@@ -563,8 +563,7 @@
 		<message id="carrying">You are carrying:</message>
 		<message id="invitem">%NOUN.</message>
 		<message id="invitemworn">%NOUN (being worn).</message>
-		<message id="invitemcontains">&#09;The %NOUN contains:</message>
-		<message id="invitemcontained">&#09;&#09;%NOUN.</message>
+		<message id="itemcontains">The %NOUN contains:</message>
 		<message id="taken">Taken.</message>
 		<message id="dropped">Dropped.</message>
 		<message id="donthave">You don't have it.</message>
@@ -1341,8 +1340,10 @@
 				<cond>
 					<if>present %2,hasdesc %2</if>
 					<if>present %2,hasnotes %2</if>
+					<if>present %2,hascontents %2</if>
 					<action>showdesc %2:present</action>
 					<action>shownotes %2:present</action>
+					<action>showcontents %2:present itemcontains 1</action>
 					<done />
 				</cond>
 				<action>message nothingunusual</action>
@@ -1352,7 +1353,8 @@
 				<if>input inventory</if>
 				<cond>
 					<if>carrying</if>
-					<action>inv carrying invitem invitemworn</action>
+					<action>message carrying</action>
+					<action>inv invitem invitemworn itemcontains</action>
 					<done />
 				</cond>
 				<action>message carryingnothing</action>
@@ -1362,7 +1364,7 @@
 				<if>input look</if>
 				<action>showdesc</action>
 				<action>shownotes</action>
-				<action>showcontents</action>
+				<action>showcontents %current_room itemcontains 0</action>
 				<done />
 			</cond>
 			<cond>

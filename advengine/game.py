@@ -82,8 +82,12 @@ class Game:
         return set(noun for noun in self.nouns.values() if set(word) & noun.get_words())
     
     
-    def get_nouns_by_loc(self, *loc):
-        return set(noun for noun in self.nouns.values() if set(loc) & noun.get_locs())
+    def get_nouns_by_loc(self, *oid):
+        return set(noun for noun in self.nouns.values() if set(oid) & noun.get_locs())
+    
+    
+    def has_contents(self, *oid):
+        return any(noun for noun in self.nouns.values() if set(oid) & noun.get_locs())
     
     
     def get_nouns_present(self):

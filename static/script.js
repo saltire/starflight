@@ -11,7 +11,7 @@ $(function() {
 			$('.command input').val('');
 			$('.dialogue').append($('<p />').addClass('input').html(json.input));
 			for (i in json.output) {
-				var msg = json.output[i].replace(/\n/g, '<br />');
+				var msg = json.output[i].replace(/\n/g, '<br />').replace(/\t/g, '&nbsp;&nbsp;&nbsp;&nbsp;');
 				$('.dialogue').append($('<p />').addClass('output').html(msg));
 			}
 			$('.dialogue').animate({scrollTop: $('.dialogue').prop('scrollHeight')});

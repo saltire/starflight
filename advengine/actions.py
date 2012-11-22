@@ -1,4 +1,16 @@
 class Actions:
+    def show_contents(self, oid, contains_msg=None, by_name=False, recursive=True, indent=0):
+        """Queue for output a list of nouns contained within a noun or room."""
+        for noun in sorted(self.game.get_nouns_by_loc(oid)):
+            if noun.is_visible():
+                self.queue_raw_output('\t' * indent +
+                                      noun.get_name() if by_name else noun.get_short_desc())
+                if recursive and self.game.has_contents(noun.get_id()):
+                    if contains_msg:
+                        self.queue_message(contains_msg, {'^': '\t' * (indent + 1), '%NOUN': noun.get_short_name()})
+                    self.show_contents(noun.get_id(), contains_msg, by_name=True, indent=indent + 1)
+
+    
     def a_message(self, mid):
         self.queue_message(mid)
     
@@ -18,18 +30,26 @@ class Actions:
                 self.queue_message(mid)
 
 
-    def a_showcontents(self, oword=None, by_name=False):
+    def a_showcontents(self, oword=None, contains_msg=None, by_name=False, recursive=True):
         for obj in self.match_objects(oword):
-            for noun in self.game.get_nouns_by_loc(obj.get_id()):
-                if noun.is_visible():
-                    self.queue_raw_output(noun.get_name() if by_name else noun.get_short_desc())
-                    self.show_noun_contents(noun)
+            self.show_contents(obj.get_id(), contains_msg, by_name, recursive)
                 
                 
-    def a_listcontents(self, oword=None):
-        self.a_showcontents(oword, True)
+    def a_listcontents(self, oword=None, recursive=True):
+        self.a_showcontents(oword, by_name=True, recursive=recursive)
                 
                 
+    def a_inv(self, carry_msg, wear_msg=None, contains_msg=None):
+        inv = self.game.get_nouns_by_loc('INVENTORY') | self.game.get_nouns_by_loc('WORN')
+        if inv:
+            for noun in inv:
+                self.queue_message(wear_msg if wear_msg and 'WORN' in noun.get_locs() else carry_msg,
+                                   {'%NOUN': noun.get_name()})
+                if contains_msg and self.game.has_contents(noun.get_id()):
+                    self.queue_message(contains_msg, {'^': '\t', '%NOUN': noun.get_short_name()})
+                    self.show_contents(noun.get_id(), contains_msg, by_name=True, indent=1)
+    
+    
     def a_move(self, movedir):
         try:
             dest = next(dest for exitdir, dest in self.game.get_current_room().get_exits().items()
@@ -40,16 +60,6 @@ class Actions:
             pass
             
             
-    def a_inv(self, intro_msg, carry_msg, wear_msg):
-        inv = self.game.get_nouns_by_loc('INVENTORY') | self.game.get_nouns_by_loc('WORN')
-        if inv:
-            self.queue_message(intro_msg)
-            for noun in inv:
-                self.queue_message(wear_msg if 'WORN' in noun.get_locs() else carry_msg,
-                                   {'%NOUN': noun.get_name()})
-                self.show_noun_contents(noun)
-    
-    
     def a_destroy(self, nword):
         for noun in self.match_nouns(nword):
             noun.clear_locs()

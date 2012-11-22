@@ -3,6 +3,8 @@ import random
 
 
 def is_filter(method):
+    """Allow a test to be used as a filter for nouns. The test must take
+    a single argument: an input word that could refer to a noun."""
     method.is_filter = True
     return method
 
@@ -103,6 +105,11 @@ class Tests:
     @is_filter
     def t_hasnotes(self, oword):
         return any(obj.get_notes() for obj in self.match_objects(oword))
+    
+    
+    @is_filter
+    def t_hascontents(self, oword):
+        return any(self.game.get_nouns_by_loc(obj.get_id()) for obj in self.match_objects(oword))
     
     
     def t_random(self, percent):

@@ -1,4 +1,5 @@
 import errno
+import logging
 import os
 
 from flask import Flask
@@ -14,6 +15,11 @@ app = Flask(__name__)
 app.secret_key = '\xaau!uhb\xec\x87\xcd\x94\x1d\xbf\x8eF/\x92|\x87\xcbko\xf1\xda3'
 
 flask_dir = os.path.dirname(os.path.realpath(__file__))
+
+handler = logging.FileHandler(os.path.join(flask_dir, 'debug.log'))
+#handler = logging.StreamHandler()
+handler.setLevel(logging.DEBUG)
+app.logger.addHandler(handler)
 
 try:
     os.makedirs(os.path.join(flask_dir, 'sessions'))
@@ -88,6 +94,7 @@ def do_ajax_command():
 
 @app.route('/newgame', methods=['get','post'])
 def new_game():
+    session.destroy()
     init_adventure()
     return redirect(url_for('index'))
 

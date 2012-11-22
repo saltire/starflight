@@ -135,7 +135,7 @@ class Adventure(tests.Tests, actions.Actions):
         cond, neg = (cond[1:], True) if cond[0] == '!' else (cond, False)
             
         cwords = cond.strip().split()
-        success = getattr(self, 't_{0}'.format(cwords[0]))(*cwords[1:])
+        success = getattr(self, 't_' + cwords[0])(*cwords[1:])
         logging.debug('test: %s%s: %s', '!' if neg else '', cond, success ^ neg)
         return success ^ neg
     
@@ -145,7 +145,7 @@ class Adventure(tests.Tests, actions.Actions):
         #action = self.sub_input_words(action.strip())
         awords = action.strip().split()
         logging.debug('action: %s', action)
-        return getattr(self, 'a_{0}'.format(awords[0]))(*awords[1:])
+        return getattr(self, 'a_' + awords[0])(*awords[1:])
     
     
     def queue_raw_output(self, message):
@@ -165,7 +165,7 @@ class Adventure(tests.Tests, actions.Actions):
         optionally replacing one or more substrings passed in a dict."""
         message = self.messages[mid]
         for search, replace in sub.items():
-            message = message.replace(search, replace)
+            message = re.sub(search, replace, message)
         self.queue_raw_output(message)
     
     
@@ -185,8 +185,8 @@ class Adventure(tests.Tests, actions.Actions):
     def filter_is_true(self, nid, test):
         """Run a test on a particular noun, passed by ID."""
         try:
-            tmethod, neg = ((getattr(self, 't_{0}'.format(test[1:])), True) if test[0] == '!'
-                            else (getattr(self, 't_{0}'.format(test)), False))
+            tmethod, neg = ((getattr(self, 't_' + test[1:]), True) if test[0] == '!'
+                            else (getattr(self, 't_' + test), False))
             if not hasattr(tmethod, 'is_filter'):
                 raise AttributeError
             return tmethod(nid) ^ neg
@@ -196,42 +196,33 @@ class Adventure(tests.Tests, actions.Actions):
             return True
 
     
-    def match_nouns(self, inputword):
+    def match_nouns(self, nword):
         """Return a set of nouns matching an input. If input is a noun ID or a
         comma-separated list of IDs, the set will contain said noun or nouns.
         If an input wildcard is passed, it will contain all nouns matching that
         input word. If a filter is specified after the wildcard, the results
         will be narrowed based on whether they pass the corresponding test."""
-        if inputword[0] == '%':
-            if ':' in inputword:
+        if nword[0] == '%':
+            if ':' in nword:
                 # filter matching nouns using tests
-                iword, tests = inputword.split(':', 1)
+                iword, tests = nword.split(':', 1)
                 return set(noun for noun in self.game.get_nouns_by_name(self.sub_input_words(iword))
                            if all(self.filter_is_true(noun.get_id(), test)
                                   for test in tests.split(':')))
             else:
                 # return all nouns matching wildcard
-                return self.game.get_nouns_by_name(self.sub_input_words(inputword))
+                return self.game.get_nouns_by_name(self.sub_input_words(nword))
         else:
             # return all nouns with these exact ids
-            return set(self.game.get_noun(nid) for nid in inputword.split(','))
+            return set(self.game.get_noun(nid) for nid in nword.split(','))
         
         
-    def match_objects(self, inputword=None):
+    def match_objects(self, oword=None):
         """Return a set containing either a single room (default the current room)
         or a number of nouns matching the given word or id."""
-        return set([self.game.get_current_room()] if inputword is None else 
-                   self.match_nouns(inputword) or [self.game.get_room(inputword)])
-        
-        
-    def show_noun_contents(self, container):
-        """Queue for output a list of nouns contained within a noun."""
-        contents = self.game.get_nouns_by_loc(container.get_id())
-        if contents:
-            self.queue_raw_output(self.messages['invitemcontains'].replace('%NOUN', container.get_short_name()))
-            for noun in contents:
-                self.queue_raw_output(self.messages['invitemcontained'].replace('%NOUN', noun.get_name()))
-                self.show_noun_contents(noun)
+        return set([self.game.get_current_room()]
+                   if oword is None or oword == '%current_room'
+                   else self.match_nouns(oword) or [self.game.get_room(oword)])
                 
         
         

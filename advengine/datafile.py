@@ -1,5 +1,6 @@
 from collections import OrderedDict as odict
 import json
+import logging
 import os
 import re
 from xml.dom import minidom
@@ -33,6 +34,7 @@ class DataFile:
         if outpath is None:
             outpath = '{0}.{1}'.format(os.path.basename(gamepath).rsplit('.', 1)[0], ext)
         with open(outpath, 'wb') as outfile:
+            logging.debug('writing file: %s', outpath)
             outfile.write(outdata)
         
         
@@ -50,6 +52,7 @@ class DataFile:
     
     def import_json(self, gamepath):
         with open(gamepath, 'rb') as gamefile:
+            logging.debug('reading json file: %s', gamepath)
             return json.load(gamefile, object_pairs_hook=odict)
 
 
@@ -66,6 +69,7 @@ class DataFile:
     
     def import_yaml(self, gamepath):
         with open(gamepath, 'rb') as gamefile:
+            logging.debug('reading yaml file: %s', gamepath)
             return yaml.load(gamefile)
     
     
@@ -87,6 +91,7 @@ class DataFile:
 
     
     def import_xml(self, gamepath):
+        logging.debug('parsing xml file: %s', gamepath)
         data = xml.parse(gamepath)
         
         def get_room(rdata):

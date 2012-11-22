@@ -1,391 +1,391 @@
 {
     "rooms": {
         "pilot": {
+            "start": true, 
             "name": "Pilot's Cabin", 
+            "desc": "You are in the pilot's cabin of the Starflyer Ganymede. In front of you is a console covered with instruments, gauges and controls. To aft is the cold sleep chamber.", 
             "exits": {
                 "south": "sleep"
             }, 
-            "notes": ["lightflashing"], 
-            "start": true, 
-            "desc": "You are in the pilot's cabin of the Starflyer Ganymede. In front of you is a console covered with instruments, gauges and controls. To aft is the cold sleep chamber."
+            "notes": ["lightflashing"]
         }, 
         "sleep": {
-            "notes": [], 
+            "name": "Cold Sleep Chamber", 
             "desc": "You are in the cold sleep chamber. In front of you is the coffin-like suspended animation booth in which you recently awoke from your decade-long nap. To starboard is an open door. Forward is the door to the main cabin.", 
             "exits": {
                 "east": "storage", 
                 "north": "pilot"
             }, 
-            "name": "Cold Sleep Chamber"
+            "notes": []
         }, 
         "storage": {
-            "notes": [], 
+            "name": "Storage Cabin", 
             "desc": "You are in the storage cabin of the Ganymede. The wall is lined with metal hooks on which have been anchored small objects so that they will not float about in the absence of gravity. There is an entrance to the airlock set in the ceiling and a door to port leading back to the cold sleep chamber.", 
             "exits": {
                 "west": "sleep", 
                 "up": "g_airlock"
             }, 
-            "name": "Storage Cabin"
+            "notes": []
         }, 
         "g_airlock": {
-            "notes": ["inneropenouterclosed"], 
+            "name": "Ganymede's Airlock", 
             "desc": "You are in the Ganymede's airlock, with the inner door below you and the outer door above you.", 
             "exits": {
                 "down": "storage", 
                 "up": "a_airlock"
             }, 
-            "name": "Ganymede's Airlock"
+            "notes": ["inneropenouterclosed"]
         }, 
         "a_airlock": {
-            "notes": [], 
+            "name": "Armstrong's Airlock", 
             "desc": "You are in the Armstrong's airlock, with the inner door above you and the outer door below you.", 
             "exits": {
                 "down": "g_airlock", 
                 "up": "trans"
             }, 
-            "name": "Armstrong's Airlock"
+            "notes": []
         }, 
         "trans": {
-            "notes": [], 
+            "name": "Transporter Room", 
             "desc": "You are in the transportation room of the Armstrong. To your horror, you see a human skeleton dressed in a petty officer's uniform seated to one side of the entranceway, its head hunched over a computer terminal. Forward is a doorway, below is the airlock.", 
             "exits": {
                 "down": "a_airlock", 
                 "north": "out_trans"
             }, 
-            "name": "Transporter Room"
+            "notes": []
         }, 
         "out_trans": {
-            "notes": [], 
+            "name": "Outside Transporter Room", 
             "desc": "You are in a long hallway running from port to starboard. To aft is a door labelled TRANSPORTATION ROOM.", 
             "exits": {
                 "west": "out_stair", 
                 "east": "out_vault", 
                 "south": "trans"
             }, 
-            "name": "Outside Transporter Room"
+            "notes": []
         }, 
         "out_vault": {
-            "notes": [], 
+            "name": "Outside Passenger Vault", 
             "desc": "You are in a long hallway running from port to starboard. Forward is a door labelled PASSENGER VAULT.", 
             "exits": {
                 "west": "out_trans", 
                 "east": "out_storage", 
                 "north": "vault"
             }, 
-            "name": "Outside Passenger Vault"
+            "notes": []
         }, 
         "vault": {
-            "notes": [], 
+            "name": "Passenger Vault", 
             "desc": "You are in the passenger vault, a chamber so immense that the forward side of it is lost in dark mists. Lined up to port and starboard are tier after tier of cold sleep booths, containing the hibernating bodies of the Armstrong's passengers. To aft is a door.", 
             "exits": {
                 "south": "out_vault"
             }, 
-            "name": "Passenger Vault"
+            "notes": []
         }, 
         "out_storage": {
-            "notes": [], 
+            "name": "Outside Storage Room", 
             "desc": "You are at the starboard end of a long hallway. To aft is a door labelled STORAGE.", 
             "exits": {
                 "west": "out_vault", 
                 "south": "main_storage"
             }, 
-            "name": "Outside Storage Room"
+            "notes": []
         }, 
         "main_storage": {
-            "notes": ["closeddooraft"], 
+            "name": "Main Storage Room", 
             "desc": "You are in the Armstrong's main storage room. The exit is forward.", 
             "exits": {
                 "north": "out_storage", 
                 "south": "aux_storage"
             }, 
-            "name": "Main Storage Room"
+            "notes": ["closeddooraft"]
         }, 
         "aux_storage": {
-            "notes": [], 
+            "name": "Auxiliary Storage Room", 
             "desc": "You are in the Armstrong's auxiliary storage room. Unopened boxes are anchored to the walls with baling wire.", 
             "exits": {
                 "north": "main_storage"
             }, 
-            "name": "Auxiliary Storage Room"
+            "notes": []
         }, 
         "out_stair": {
-            "notes": [], 
+            "name": "Outside Stairshaft", 
             "desc": "You are in a long hallway running from port to starboard. Aft is a door labelled STAIRSHAFT.", 
             "exits": {
                 "west": "corner", 
                 "east": "out_trans", 
                 "south": "stair"
             }, 
-            "name": "Outside Stairshaft"
+            "notes": []
         }, 
         "stair": {
-            "notes": [], 
+            "name": "Winding Stairshaft", 
             "desc": "You are in a winding stairshaft leading downward to a lower level of the ship. There is a door to forward.", 
             "exits": {
                 "down": "maintenance", 
                 "north": "out_stair"
             }, 
-            "name": "Winding Stairshaft"
+            "notes": []
         }, 
         "maintenance": {
-            "notes": [], 
+            "name": "Maintenance Room", 
             "desc": "You are in the Armstrong's maintenance room. Another uniformed skeleton is sprawled over a console covered with gauges and instruments. There is a stairshaft leading up.", 
             "exits": {
                 "up": "stair"
             }, 
-            "name": "Maintenance Room"
+            "notes": []
         }, 
         "corner": {
-            "notes": [], 
+            "name": "Corner of Two Hallways", 
             "desc": "You are at the corner of two hallways, one heading forward, the other to starboard.", 
             "exits": {
                 "east": "out_stair", 
                 "north": "hallway"
             }, 
-            "name": "Corner of Two Hallways"
+            "notes": []
         }, 
         "hallway": {
-            "notes": [], 
+            "name": "Long Hallway", 
             "desc": "You are in a long hallway running from fore to aft.", 
             "exits": {
                 "north": "out_bridge", 
                 "south": "corner"
             }, 
-            "name": "Long Hallway"
+            "notes": []
         }, 
         "out_bridge": {
-            "notes": [], 
+            "name": "Outside Bridge", 
             "desc": "You are in a long hallway running from fore to aft. To starboard is a door labelled BRIDGE.", 
             "exits": {
                 "east": "w_bridge", 
                 "north": "debris", 
                 "south": "hallway"
             }, 
-            "name": "Outside Bridge"
+            "notes": []
         }, 
         "w_bridge": {
-            "notes": [], 
+            "name": "Port Side of Bridge", 
             "desc": "You are on the port side of the Armstrong's bridge. In front of you is a scene of unparalleled carnage. Long decayed skeletons in varicoloured uniforms are sprawled to all sides, some seated in contoured plastic chairs, some collapsed on the floor in grotesque attitudes. There is a door to port. The bridge continues to starboard.", 
             "exits": {
                 "west": "out_bridge", 
                 "east": "c_bridge"
             }, 
-            "name": "Port Side of Bridge"
+            "notes": []
         }, 
         "c_bridge": {
-            "notes": [], 
+            "name": "Centre of Bridge", 
             "desc": "You are in the centre of the Armstrong's bridge. You see a skeleton dressed in a captain's uniform, seated in a large chair, its hand perched over the navigational override controls.", 
             "exits": {
                 "west": "w_bridge", 
                 "east": "e_bridge"
             }, 
-            "name": "Centre of Bridge"
+            "notes": []
         }, 
         "e_bridge": {
-            "notes": [], 
+            "name": "Starboard Side of Bridge", 
             "desc": "You are on the starboard side of the Armstrong's bridge. A skeleton in a science officer's uniform is sprawled next to a plastic panel set into the wall.", 
             "exits": {
                 "west": "c_bridge"
             }, 
-            "name": "Starboard Side of Bridge"
+            "notes": []
         }, 
         "debris": {
-            "notes": [], 
+            "name": "In the Middle of Debris", 
             "desc": "You are in the middle of a vast assortment of debris. You can go no farther forward.", 
             "exits": {
                 "south": "out_bridge"
             }, 
-            "name": "In the Middle of Debris"
+            "notes": []
         }
     }, 
     "nouns": {
         "spacesuit": {
-            "name": "a bulky spacesuit", 
-            "locs": ["storage"], 
+            "visible": true, 
             "movable": true, 
             "wearable": true, 
-            "visible": true, 
-            "words": ["spacesuit", "suit"], 
             "shortdesc": "There is a bulky spacesuit here.", 
             "shortname": "spacesuit", 
-            "desc": "Almost the entire suit, including the flexible portions, is made of heavily metallized fabric, apparently incorporating some sort of iron mesh."
+            "name": "a bulky spacesuit", 
+            "words": ["spacesuit", "suit"], 
+            "desc": "Almost the entire suit, including the flexible portions, is made of heavily metallized fabric, apparently incorporating some sort of iron mesh.", 
+            "locs": ["storage"]
         }, 
         "pouch": {
-            "name": "a plastic pouch", 
-            "locs": ["storage"], 
-            "movable": true, 
             "visible": true, 
-            "words": ["pouch", "bag", "plastic"], 
+            "movable": true, 
             "shortdesc": "There is a plastic pouch here.", 
             "shortname": "plastic pouch", 
-            "desc": "It's heavy."
+            "name": "a plastic pouch", 
+            "words": ["pouch", "bag", "plastic"], 
+            "desc": "It's heavy.", 
+            "locs": ["storage"]
         }, 
         "crowbar": {
             "visible": true, 
-            "name": "a crowbar", 
-            "words": ["crowbar", "bar"], 
+            "movable": true, 
             "shortdesc": "There is a crowbar here.", 
             "shortname": "crowbar", 
-            "movable": true
+            "name": "a crowbar", 
+            "words": ["crowbar", "bar"]
         }, 
         "knife": {
             "visible": true, 
-            "name": "a small knife", 
-            "words": ["knife"], 
+            "movable": true, 
             "shortdesc": "There is a small knife here.", 
             "shortname": "knife", 
-            "movable": true
+            "name": "a small knife", 
+            "words": ["knife"]
         }, 
         "keys": {
             "visible": true, 
-            "name": "a set of keys", 
-            "words": ["keys", "key", "set"], 
+            "movable": true, 
             "shortdesc": "There is a set of keys here.", 
             "shortname": "set of keys", 
-            "movable": true
+            "name": "a set of keys", 
+            "words": ["keys", "key", "set"]
         }, 
         "sonic": {
-            "name": "a sonic disruptor", 
-            "movable": true, 
             "visible": true, 
-            "words": ["sonic", "disruptor", "cylinder", "cylinders"], 
+            "movable": true, 
             "shortdesc": "There is a sonic disruptor here.", 
             "shortname": "sonic disruptor", 
+            "name": "a sonic disruptor", 
+            "words": ["sonic", "disruptor", "cylinder", "cylinders"], 
             "desc": "The sonic disruptor is made of two independently rotatable metal cylinders, mounted end to end."
         }, 
         "molten": {
-            "shortdesc": "There is a molten sonic disruptor here.", 
             "visible": true, 
-            "words": ["molten", "sonic", "disruptor", "cylinder", "cylinders"], 
-            "name": "a molten sonic disruptor"
+            "shortdesc": "There is a molten sonic disruptor here.", 
+            "name": "a molten sonic disruptor", 
+            "words": ["molten", "sonic", "disruptor", "cylinder", "cylinders"]
         }, 
         "box": {
-            "name": "a wooden box", 
-            "locs": ["main_storage"], 
-            "movable": true, 
             "visible": true, 
-            "words": ["box", "wooden", "wood", "crate"], 
+            "movable": true, 
             "shortdesc": "There is a wooden box here.", 
             "shortname": "wooden box", 
-            "desc": "There seems to be something inside."
+            "name": "a wooden box", 
+            "words": ["box", "wooden", "wood", "crate"], 
+            "desc": "There seems to be something inside.", 
+            "locs": ["main_storage"]
         }, 
         "magnet": {
             "visible": true, 
-            "name": "a powerful bar magnet", 
-            "words": ["magnet"], 
-            "locs": ["debris"], 
+            "movable": true, 
             "shortdesc": "There is a powerful bar magnet here.", 
             "shortname": "magnet", 
-            "movable": true
+            "name": "a powerful bar magnet", 
+            "words": ["magnet"], 
+            "locs": ["debris"]
         }, 
         "radio": {
-            "name": "a two-way radio", 
-            "locs": ["storage"], 
-            "movable": true, 
             "visible": true, 
-            "words": ["radio", "twoway"], 
+            "movable": true, 
             "shortdesc": "There is a two-way radio here.", 
             "shortname": "two-way radio", 
-            "desc": "It appears to need batteries."
+            "name": "a two-way radio", 
+            "words": ["radio", "twoway"], 
+            "desc": "It appears to need batteries.", 
+            "locs": ["storage"]
         }, 
         "inner": {
-            "locs": ["storage", "g_airlock", "a_airlock", "trans"], 
             "words": ["inner", "innerdoor"], 
-            "desc": "An iris-shaped airlock door, allowing passage between the airlock and the ship."
+            "desc": "An iris-shaped airlock door, allowing passage between the airlock and the ship.", 
+            "locs": ["storage", "g_airlock", "a_airlock", "trans"]
         }, 
         "outer": {
-            "locs": ["g_airlock", "a_airlock"], 
             "words": ["outer", "outerdoor"], 
-            "desc": "An iris-shaped airlock door. This one exits the ship."
+            "desc": "An iris-shaped airlock door. This one exits the ship.", 
+            "locs": ["g_airlock", "a_airlock"]
         }, 
         "light": {
-            "locs": ["pilot"], 
             "words": ["light"], 
-            "desc": "It is blinking rapidly. Below the light is a small blue button."
+            "desc": "It is blinking rapidly. Below the light is a small blue button.", 
+            "locs": ["pilot"]
         }, 
         "blue": {
-            "locs": ["pilot"], 
-            "words": ["blue", "bluebutton"]
+            "words": ["blue", "bluebutton"], 
+            "locs": ["pilot"]
         }, 
         "console": {
-            "locs": ["pilot"], 
-            "notes": ["consolelightflashing"], 
             "words": ["console", "instrument", "instruments", "gauge", "gauges", "buttons"], 
-            "desc": "The console is covered mostly with digital gauges that allow you to monitor the functioning of the ship's computer. In the centre of the console, however, are four buttons, one green, one yellow, one orange, and one red."
+            "desc": "The console is covered mostly with digital gauges that allow you to monitor the functioning of the ship's computer. In the centre of the console, however, are four buttons, one green, one yellow, one orange, and one red.", 
+            "locs": ["pilot"], 
+            "notes": ["consolelightflashing"]
         }, 
         "green": {
-            "locs": ["pilot"], 
             "words": ["green", "greenbutton", "acknowledge"], 
-            "desc": "Beneath the green button is the word ACKNOWLEDGE."
+            "desc": "Beneath the green button is the word ACKNOWLEDGE.", 
+            "locs": ["pilot"]
         }, 
         "yellow": {
-            "locs": ["pilot"], 
             "words": ["yellow", "yellowbutton", "tachyon", "tachyonbeam"], 
-            "desc": "Beneath the yellow button are the words TACHYON BEAM."
+            "desc": "Beneath the yellow button are the words TACHYON BEAM.", 
+            "locs": ["pilot"]
         }, 
         "orange": {
-            "locs": ["pilot"], 
             "words": ["orange", "orangebutton", "docking", "dockingcontrol"], 
-            "desc": "Beneath the orange button are the words DOCKING CONTROL."
+            "desc": "Beneath the orange button are the words DOCKING CONTROL.", 
+            "locs": ["pilot"]
         }, 
         "red": {
-            "locs": ["pilot"], 
             "words": ["red", "redbutton", "status", "report", "statusreport"], 
-            "desc": "Beneath the red button are the words STATUS REPORT."
+            "desc": "Beneath the red button are the words STATUS REPORT.", 
+            "locs": ["pilot"]
         }, 
         "booth": {
-            "locs": ["sleep"], 
-            "words": ["booth", "cold", "sleep", "coffin"]
+            "words": ["booth", "cold", "sleep", "coffin"], 
+            "locs": ["sleep"]
         }, 
         "petty": {
-            "locs": ["trans"], 
             "words": ["skeleton", "body", "pettyofficer", "petty", "officer", "crewmember", "crew"], 
-            "desc": "It appears to have been typing at the computer terminal."
+            "desc": "It appears to have been typing at the computer terminal.", 
+            "locs": ["trans"]
         }, 
         "terminal": {
-            "locs": ["trans"], 
             "words": ["computer", "terminal", "screen"], 
-            "desc": "On the video display you see the words:\n\n\"SHIP'S LOG, ENTRY 2,349.6.\n\n\"Whatever it is, we can't seem to stop it. The carnage is horrible. Most of the crew has succumbed, and I don't know how much longer I can hold out. Even now, the screams in the distance are hideous. Is there any way to\"\n\nAt that point, the message ends."
+            "desc": "On the video display you see the words:\n\n\"SHIP'S LOG, ENTRY 2,349.6.\n\n\"Whatever it is, we can't seem to stop it. The carnage is horrible. Most of the crew has succumbed, and I don't know how much longer I can hold out. Even now, the screams in the distance are hideous. Is there any way to\"\n\nAt that point, the message ends.", 
+            "locs": ["trans"]
         }, 
         "booths": {
-            "locs": ["vault"], 
             "words": ["booths", "booth", "tier", "cold", "sleep"], 
-            "desc": "Through the frosty window of the nearest booth you see the face of a young girl, apparently well and unharmed by whatever has struck the ship's crew."
+            "desc": "Through the frosty window of the nearest booth you see the face of a young girl, apparently well and unharmed by whatever has struck the ship's crew.", 
+            "locs": ["vault"]
         }, 
         "captain": {
-            "locs": ["c_bridge"], 
             "words": ["skeleton", "body", "captain", "capn", "skipper", "jtk", "officer", "crewmember", "crew"], 
-            "desc": "Just beneath the collar of the captain's uniform is the monogram JTK."
+            "desc": "Just beneath the collar of the captain's uniform is the monogram JTK.", 
+            "locs": ["c_bridge"]
         }, 
         "navcontrols": {
-            "locs": ["c_bridge"], 
             "words": ["nav", "navigation", "navigational", "controls", "navigationalcontrols", "navcontrols"], 
-            "desc": "Considering your rudimentary knowledge of megaship navigation, you shouldn't even be *thinking* of touching the navigational controls."
+            "desc": "Considering your rudimentary knowledge of megaship navigation, you shouldn't even be *thinking* of touching the navigational controls.", 
+            "locs": ["c_bridge"]
         }, 
         "science": {
-            "locs": ["e_bridge"], 
             "words": ["skeleton", "body", "scienceofficer", "science", "officer", "skull", "spock"], 
-            "desc": "The skull is cracked where it fell against the panel."
+            "desc": "The skull is cracked where it fell against the panel.", 
+            "locs": ["e_bridge"]
         }, 
         "m_officer": {
-            "locs": ["maintenance"], 
             "words": ["skeleton", "body", "officer", "crewmember", "crew"], 
-            "desc": "The skeleton is sprawled across the instrument console."
+            "desc": "The skeleton is sprawled across the instrument console.", 
+            "locs": ["maintenance"]
         }, 
         "m_console": {
-            "locs": ["maintenance"], 
             "words": ["console", "instrument", "instruments", "gauge", "gauges"], 
-            "desc": "Although the skeleton is covering most of the console, you can see a flashing sign at one end. Below the sign is a yellow button."
+            "desc": "Although the skeleton is covering most of the console, you can see a flashing sign at one end. Below the sign is a yellow button.", 
+            "locs": ["maintenance"]
         }, 
         "sign": {
-            "locs": ["maintenance"], 
             "words": ["sign", "words"], 
-            "desc": "The flashing sign reads:\n\nAIR LEVEL TOXIC!\nPRESS PURIFICATION CONTROL THREE TIMES!"
+            "desc": "The flashing sign reads:\n\nAIR LEVEL TOXIC!\nPRESS PURIFICATION CONTROL THREE TIMES!", 
+            "locs": ["maintenance"]
         }, 
         "m_yellow": {
-            "locs": ["maintenance"], 
             "words": ["yellow", "yellowbutton", "purification"], 
-            "desc": "Beneath the yellow button are the words PURIFICATION CONTROL."
+            "desc": "Beneath the yellow button are the words PURIFICATION CONTROL.", 
+            "locs": ["maintenance"]
         }, 
         "screen": {
             "words": ["video", "screen", "computer", "monitor"], 
@@ -593,8 +593,7 @@
         "carrying": "You are carrying:", 
         "invitem": "%NOUN.", 
         "invitemworn": "%NOUN (being worn).", 
-        "invitemcontains": "\tThe %NOUN contains:", 
-        "invitemcontained": "\t\t%NOUN.", 
+        "itemcontains": "The %NOUN contains:", 
         "taken": "Taken.", 
         "dropped": "Dropped.", 
         "donthave": "You don't have it.", 
@@ -1328,9 +1327,10 @@
                     {
                         "if": [
                             ["present %2", "hasdesc %2"], 
-                            ["present %2", "hasnotes %2"]
+                            ["present %2", "hasnotes %2"], 
+                            ["present %2", "hascontents %2"]
                         ], 
-                        "then": ["showdesc %2:present", "shownotes %2:present"], 
+                        "then": ["showdesc %2:present", "shownotes %2:present", "showcontents %2:present itemcontains 1"], 
                         "done": true
                     }, 
                     "message nothingunusual"
@@ -1342,7 +1342,7 @@
                 "then": [
                     {
                         "if": ["carrying"], 
-                        "then": ["inv carrying invitem invitemworn"], 
+                        "then": ["message carrying", "inv invitem invitemworn itemcontains"], 
                         "done": true
                     }, 
                     "message carryingnothing"
@@ -1351,7 +1351,7 @@
             }, 
             {
                 "if": ["input look"], 
-                "then": ["showdesc", "shownotes", "showcontents"], 
+                "then": ["showdesc", "shownotes", "showcontents %current_room itemcontains 0"], 
                 "done": true
             }, 
             {
