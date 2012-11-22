@@ -6,10 +6,8 @@ body { background: #808073; color: #f1f1da; font-size: 18px;
 .dialogue { height: 500px; overflow: auto; }
 
 p { margin: 0 0 0.8em; }
-	
 .input { margin: 20px; color: #ffffff; }
 .pause { margin: 20px; font-style: italic; color: #ffffff; }
-
 .helptext em { color: #ffffff; }
 
 form { display: inline-block; }

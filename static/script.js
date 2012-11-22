@@ -6,6 +6,7 @@ $(function() {
 	
 	$('.command').submit(function(e) {
 		e.preventDefault();
+		$('.command input, .enter').prop('disabled', 'disabled').fadeTo(100, .5);
 		$.post('fetch', {command: $('.command input').val()}, function(json) {
 			$('.command input').val('');
 			$('.dialogue').append($('<p />').addClass('input').html(json.input));
@@ -14,6 +15,7 @@ $(function() {
 				$('.dialogue').append($('<p />').addClass('output').html(msg));
 			}
 			$('.dialogue').animate({scrollTop: $('.dialogue').prop('scrollHeight')});
+			$('.command input, .enter').removeProp('disabled').fadeTo(100, 1);
 		});
 	});
 	
