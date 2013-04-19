@@ -122,7 +122,7 @@ class Adventure():
         cond, neg = (cond[1:], True) if cond[0] == '!' else (cond, False)
             
         cwords = cond.strip().split()
-        success = getattr(self.tests, 't_' + cwords[0])(*cwords[1:])
+        success = getattr(self.tests, cwords[0])(*cwords[1:])
         logging.debug('test: %s%s: %s', '!' if neg else '', cond, success ^ neg)
         return success ^ neg
     
@@ -131,7 +131,7 @@ class Adventure():
         """Call the method for a single action."""
         #action = self.sub_input_words(action.strip())
         logging.debug('action: %s', action)
-        return getattr(self.actions, 'a_' + action)(*params)
+        return getattr(self.actions, action)(*params)
     
     
     def is_game_over(self):

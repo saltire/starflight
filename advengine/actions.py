@@ -16,35 +16,35 @@ class Actions:
                     self._show_contents(noun.id, contains_msg, by_name=True, indent=indent + 1)
 
     
-    def a_message(self, mid):
+    def message(self, mid):
         self.game.queue_message(mid)
     
     
-    def a_pause(self):
+    def pause(self):
         self.game.queue_output('PAUSE')
     
     
-    def a_showdesc(self, oword=None):
+    def showdesc(self, oword=None):
         for obj in self.game.match_objects(oword):
             self.game.queue_output(obj.desc)
         
         
-    def a_shownotes(self, oword=None):
+    def shownotes(self, oword=None):
         for obj in self.game.match_objects(oword):
             for mid in obj.notes:
                 self.game.queue_message(mid)
 
 
-    def a_showcontents(self, oword=None, contains_msg=None, by_name=False, recursive=True):
+    def showcontents(self, oword=None, contains_msg=None, by_name=False, recursive=True):
         for obj in self.game.match_objects(oword):
             self._show_contents(obj.id, contains_msg, by_name, recursive)
                 
                 
-    def a_listcontents(self, oword=None, recursive=True):
-        self.a_showcontents(oword, by_name=True, recursive=recursive)
+    def listcontents(self, oword=None, recursive=True):
+        self.showcontents(oword, by_name=True, recursive=recursive)
                 
                 
-    def a_inv(self, carry_msg, nothing_msg, wear_msg=None, contains_msg=None):
+    def inv(self, carry_msg, nothing_msg, wear_msg=None, contains_msg=None):
         inv = self.game.get_nouns_by_loc('INVENTORY') | self.game.get_nouns_by_loc('WORN')
         if inv:
             for noun in inv:
@@ -58,7 +58,7 @@ class Actions:
             self.game.queue_message(nothing_msg)
     
     
-    def a_move(self, movedir):
+    def move(self, movedir):
         try:
             dest = next(dest for exitdir, dest in self.game.current_room.exits.items()
                         if self.game.match_word(movedir, exitdir))
@@ -67,43 +67,43 @@ class Actions:
             pass
             
             
-    def a_destroy(self, nword):
+    def destroy(self, nword):
         for noun in self.game.match_nouns(nword):
             self.game.destroy_noun(noun)
             
             
-    def a_sendnoun(self, nword, rword):
+    def sendnoun(self, nword, rword):
         for noun in self.game.match_nouns(nword):
             self.game.move_noun(noun, *rword.split(','))
             
             
-    def a_sendtoroom(self, nword):
+    def sendtoroom(self, nword):
         for noun in self.game.match_nouns(nword):
             self.game.move_noun(noun, self.game.current_room.id)
         
         
-    def a_sendtoinv(self, nword):
+    def sendtoinv(self, nword):
         for noun in self.game.match_nouns(nword):
             self.game.move_noun(noun, 'INVENTORY')
         
         
-    def a_wear(self, nword):
+    def wear(self, nword):
         for noun in self.game.match_nouns(nword):
             self.game.move_noun(noun, 'WORN')
         
         
-    def a_sendtonounloc(self, nword, d_nword):
+    def sendtonounloc(self, nword, d_nword):
         oids = set.union(*(self.game.get_noun_locs(noun) for noun in self.game.match_nouns(d_nword)))
         for noun in self.game.match_nouns(nword):
             self.game.move_noun(noun, *oids)
             
             
-    def a_sendtonoun(self, nword, d_nword):
+    def sendtonoun(self, nword, d_nword):
         for noun in self.game.match_nouns(nword):
             self.game.move_noun(noun, *(noun.id for noun in self.game.match_nouns(d_nword)))
         
         
-    def a_swapnouns(self, nword1, nword2):
+    def swapnouns(self, nword1, nword2):
         nouns1 = self.game.match_nouns(nword1)
         nouns2 = self.game.match_nouns(nword2)
         locs1 = set.union(*(self.game.get_noun_locs(noun) for noun in nouns1))
@@ -114,48 +114,48 @@ class Actions:
             self.game.move_noun(noun, *locs1)
             
             
-    def a_setnoundesc(self, nword, mid):
+    def setnoundesc(self, nword, mid):
         for noun in self.game.match_nouns(nword):
             noun.desc = self.messages[mid]
             
             
-    def a_addnounnote(self, nword, mid):
+    def addnounnote(self, nword, mid):
         for noun in self.game.match_nouns(nword):
             noun.notes.append(mid)
         
         
-    def a_removenounnote(self, nword, mid):
+    def removenounnote(self, nword, mid):
         for noun in self.game.match_nouns(nword):
             while mid in noun.notes:
                 noun.notes.remove(mid)
         
         
-    def a_clearnounnotes(self, nword):
+    def clearnounnotes(self, nword):
         for noun in self.game.match_nouns(nword):
             del noun.notes[:]
         
         
-    def a_addroomnote(self, rword, mid):
+    def addroomnote(self, rword, mid):
         for rid in rword.split(','):
             self.game.rooms[rid].notes.append(mid)
         
         
-    def a_removeroomnote(self, rword, mid):
+    def removeroomnote(self, rword, mid):
         for rid in rword.split(','):
             while mid in self.game.rooms[rid].notes:
                 self.game.rooms[rid].notes.remove(mid)
         
         
-    def a_clearroomnotes(self, rword):
+    def clearroomnotes(self, rword):
         for rid in rword.split(','):
             del self.game.rooms[rid].notes[:]
             
     
-    def a_setvar(self, vid, value):
+    def setvar(self, vid, value):
         self.game.vars[vid] = value
         
     
-    def a_adjustvar(self, vid, value):
+    def adjustvar(self, vid, value):
         if value[0] == '+':
             self.game.vars[vid] += int(value[1:])
         elif value[0] == '-':

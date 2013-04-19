@@ -96,7 +96,7 @@ class Game:
         def filter_is_true(nid, test):
             """Run a test on a particular noun, passed by ID."""
             try:
-                tmethod = self.filters['t_' + test.lstrip('!')]
+                tmethod = self.filters[test.lstrip('!')]
             except KeyError:
                 return True
             
