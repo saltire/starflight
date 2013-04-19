@@ -11,40 +11,44 @@ def is_filter(method):
 
 
 class Tests:
+    def __init__(self, game):
+        self.game = game
+        
+        
     def t_start(self):
-        return self.game.get_turn() == 1
+        return self.game.get_turn() == 0
     
     
     def t_input(self, *cwords):
-        return (len(self.words) >= len(cwords) and
-                all(self.match_word(self.words[i], cword) for i, cword in enumerate(cwords)))
+        return self.game.input_matches(cwords)
     
     
     def t_var(self, vid, value):
-        var = self.game.get_var(vid)
+        var = self.game.vars[vid]
         
         if value[0] == '<':
             return var < int(value[1:])
         elif value[0] == '>':
             return var > int(value[1:])
-        elif value[0] in ('>=', '=>'):
+        elif value[:2] in ('>=', '=>'):
             return var >= int(value[2:])
-        elif value[0] in ('<=', '=<'):
+        elif value[:2] in ('<=', '=<'):
             return var <= int(value[2:])
         else:
             return var == int(value)
     
     
     def t_room(self, rword):
-        return any(self.game.get_current_room_id() == rid for rid in rword.split('|'))
+        return any(self.game.current_room.id == rid for rid in rword.split('|'))
     
     
     def t_visited(self, rword):
-        return any(self.game.get_room(rid).visited() for rid in rword.split('|'))
+        return any(self.game.rooms[rid].is_visited() for rid in rword.split('|'))
     
     
     def t_exitexists(self, direction):
-        return any(self.match_word(direction, rexit) for rexit in self.game.get_current_room().get_exits())
+        return any(self.game.match_word(direction, exitdir)
+                   for exitdir in self.game.current_room.exits.iterkeys())
     
     
     def t_carrying(self):
@@ -52,8 +56,9 @@ class Tests:
     
     
     def t_nounloc(self, nword, rword):
-        return any(noun for noun in self.match_nouns(nword)
-                   for rid in rword.split('|') if rid in noun.get_locs())
+        return any(True for noun in self.game.match_nouns(nword)
+                   for rid in rword.split('|')
+                   if self.game.is_noun_at(noun, rid))
     
     
     @is_filter
@@ -68,48 +73,49 @@ class Tests:
         
     @is_filter
     def t_inroom(self, nword):
-        return self.t_nounloc(nword, self.game.get_current_room_id())
+        return self.t_nounloc(nword, self.game.current_room.id)
     
     
     @is_filter
     def t_present(self, nword):
-        return bool(self.match_nouns(nword) & self.game.get_nouns_present())
+        return bool(self.game.match_nouns(nword) & self.game.get_nouns_present())
     
     
     @is_filter
     def t_contained(self, nword):
-        return any(noun for noun in self.match_nouns(nword) for loc in noun.get_locs()
-                   if loc in self.game.get_noun_list())
+        return any(True for noun in self.game.match_nouns(nword)
+                   for oid in self.game.get_noun_locs(noun)
+                   if oid in self.game.nouns.keys())
         
         
     @is_filter
     def t_somewhere(self, nword):
-        return any(noun.get_locs() for noun in self.match_nouns(nword))
+        return any(self.game.get_noun_locs(noun) for noun in self.game.match_nouns(nword))
     
     
     @is_filter
     def t_movable(self, nword):
-        return any(noun.is_movable() for noun in self.match_nouns(nword))
+        return any(noun.is_movable() for noun in self.game.match_nouns(nword))
     
     
     @is_filter
     def t_wearable(self, nword):
-        return any(noun.is_wearable() for noun in self.match_nouns(nword))
+        return any(noun.is_wearable() for noun in self.game.match_nouns(nword))
     
     
     @is_filter
     def t_hasdesc(self, oword):
-        return any(obj.get_description() for obj in self.match_objects(oword))
+        return any(obj.desc for obj in self.game.match_objects(oword))
     
     
     @is_filter
     def t_hasnotes(self, oword):
-        return any(obj.get_notes() for obj in self.match_objects(oword))
+        return any(obj.notes for obj in self.game.match_objects(oword))
     
     
     @is_filter
     def t_hascontents(self, oword):
-        return any(self.game.get_nouns_by_loc(obj.get_id()) for obj in self.match_objects(oword))
+        return any(self.game.get_nouns_by_loc(obj.id) for obj in self.game.match_objects(oword))
     
     
     def t_random(self, percent):

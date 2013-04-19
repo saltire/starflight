@@ -1342,7 +1342,7 @@
                 "then": [
                     {
                         "if": ["carrying"], 
-                        "then": ["message carrying", "inv invitem invitemworn itemcontains"], 
+                        "then": ["message carrying", "inv invitem carryingnothing invitemworn itemcontains"], 
                         "done": true
                     }, 
                     "message carryingnothing"

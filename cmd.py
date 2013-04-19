@@ -3,14 +3,16 @@ import textwrap
 
 from advengine import Adventure
 
+
+logging.basicConfig(filename='debug.log', level=logging.DEBUG)
+#logging.basicConfig(level=logging.DEBUG)
+
 gamefile = 'games/starflight.json'
 adv = Adventure(gamefile)
 
-logging.basicConfig(filename='debug.log', level=logging.DEBUG)
-
 command = ''
 while True:
-    status, output = adv.do_command(command)
+    output = adv.do_command(command)
     
     for msg in output:
         if msg == 'PAUSE':
@@ -20,7 +22,7 @@ while True:
         else:
             print '\n'.join(textwrap.fill(para) for para in msg.splitlines())
     
-    if status == 'gameover':
+    if adv.is_game_over():
         break
     
     print

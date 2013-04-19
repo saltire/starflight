@@ -1,112 +1,99 @@
+import inspect
 import logging
-import re
 
-import datafile
-import game
-import tests
-import actions
+from datafile import DataFile
+from game import Game
+from tests import Tests
+from actions import Actions
 
 
-class Adventure(tests.Tests, actions.Actions):
-    def __init__(self, gamepath, state=None):
-        data = datafile.DataFile().get_data(gamepath)
+class Adventure():
+    def __init__(self, gamepath):
+        data = DataFile().get_data(gamepath)
         
         self.controls = data['controls']
-        self.messages = data['messages']
-        self.game = game.Game(data, state)
+        self.game = Game(data)
         
-        def add_to_synonyms(wordslist):
-            for words in wordslist:
-                self.synonyms.update({word: self.synonyms.setdefault(word, set()) | set(words) for word in words})
-            
-        self.synonyms = {}
-        add_to_synonyms(data['words'])
-        add_to_synonyms([noun.get('words', []) for noun in data['nouns'].values()])
+        self.tests = Tests(self.game)
+        self.actions = Actions(self.game, self.tests)
         
-        
-    def export_state(self):
-        return self.game.export_state()
+        filters = dict(inspect.getmembers(self.tests, lambda m: hasattr(m, 'is_filter')))
+        self.game.add_filters(filters)
         
         
     def do_command(self, command):
         """Get a command, and execute a single turn of the game."""
-        self.game.increment_turn()
-        self.output = []
-        self.words = [word for word in command.strip().split() if word not in ('the', 'a', 'an')]
-
-        while True:
-            status = self.do_controls()
-            if status != 'replace':
-                break
-            
-        return status, self.output
+        self.game.start_turn(command)
+        actions = self.do_command_actions(command)
+        return self.game.end_turn(actions)
     
     
-    def do_controls(self):
+    def do_command_actions(self, command):
         """Step through all the tests and actions for this turn."""
-        status = 'ok'
+        actions = []
         
         for controlset in self.controls:
-            allactions = []
+            csactions = []
             for control in controlset:
-                status, actions = self.do_control(control)
-                allactions.extend(actions)
+                done = False
+                for action, params in self.get_control_actions(control):
+                    if action == 'replace':
+                        logging.debug('replace: %s', params)
+                        self.game.set_words(params)
+                        return self.do_command_actions(params)
+                    
+                    elif action == 'gameover':
+                        done = True
+                        self.game.end_game()
+                        break
+                    
+                    elif action == 'done':
+                        done = True
+                        break
+                    
+                    else:
+                        csactions.append((action, params))
+                        actions.append((action, params))
+                        logging.debug((action, params))
                 
-                if status == 'replace':
-                    self.words = self.sub_input_words(actions).split()
-                    logging.debug('replace: %s', ' '.join(self.words))
-                    return 'replace'
-                
-                elif status == 'gameover':
-                    logging.debug('gameover')
+                if done:
                     break
-                
-                elif status == 'done':
-                    logging.debug('done')
-                    status = 'ok'
-                    break
-        
-            for action in allactions:
-                self.do_action(action)
-                
-            if status == 'gameover':
-                break
             
-        return status
+            for action, params in csactions:
+                self.do_action(action, params)
+                if self.game.gameover:
+                    break
+                
+        return actions
     
     
-    def do_control(self, control):
+    def get_control_actions(self, control):
         """Execute the tests and (possibly) actions for a single control."""
-        status = 'ok'
-        allactions = []
+        actions = []
         
         if self.test_is_true(control.get('if')):
             if control.get('replace'):
-                return 'replace', control.get('replace')
+                actions.append(('replace', self.game.sub_input_words(control.get('replace'))))
+                return actions
             
             for action in control.get('then', []):
                 if isinstance(action, dict):
                     # action is a subcontrol
-                    status, actions = self.do_control(action)
-                    
-                    if status == 'replace':
-                        return 'replace', actions
-                    
-                    allactions.extend(actions)
-                    if status == 'gameover':
-                        return 'gameover', allactions
-                    if status == 'done':
-                        break
+                    actions.extend(self.get_control_actions(action))
                     
                 else:
-                    allactions.append(action)
+                    try:
+                        action, params = action.split(' ', 1)
+                        actions.append((action, params.split()))
+                    except ValueError:
+                        actions.append((action, []))
                     
             if control.get('done'):
-                status = 'done'
+                actions.append(('done', None))
             if control.get('gameover'):
-                status = 'gameover'
+                actions.append(('gameover', None))
             
-        return status, allactions
+        return actions
     
     
     def test_is_true(self, test):
@@ -135,94 +122,19 @@ class Adventure(tests.Tests, actions.Actions):
         cond, neg = (cond[1:], True) if cond[0] == '!' else (cond, False)
             
         cwords = cond.strip().split()
-        success = getattr(self, 't_' + cwords[0])(*cwords[1:])
+        success = getattr(self.tests, 't_' + cwords[0])(*cwords[1:])
         logging.debug('test: %s%s: %s', '!' if neg else '', cond, success ^ neg)
         return success ^ neg
     
     
-    def do_action(self, action):
+    def do_action(self, action, params):
         """Call the method for a single action."""
         #action = self.sub_input_words(action.strip())
-        awords = action.strip().split()
         logging.debug('action: %s', action)
-        return getattr(self, 'a_' + awords[0])(*awords[1:])
+        return getattr(self.actions, 'a_' + action)(*params)
     
     
-    def queue_raw_output(self, message):
-        """Add a string or list of strings to the output queue."""
-        if isinstance(message, list):
-            for msg in message:
-                self.queue_raw_output(msg)
-                
-        elif len(message):
-            message = re.sub('%VAR\((.+?)\)', lambda m: str(self.game.get_var(m.group(1))), message)
-            message = message.replace('%TURNS', str(self.game.get_turn()))
-            self.output.append(self.sub_input_words(message))
-            
-            
-    def queue_message(self, mid, sub={}):
-        """Get a message from the list and queue it for output,
-        optionally replacing one or more substrings passed in a dict."""
-        message = self.messages[mid]
-        for search, replace in sub.items():
-            message = re.sub(search, replace, message)
-        self.queue_raw_output(message)
-    
-    
-    def sub_input_words(self, phrase):
-        """Substitute %1, %2, etc. in phrase with words from the original command."""
-        sub_input = lambda m: self.words[int(m.group(1)) - 1] if len(self.words) >= int(m.group(1)) else ''
-        #logging.debug('substituting from: %s to: %s', phrase, re.sub('%(\d+)', sub_word, phrase))        
-        return re.sub('%(\d+)', sub_input, phrase)
-    
-    
-    def match_word(self, inputword, word):
-        """Check if an input word is a synonym of another word."""
-        inputword = self.sub_input_words(inputword)
-        return word == '*' or any(inputword in self.synonyms.get(word, []) for word in word.split('|'))
-    
-    
-    def filter_is_true(self, nid, test):
-        """Run a test on a particular noun, passed by ID."""
-        try:
-            tmethod, neg = ((getattr(self, 't_' + test[1:]), True) if test[0] == '!'
-                            else (getattr(self, 't_' + test), False))
-            if not hasattr(tmethod, 'is_filter'):
-                raise AttributeError
-            return tmethod(nid) ^ neg
-        
-        except AttributeError:
-            # test doesn't exist or doesn't have is_filter attribute
-            return True
+    def is_game_over(self):
+        return self.game.gameover
 
-    
-    def match_nouns(self, nword):
-        """Return a set of nouns matching an input. If input is a noun ID or a
-        comma-separated list of IDs, the set will contain said noun or nouns.
-        If an input wildcard is passed, it will contain all nouns matching that
-        input word. If a filter is specified after the wildcard, the results
-        will be narrowed based on whether they pass the corresponding test."""
-        if nword[0] == '%':
-            if ':' in nword:
-                # filter matching nouns using tests
-                iword, tests = nword.split(':', 1)
-                return set(noun for noun in self.game.get_nouns_by_name(self.sub_input_words(iword))
-                           if all(self.filter_is_true(noun.get_id(), test)
-                                  for test in tests.split(':')))
-            else:
-                # return all nouns matching wildcard
-                return self.game.get_nouns_by_name(self.sub_input_words(nword))
-        else:
-            # return all nouns with these exact ids
-            return set(self.game.get_noun(nid) for nid in nword.split(','))
-        
-        
-    def match_objects(self, oword=None):
-        """Return a set containing either a single room (default the current room)
-        or a number of nouns matching the given word or id."""
-        return set([self.game.get_current_room()]
-                   if oword is None or oword == '%current_room'
-                   else self.match_nouns(oword) or [self.game.get_room(oword)])
-                
-        
-        
+
