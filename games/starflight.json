@@ -15,8 +15,7 @@
             "exits": {
                 "east": "storage", 
                 "north": "pilot"
-            }, 
-            "notes": []
+            }
         }, 
         "storage": {
             "name": "Storage Cabin", 
@@ -24,8 +23,7 @@
             "exits": {
                 "west": "sleep", 
                 "up": "g_airlock"
-            }, 
-            "notes": []
+            }
         }, 
         "g_airlock": {
             "name": "Ganymede's Airlock", 
@@ -42,8 +40,7 @@
             "exits": {
                 "down": "g_airlock", 
                 "up": "trans"
-            }, 
-            "notes": []
+            }
         }, 
         "trans": {
             "name": "Transporter Room", 
@@ -51,8 +48,7 @@
             "exits": {
                 "down": "a_airlock", 
                 "north": "out_trans"
-            }, 
-            "notes": []
+            }
         }, 
         "out_trans": {
             "name": "Outside Transporter Room", 
@@ -61,8 +57,7 @@
                 "west": "out_stair", 
                 "east": "out_vault", 
                 "south": "trans"
-            }, 
-            "notes": []
+            }
         }, 
         "out_vault": {
             "name": "Outside Passenger Vault", 
@@ -71,16 +66,14 @@
                 "west": "out_trans", 
                 "east": "out_storage", 
                 "north": "vault"
-            }, 
-            "notes": []
+            }
         }, 
         "vault": {
             "name": "Passenger Vault", 
             "desc": "You are in the passenger vault, a chamber so immense that the forward side of it is lost in dark mists. Lined up to port and starboard are tier after tier of cold sleep booths, containing the hibernating bodies of the Armstrong's passengers. To aft is a door.", 
             "exits": {
                 "south": "out_vault"
-            }, 
-            "notes": []
+            }
         }, 
         "out_storage": {
             "name": "Outside Storage Room", 
@@ -88,8 +81,7 @@
             "exits": {
                 "west": "out_vault", 
                 "south": "main_storage"
-            }, 
-            "notes": []
+            }
         }, 
         "main_storage": {
             "name": "Main Storage Room", 
@@ -105,8 +97,7 @@
             "desc": "You are in the Armstrong's auxiliary storage room. Unopened boxes are anchored to the walls with baling wire.", 
             "exits": {
                 "north": "main_storage"
-            }, 
-            "notes": []
+            }
         }, 
         "out_stair": {
             "name": "Outside Stairshaft", 
@@ -115,8 +106,7 @@
                 "west": "corner", 
                 "east": "out_trans", 
                 "south": "stair"
-            }, 
-            "notes": []
+            }
         }, 
         "stair": {
             "name": "Winding Stairshaft", 
@@ -124,16 +114,14 @@
             "exits": {
                 "down": "maintenance", 
                 "north": "out_stair"
-            }, 
-            "notes": []
+            }
         }, 
         "maintenance": {
             "name": "Maintenance Room", 
             "desc": "You are in the Armstrong's maintenance room. Another uniformed skeleton is sprawled over a console covered with gauges and instruments. There is a stairshaft leading up.", 
             "exits": {
                 "up": "stair"
-            }, 
-            "notes": []
+            }
         }, 
         "corner": {
             "name": "Corner of Two Hallways", 
@@ -141,8 +129,7 @@
             "exits": {
                 "east": "out_stair", 
                 "north": "hallway"
-            }, 
-            "notes": []
+            }
         }, 
         "hallway": {
             "name": "Long Hallway", 
@@ -150,8 +137,7 @@
             "exits": {
                 "north": "out_bridge", 
                 "south": "corner"
-            }, 
-            "notes": []
+            }
         }, 
         "out_bridge": {
             "name": "Outside Bridge", 
@@ -160,8 +146,7 @@
                 "east": "w_bridge", 
                 "north": "debris", 
                 "south": "hallway"
-            }, 
-            "notes": []
+            }
         }, 
         "w_bridge": {
             "name": "Port Side of Bridge", 
@@ -169,8 +154,7 @@
             "exits": {
                 "west": "out_bridge", 
                 "east": "c_bridge"
-            }, 
-            "notes": []
+            }
         }, 
         "c_bridge": {
             "name": "Centre of Bridge", 
@@ -178,24 +162,21 @@
             "exits": {
                 "west": "w_bridge", 
                 "east": "e_bridge"
-            }, 
-            "notes": []
+            }
         }, 
         "e_bridge": {
             "name": "Starboard Side of Bridge", 
             "desc": "You are on the starboard side of the Armstrong's bridge. A skeleton in a science officer's uniform is sprawled next to a plastic panel set into the wall.", 
             "exits": {
                 "west": "c_bridge"
-            }, 
-            "notes": []
+            }
         }, 
         "debris": {
             "name": "In the Middle of Debris", 
             "desc": "You are in the middle of a vast assortment of debris. You can go no farther forward.", 
             "exits": {
                 "south": "out_bridge"
-            }, 
-            "notes": []
+            }
         }
     }, 
     "nouns": {

@@ -97,8 +97,10 @@ class DataFile:
         def get_room(rdata):
             room = odict(rdata.items())
             room.update({item.tag: item.text for item in rdata if item.text})
-            room['exits'] = {ex.get('dir'): ex.get('room') for ex in rdata.findall('exit')}
-            room['notes'] = [note.get('id') for note in rdata.findall('note')]
+            if rdata.find('exit') is not None:
+                room['exits'] = {ex.get('dir'): ex.get('room') for ex in rdata.findall('exit')}
+            if rdata.find('note') is not None:
+                room['notes'] = [note.get('id') for note in rdata.findall('note')]
             for k, v in room.iteritems():
                 if v == '1':
                     room[k] = True
